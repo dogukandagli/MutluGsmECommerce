@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\MutluGsmServer.Domain\MutluGsmServer.Domain.csproj" />
+    <ProjectReference Include="..\MutluGsmServer.Domain\MutluGsmServer.Domain.csproj" />
   </ItemGroup>
+
+ 
 
 </Project>

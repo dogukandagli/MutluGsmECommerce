@@ -22,4 +22,6 @@
     <ProjectReference Include="..\MutluGsmServer.Infrastructure\MutluGsmServer.Infrastructure.csproj" />
   </ItemGroup>
 
+ 
+
 </Project>

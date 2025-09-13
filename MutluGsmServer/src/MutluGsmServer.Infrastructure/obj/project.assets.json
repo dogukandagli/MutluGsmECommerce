@@ -4722,8 +4722,8 @@
     },
     "MutluGsmServer.Domain/1.0.0": {
       "type": "project",
-      "path": "../src/MutluGsmServer.Domain/MutluGsmServer.Domain.csproj",
-      "msbuildProject": "../src/MutluGsmServer.Domain/MutluGsmServer.Domain.csproj"
+      "path": "../MutluGsmServer.Domain/MutluGsmServer.Domain.csproj",
+      "msbuildProject": "../MutluGsmServer.Domain/MutluGsmServer.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4742,11 +4742,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj",
       "projectName": "MutluGsmServer.Infrastructure",
-      "projectPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\dagli\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4767,8 +4767,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj": {
-              "projectPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj"
+            "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj": {
+              "projectPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj"
             },
             "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Domain\\MutluGsmServer.Domain.csproj": {
               "projectPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Domain\\MutluGsmServer.Domain.csproj"

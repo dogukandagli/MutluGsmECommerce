@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/3RX/9uOOUE=",
+  "dgSpecHash": "paT5YLK2nZU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dagli\\.nuget\\packages\\ardalis.smartenum\\8.2.0\\ardalis.smartenum.8.2.0.nupkg.sha512",
     "C:\\Users\\dagli\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
