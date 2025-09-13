@@ -6,6 +6,7 @@ namespace MutluGsmServer.Domain.Categories;
 
 public sealed class Category: Entity
 {
+    private Category() { }
     public Category(Name name)
     {
         SetName(name);

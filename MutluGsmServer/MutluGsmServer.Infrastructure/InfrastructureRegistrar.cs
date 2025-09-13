@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GenericRepository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MutluGsmServer.Infrastructure.Context;
@@ -21,6 +22,8 @@ public static class InfrastructureRegistrar
             string connectionString = configuration.GetConnectionString("SqlServer")!;
             opt.UseSqlServer(connectionString);
         });
+
+        services.AddScoped<IUnitOfWork>(srv => srv.GetRequiredService<ApplicationDbContext>());
 
         services.Scan(opt => opt
         .FromAssemblies(typeof(InfrastructureRegistrar).Assembly)

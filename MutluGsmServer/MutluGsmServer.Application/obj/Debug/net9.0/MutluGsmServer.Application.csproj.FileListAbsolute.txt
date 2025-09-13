@@ -1,0 +1,16 @@
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\bin\Debug\net9.0\MutluGsmServer.Application.deps.json
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\bin\Debug\net9.0\MutluGsmServer.Application.dll
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\bin\Debug\net9.0\MutluGsmServer.Application.pdb
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\bin\Debug\net9.0\MutluGsmServer.Domain.dll
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\bin\Debug\net9.0\MutluGsmServer.Domain.pdb
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsmServer.Application.csproj.AssemblyReference.cache
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsmServer.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsmServer.Application.AssemblyInfoInputs.cache
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsmServer.Application.AssemblyInfo.cs
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsmServer.Application.csproj.CoreCompileInputs.cache
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsmServer.Application.sourcelink.json
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsm.A7B42D89.Up2Date
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsmServer.Application.dll
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\refint\MutluGsmServer.Application.dll
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\MutluGsmServer.Application.pdb
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\MutluGsmServer.Application\obj\Debug\net9.0\ref\MutluGsmServer.Application.dll
