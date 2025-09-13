@@ -1,5 +1,7 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="MutluGsmServer.Application/MutluGsmServer.Application.csproj" Id="41c9e0ee-d52d-4a5d-ade7-830a25f61cc3" />
+    <Project Path="MutluGsmServer.Infrastructure/MutluGsmServer.Infrastructure.csproj" Id="169e047d-83e8-43d3-b351-72cce77cbe33" />
     <Project Path="src/MutluGsmServer.Domain/MutluGsmServer.Domain.csproj" />
   </Folder>
   <Folder Name="/tests/" />

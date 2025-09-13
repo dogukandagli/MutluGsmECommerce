@@ -6,7 +6,7 @@ namespace MutluGsmServer.Domain.Categories;
 
 public sealed class Category: Entity
 {
-    public Category(string name)
+    public Category(Name name)
     {
         SetName(name);
     }
@@ -15,8 +15,8 @@ public sealed class Category: Entity
 
     public ICollection<Product> Products { get;private set; }
 
-    public void SetName(string name)
+    public void SetName(Name name)
     {
-        Name = new(name);
+        Name = name;
     }
 }

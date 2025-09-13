@@ -6,31 +6,18 @@ using System.Threading.Tasks;
 
 namespace MutluGsmServer.Domain.Abstractions;
 
-public abstract class Entity
+public abstract class EntityDto
 {
-    public Entity()
-    {
-        Id = Guid.CreateVersion7();
-    }
     public Guid Id { get; set; }
 
     #region Audit Log
-    public DateTimeOffset CreatedDate { get; set; } 
+    public DateTimeOffset CreatedDate { get; set; }
     public DateTimeOffset? UpdatedDate { get; set; }
-    public bool IsDeleted { get; set; } 
+    public bool IsDeleted { get; set; }
     public DateTimeOffset? DeletedDate { get; set; }
     public bool IsActive { get; set; } = true;
 
     #endregion
 
-    public void Delete()
-    {
-       IsDeleted = true;
-    }
 
-    public void SetStatus(bool isActive)
-    {
-        IsActive = isActive;
-    }
-    
 }
