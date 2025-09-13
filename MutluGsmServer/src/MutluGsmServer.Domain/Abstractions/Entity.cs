@@ -19,7 +19,18 @@ public abstract class Entity
     public DateTimeOffset? UpdatedDate { get; set; }
     public bool IsDeleted { get; set; }
     public DateTimeOffset? DeletedDate { get; set; }
+    public bool IsActive { get; set; } = true;
 
     #endregion
 
+    public void Delete()
+    {
+       IsDeleted = true;
+    }
+
+    public void SetStatus(bool isActive)
+    {
+        IsActive = isActive;
+    }
+    
 }

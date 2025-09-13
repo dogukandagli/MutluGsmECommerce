@@ -53,6 +53,10 @@
             "Ardalis.SmartEnum": {
               "target": "Package",
               "version": "[8.2.0, )"
+            },
+            "TS.EntityFrameworkCore.GenericRepository": {
+              "target": "Package",
+              "version": "[9.0.4, )"
             }
           },
           "imports": [
