@@ -26,8 +26,6 @@ internal sealed class ApplicationDbContext : DbContext, IUnitOfWork
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-        modelBuilder.Ignore<Product>();
-        modelBuilder.Ignore<ProductImage>();
         modelBuilder.Ignore<Brand>();
     }
 

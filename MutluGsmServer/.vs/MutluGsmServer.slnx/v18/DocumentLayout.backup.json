@@ -3,40 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.webapi\\mutlugsmserver.webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|solutionrelative:src\\mutlugsmserver.webapi\\mutlugsmserver.webapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.webapi\\modules\\routeregistrar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|solutionrelative:src\\mutlugsmserver.webapi\\modules\\routeregistrar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.application\\mutlugsmserver.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|solutionrelative:src\\mutlugsmserver.application\\mutlugsmserver.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.webapi\\modules\\productmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|solutionrelative:src\\mutlugsmserver.webapi\\modules\\productmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E90DF324-344D-8F5C-E7CC-B9DF0CCF8DD6}|src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.infrastructure\\mutlugsmserver.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{E90DF324-344D-8F5C-E7CC-B9DF0CCF8DD6}|src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj|solutionrelative:src\\mutlugsmserver.infrastructure\\mutlugsmserver.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.webapi\\modules\\categorymodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|solutionrelative:src\\mutlugsmserver.webapi\\modules\\categorymodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.webapi\\controllers\\mainodatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|solutionrelative:src\\mutlugsmserver.webapi\\controllers\\mainodatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MutluGsmServer.WebAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\Configurations\\CategoryConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MutluGsmServer.Infrastructure\\Configurations\\CategoryConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\Context\\ApplicationDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MutluGsmServer.Infrastructure\\Context\\ApplicationDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.application\\features\\products\\queries\\getallproduct\\productgetallquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|solutionrelative:src\\mutlugsmserver.application\\features\\products\\queries\\getallproduct\\productgetallquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -49,118 +33,73 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MutluGsmServer.Infrastructure",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj",
-              "RelativeDocumentMoniker": "src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj*",
-              "RelativeToolTip": "src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj*",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-13T17:35:37.345Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MutluGsmServer.WebAPI",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj",
-              "RelativeDocumentMoniker": "src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj",
-              "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-13T17:35:33.595Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MutluGsmServer.Application",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj",
-              "RelativeDocumentMoniker": "src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj*",
-              "RelativeToolTip": "src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj*",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-13T17:34:05.912Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "RouteRegistrar.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs",
-              "RelativeDocumentMoniker": "MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs",
-              "RelativeToolTip": "MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\Modules\\RouteRegistrar.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T17:27:34.035Z"
+              "WhenOpened": "2025-09-13T23:00:38.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CategoryModule.cs",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T22:59:11.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductModule.cs",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\ProductModule.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.WebAPI\\Modules\\ProductModule.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\ProductModule.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\Modules\\ProductModule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T22:59:10.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductGetAllQuery.cs",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Queries\\GetAllProduct\\ProductGetAllQuery.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.Application\\Features\\Products\\Queries\\GetAllProduct\\ProductGetAllQuery.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Queries\\GetAllProduct\\ProductGetAllQuery.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.Application\\Features\\Products\\Queries\\GetAllProduct\\ProductGetAllQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T22:57:33.41Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "CategoryModule.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
-              "RelativeDocumentMoniker": "MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
-              "RelativeToolTip": "MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T17:25:02.803Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "MainODataController.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs",
-              "RelativeDocumentMoniker": "MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs",
-              "RelativeToolTip": "MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAAYAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\Controllers\\MainODataController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T17:24:12.735Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "MutluGsmServer.WebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.WebAPI\\Program.cs",
-              "RelativeToolTip": "MutluGsmServer.WebAPI\\Program.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACwAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T17:23:44.438Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CategoryConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\Configurations\\CategoryConfiguration.cs",
-              "RelativeDocumentMoniker": "MutluGsmServer.Infrastructure\\Configurations\\CategoryConfiguration.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\Configurations\\CategoryConfiguration.cs",
-              "RelativeToolTip": "MutluGsmServer.Infrastructure\\Configurations\\CategoryConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T17:23:10.1Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\Context\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "MutluGsmServer.Infrastructure\\Context\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\MutluGsmServer.Infrastructure\\Context\\ApplicationDbContext.cs",
-              "RelativeToolTip": "MutluGsmServer.Infrastructure\\Context\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T17:22:30.743Z"
+              "WhenOpened": "2025-09-13T22:56:50.321Z",
+              "EditorCaption": ""
             }
           ]
         }

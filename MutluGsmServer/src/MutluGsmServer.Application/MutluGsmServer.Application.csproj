@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Products\Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MutluGsmServer.Domain\MutluGsmServer.Domain.csproj" />
   </ItemGroup>
 

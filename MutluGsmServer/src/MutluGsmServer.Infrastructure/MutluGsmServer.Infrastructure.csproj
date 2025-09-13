@@ -20,7 +20,4 @@
     <ProjectReference Include="..\MutluGsmServer.Application\MutluGsmServer.Application.csproj" />
     <ProjectReference Include="..\MutluGsmServer.Domain\MutluGsmServer.Domain.csproj" />
   </ItemGroup>
-
- 
-
 </Project>

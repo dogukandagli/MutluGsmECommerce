@@ -40,6 +40,11 @@ namespace MutluGsmServer.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<DateTimeOffset?>("UpdatedDate")
                         .HasColumnType("datetimeoffset");
 
@@ -48,28 +53,134 @@ namespace MutluGsmServer.Infrastructure.Migrations
                     b.ToTable("Categories", (string)null);
                 });
 
+            modelBuilder.Entity("MutluGsmServer.Domain.Products.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BrandId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Condition")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<bool>("Featured")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal?>("OriginalPrice")
+                        .HasColumnType("Money");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("Money");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products", (string)null);
+                });
+
+            modelBuilder.Entity("MutluGsmServer.Domain.Products.ProductImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId", "ImageUrl")
+                        .IsUnique();
+
+                    b.ToTable("ProductImages", (string)null);
+                });
+
+            modelBuilder.Entity("MutluGsmServer.Domain.Products.Product", b =>
+                {
+                    b.HasOne("MutluGsmServer.Domain.Categories.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("MutluGsmServer.Domain.Products.ProductImage", b =>
+                {
+                    b.HasOne("MutluGsmServer.Domain.Products.Product", "Product")
+                        .WithMany("_images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("MutluGsmServer.Domain.Categories.Category", b =>
                 {
-                    b.OwnsOne("MutluGsmServer.Domain.Shared.Name", "Name", b1 =>
-                        {
-                            b1.Property<Guid>("CategoryId")
-                                .HasColumnType("uniqueidentifier");
+                    b.Navigation("Products");
+                });
 
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Name");
-
-                            b1.HasKey("CategoryId");
-
-                            b1.ToTable("Categories");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CategoryId");
-                        });
-
-                    b.Navigation("Name")
-                        .IsRequired();
+            modelBuilder.Entity("MutluGsmServer.Domain.Products.Product", b =>
+                {
+                    b.Navigation("_images");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,6 +9,7 @@ namespace MutluGsmServer.Domain.Products;
 
 public sealed class Product : Entity
 {
+    private Product() { }
     public Product(Name name, Quantity qty, decimal price, decimal? originalPrice,
                    ConditionEnum condition, Guid categoryId, Guid? brandId, string? description = null, bool featured = false)
     {
@@ -21,7 +22,6 @@ public sealed class Product : Entity
         SetBrandId(brandId);
         SetDescription(description);
         SetFeatured(featured);
-
     }
 
     public Name Name { get;private set; } 
@@ -34,9 +34,9 @@ public sealed class Product : Entity
     public Category Category { get; private set; } 
     public Guid? BrandId { get; private set; }
     public Brand Brand { get; private set; } 
-    public List<ProductImage> _images { get; private set; } = new();
-    public IReadOnlyCollection<ProductImage> ProductImages => _images;
    
+    public ICollection<ProductImage> _images { get; private set; } = new List<ProductImage>();
+
     public bool Featured { get; private set; }
 
     public void SetName(Name name)
@@ -107,7 +107,7 @@ public sealed class Product : Entity
         bool wasMain = image.IsMain;
         if (image.IsMain && _images.Any())
         {
-            _images[0].SetMain(true);
+            _images.FirstOrDefault().SetMain(true);
         }
     }
     public void SetMainImage(Guid imageGuid)

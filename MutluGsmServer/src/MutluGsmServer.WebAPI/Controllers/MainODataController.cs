@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using MutluGsmServer.Application.Features.Categories.Queries.GetAllCategory;
+using MutluGsmServer.Application.Features.Products.Queries.GetAllProduct;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace MutluGsmServer.WebAPI.Controllers;
@@ -20,6 +21,7 @@ public class MainODataController(ISender sender)  : ODataController
         ODataConventionModelBuilder builder = new();
         builder.EnableLowerCamelCase();
         builder.EntitySet<CategoryGetAllQueryResponse>("Categories");
+        builder.EntitySet<ProductDto>("Products");
         return builder.GetEdmModel();
     }
 
@@ -27,6 +29,13 @@ public class MainODataController(ISender sender)  : ODataController
     public async Task<IQueryable<CategoryGetAllQueryResponse>> GetAllCategories(CancellationToken cancellationToken)
     {
         var response = await sender.Send(new CategoryGetAllQuery(),cancellationToken);
+        return response;
+    }
+
+    [HttpGet("Products")]
+    public async Task<IQueryable<ProductDto>> GetAllProducts(CancellationToken cancellationToken)
+    {
+        var response = await sender.Send(new ProductGetAllQuery(), cancellationToken);
         return response;
     }
 }
