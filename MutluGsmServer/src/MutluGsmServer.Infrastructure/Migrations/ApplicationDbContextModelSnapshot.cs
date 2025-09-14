@@ -22,6 +22,37 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("MutluGsmServer.Domain.Brands.Brand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands", (string)null);
+                });
+
             modelBuilder.Entity("MutluGsmServer.Domain.Categories.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -106,6 +137,8 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BrandId");
+
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products", (string)null);
@@ -153,11 +186,17 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
             modelBuilder.Entity("MutluGsmServer.Domain.Products.Product", b =>
                 {
+                    b.HasOne("MutluGsmServer.Domain.Brands.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId");
+
                     b.HasOne("MutluGsmServer.Domain.Categories.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Brand");
 
                     b.Navigation("Category");
                 });
@@ -171,6 +210,11 @@ namespace MutluGsmServer.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MutluGsmServer.Domain.Brands.Brand", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("MutluGsmServer.Domain.Categories.Category", b =>

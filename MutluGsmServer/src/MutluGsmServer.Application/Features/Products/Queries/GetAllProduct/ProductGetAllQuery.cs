@@ -19,8 +19,10 @@ internal sealed class ProductGetAllQueryHandler(
 {
     public Task<IQueryable<ProductDto>> Handle(ProductGetAllQuery request, CancellationToken cancellationToken)
     {
-       return Task.FromResult(productRepository.GetAllWithAudit().MapTo(categoryRepository.GetAll(),brandRepository.GetAll())
-            .AsQueryable());
+       return Task.FromResult(productRepository
+           .GetAllWithAudit()
+           .MapTo(categoryRepository.GetAll(),
+           brandRepository.GetAll()).AsQueryable());
     }
 }
 

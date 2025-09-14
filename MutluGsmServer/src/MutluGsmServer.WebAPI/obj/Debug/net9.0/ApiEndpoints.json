@@ -1,5 +1,33 @@
 [
   {
+    "ContainingType": "MutluGsmServer.WebAPI.Modules.BrandModule\u002B\u003C\u003Ec",
+    "Method": "\u003CRegisterBrandRoutes\u003Eb__0_0",
+    "RelativePath": "brands/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "MutluGsmServer.Application.Features.Brands.Commands.CreateBrands.BrandCreateCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "TS.Result.Result\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Brands"
+    ],
+    "EndpointName": "BrandCreate"
+  },
+  {
     "ContainingType": "MutluGsmServer.WebAPI.Modules.CategoryModule\u002B\u003C\u003Ec",
     "Method": "\u003CRegisterCategoryRoutes\u003Eb__0_0",
     "RelativePath": "categories/",

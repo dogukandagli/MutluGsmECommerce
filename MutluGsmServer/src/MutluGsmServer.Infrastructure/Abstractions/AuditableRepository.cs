@@ -1,6 +1,7 @@
 ﻿using GenericRepository;
 using Microsoft.EntityFrameworkCore;
 using MutluGsmServer.Domain.Abstractions;
+using MutluGsmServer.Domain.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ internal class AuditableRepository<TEntity, TContext> : Repository<TEntity, TCon
 
     public IQueryable<EntityWithAuditDto<TEntity>> GetAllWithAudit()
     {
+
         var entities = _context.Set<TEntity>().AsQueryable();
 
         var res = entities.Select(e => new EntityWithAuditDto<TEntity>

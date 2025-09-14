@@ -14,14 +14,16 @@ using TS.Result;
 
 namespace MutluGsmServer.Application.Features.Products.Commands.CreateProduct;
 
-public sealed record ProductCreateCommand(string Name, 
+public sealed record ProductCreateCommand(
+    string Name, 
     int Quantity,
     decimal Price,
     decimal? OriginalPrice,
     int Condition,
     Guid CategoryId,
     Guid? brandId,
-    string? Description, bool featured): IRequest<Result<string>>;
+    string? Description, 
+    bool featured): IRequest<Result<string>>;
 
 public sealed class ProductCreateCommandValidator : AbstractValidator<ProductCreateCommand>
 {
