@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
+using MutluGsmServer.Application.Features.Brands.Queries.GetAllBrand;
 using MutluGsmServer.Application.Features.Categories.Queries.GetAllCategory;
 using MutluGsmServer.Application.Features.Products.Queries.GetAllProduct;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
@@ -22,6 +23,8 @@ public class MainODataController(ISender sender)  : ODataController
         builder.EnableLowerCamelCase();
         builder.EntitySet<CategoryGetAllQueryResponse>("Categories");
         builder.EntitySet<ProductDto>("Products");
+        builder.EntitySet<BrandGetAllQueryResponse>("Brands");
+
         return builder.GetEdmModel();
     }
 
@@ -36,6 +39,13 @@ public class MainODataController(ISender sender)  : ODataController
     public async Task<IQueryable<ProductDto>> GetAllProducts(CancellationToken cancellationToken)
     {
         var response = await sender.Send(new ProductGetAllQuery(), cancellationToken);
+        return response;
+    }
+
+    [HttpGet("Brands")]
+    public async Task<IQueryable<BrandGetAllQueryResponse>> GetAllBrands(CancellationToken cancellationToken)
+    {
+        var response = await sender.Send(new BrandGetAllQuery(), cancellationToken);
         return response;
     }
 }
