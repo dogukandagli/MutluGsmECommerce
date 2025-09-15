@@ -29,18 +29,12 @@ public class MainODataController(ISender sender)  : ODataController
     }
 
     [HttpGet("Categories")]
-    public async Task<IQueryable<CategoryGetAllQueryResponse>> GetAllCategories(CancellationToken cancellationToken)
-    {
-        var response = await sender.Send(new CategoryGetAllQuery(),cancellationToken);
-        return response;
-    }
+    public IQueryable<CategoryGetAllQueryResponse> GetAllCategories(ISender sender, CancellationToken cancellationToken = default)
+      => sender.Send(new CategoryGetAllQuery(), cancellationToken).Result;
 
     [HttpGet("Products")]
-    public async Task<IQueryable<ProductDto>> GetAllProducts(CancellationToken cancellationToken)
-    {
-        var response = await sender.Send(new ProductGetAllQuery(), cancellationToken);
-        return response;
-    }
+    public IQueryable<ProductDto> GetAllProducts(ISender sender, CancellationToken cancellationToken = default)
+      => sender.Send(new ProductGetAllQuery(), cancellationToken).Result;
 
     [HttpGet("Brands")]
     public async Task<IQueryable<BrandGetAllQueryResponse>> GetAllBrands(CancellationToken cancellationToken)

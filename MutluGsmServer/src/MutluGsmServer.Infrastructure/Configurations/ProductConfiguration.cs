@@ -18,14 +18,20 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.ToTable("Products");
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.Name)
-              .HasConversion(v => v.Value, v => new Name(v))
-              .HasMaxLength(200)
+        builder.OwnsOne(p => p.Name, nb =>
+        {
+            nb.Property(n => n.Value)
+              .HasColumnName("Name")   
               .IsRequired();
+        });
 
-        builder.Property(p => p.Quantity)
-               .HasConversion(v => v.Value, v => new Quantity(v))
-               .IsRequired();
+        builder.OwnsOne(p => p.Quantity, nb =>
+        {
+            nb.Property(n => n.Value)
+              .HasColumnName("Quantity")   
+              .IsRequired();
+        });
+
 
         builder.Property(p => p.Price)
                .HasColumnType("Money")

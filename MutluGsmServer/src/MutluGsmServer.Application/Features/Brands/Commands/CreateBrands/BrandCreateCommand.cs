@@ -23,15 +23,14 @@ internal sealed class BrandCreateCommandHandler(IBrandRepository brandRepository
 {
     public async Task<Result<string>> Handle(BrandCreateCommand request, CancellationToken cancellationToken)
     {
-        Name name = new(request.name);
 
-        var nameExists =await brandRepository.AnyAsync(b=>b.Name == name, cancellationToken);
+        var nameExists =await brandRepository.AnyAsync(b=>b.Name.Value == request.name, cancellationToken);
 
         if (nameExists)
         {
             return Result<string>.Failure("Marki adı zaten mevcut");
         }
-
+        Name name = new(request.name);
         Brand brand = new(name);
         brandRepository.Add(brand);
         await unitOfWork.SaveChangesAsync(cancellationToken);

@@ -15,10 +15,12 @@ internal sealed class CategoryConfiguration : IEntityTypeConfiguration<Category>
     public void Configure(EntityTypeBuilder<Category> builder)
     {
         builder.ToTable("Categories");
-        builder.HasKey(c => c.Id);
-        builder.Property(c => c.Name)
-               .HasConversion(v => v.Value, v => new Name(v))
-               .HasMaxLength(200)
-               .IsRequired();
+        builder.HasKey(x => x.Id);
+        builder.OwnsOne(p => p.Name, nb =>
+        {
+            nb.Property(n => n.Value)
+              .HasColumnName("Name")
+              .IsRequired();
+        });
     }
 }

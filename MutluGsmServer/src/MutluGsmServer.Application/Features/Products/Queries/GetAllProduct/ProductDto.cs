@@ -32,7 +32,7 @@ public static class ProductExtensions
         IQueryable<Brand> brands)
     {
 
-        return (from Entity in entities
+        var res = (from Entity in entities
                         join Category in categories on Entity.Entity.CategoryId equals Category.Id
                         join Brand in brands on Entity.Entity.BrandId equals Brand.Id into bj
                         from Brand in bj.DefaultIfEmpty()
@@ -56,7 +56,10 @@ public static class ProductExtensions
                             UpdatedDate = Entity.Entity.UpdatedDate,
                             Id = Entity.Entity.Id,
                         }
-                       );
+                       ).AsQueryable();
+
+        return res;
+
 
         //return entities
         // .Join(categories,

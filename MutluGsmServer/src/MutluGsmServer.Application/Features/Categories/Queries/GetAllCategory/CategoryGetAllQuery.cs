@@ -22,15 +22,14 @@ public sealed class CategoryGetAllQueryHandler(ICategoryRepository categoryRepos
     {
         var response = categoryRepository.GetAll()
             .Select(s=> new CategoryGetAllQueryResponse { 
-                Name = s.Name.Value,
-                 CreatedDate = s.CreatedDate,
+                    Name = s.Name.Value,
+                    CreatedDate = s.CreatedDate,
                     Id = s.Id,
                     IsActive = s.IsActive,
                     IsDeleted = s.IsDeleted,
                     DeletedDate = s.DeletedDate,
                     UpdatedDate = s.UpdatedDate
-
-            }).AsQueryable();
+            });
 
         return Task.FromResult(response);
     }

@@ -2,6 +2,7 @@
 
 public sealed record Name
 {
+    private Name() { }
     public string Value { get; set; }
     public Name(string value)
     {

@@ -42,7 +42,8 @@ app.UseCors(policy => policy
 .AllowAnyHeader()
 .AllowCredentials()
 .AllowAnyMethod()
-.SetIsOriginAllowed(t=>true));
+.WithOrigins("http://localhost:3000")
+.SetIsOriginAllowed(t => true));
 
 app.RegisterRoutes();
 app.UseExceptionHandler();
