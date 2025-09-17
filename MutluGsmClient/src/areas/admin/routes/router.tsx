@@ -8,9 +8,9 @@ export const adminRoutes = {
   path: "/admin",
   element: <AdminLayout />,
   children: [
-    { path: "", element: <AdminDashboard /> },
-    { path: "/products", element: <ProductsPage /> },
-    { path: "/admin/products/new", element: <ProductCreatePage /> },
-    { path: "/admin/products/:id/edit", element: <ProductEditPage /> },
+    { index: true, element: <AdminDashboard /> },
+    { path: "products", element: <ProductsPage /> },
+    { path: "products/new", element: <ProductCreatePage /> },
+    { path: "products/:id/edit", element: <ProductEditPage /> },
   ],
 };
