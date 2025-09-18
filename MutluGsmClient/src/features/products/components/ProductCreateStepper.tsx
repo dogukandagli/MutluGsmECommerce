@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { stepConnectorClasses } from "@mui/material/StepConnector";
 import type { StepIconProps } from "@mui/material/StepIcon";
+import { useFormContext, type FieldValues } from "react-hook-form";
 
 // --------- Defaults ---------
 const DEFAULT_STEPS = [
@@ -115,111 +116,144 @@ const ProductCreateStepper: React.FC<ProductCreateStepperProps> = ({
     [steps.length, onStepChange]
   );
 
-  const handleNext = () => goTo(activeStep + 1);
+  // Map each step to its relevant form fields (update field names as needed)
+  const stepFields: string[][] = [
+    ["name"],
+    ["media"],
+    ["social", "seo"],
+    ["price", "discount"],
+  ];
+
+  const handlePrimaryClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    // 1) Bu adımın alanlarını doğrula
+    const fields = stepFields[activeStep] ?? [];
+    if (fields.length > 0) {
+      const ok = await trigger(fields as any, { shouldFocus: true });
+      if (!ok) return; // hatalıysa ilerleme / submit etme
+    }
+
+    // 2) Son adım mı?
+    if (!isLast) {
+      goTo(activeStep + 1); // sonraki adıma geç
+    } else {
+      // 3) Programatik submit (useMemo yok; direkt çağırıyoruz)
+      await handleSubmit(submitForm)();
+    }
+  };
   const handleBack = () => goTo(activeStep - 1);
 
   const isFirst = activeStep === 0;
   const isLast = activeStep === steps.length - 1;
 
-  return (
-    <Stack spacing={3}>
-      {/* Header */}
-      <Typography align="center" variant="h4">
-        {title}
-      </Typography>
-      {subtitle && (
-        <Typography align="center" color="text.secondary">
-          {subtitle}
-        </Typography>
-      )}
+  const { trigger, handleSubmit } = useFormContext();
 
-      {/* Card */}
-      <Paper
-        elevation={1}
-        sx={{
-          p: 3,
-          borderRadius: 3,
-          border: "1px solid",
-          borderColor: "divider",
-        }}
-      >
-        {/* Dark strip + Stepper */}
+  async function submitForm(data: FieldValues) {
+    console.log(data);
+  }
+  return (
+    <form onSubmit={handleSubmit(submitForm)} noValidate>
+      <Stack spacing={3}>
+        {/* Header */}
+        <Typography align="center" variant="h4">
+          {title}
+        </Typography>
+        {subtitle && (
+          <Typography align="center" color="text.secondary">
+            {subtitle}
+          </Typography>
+        )}
+
+        {/* Card */}
         <Paper
-          elevation={6}
+          elevation={1}
           sx={{
+            p: 3,
             borderRadius: 3,
-            px: 2,
-            py: 1.5,
-            mb: 3,
-            background: "linear-gradient(180deg, #3a3a3a 0%, #2b2b2b 100%)",
+            border: "1px solid",
+            borderColor: "divider",
           }}
         >
-          <Stepper
-            alternativeLabel
-            activeStep={activeStep}
-            connector={<DarkBarConnector />}
-          >
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel
-                  StepIconComponent={DotStepIcon}
-                  sx={{
-                    "& .MuiStepLabel-label": {
-                      color: "rgba(255,255,255,.75)",
-                      fontWeight: 600,
-                      letterSpacing: ".4px",
-                      "&.Mui-active": { color: "#fff" },
-                      "&.Mui-completed": { color: "rgba(255,255,255,.9)" },
-                      whiteSpace: "nowrap",
-                    },
-                  }}
-                >
-                  {label}
-                </StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-        </Paper>
-
-        {/* Step body */}
-        <Box sx={{ minHeight: 220 }}>
-          {renderStep ? (
-            renderStep(activeStep)
-          ) : (
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              {activeStep === 0 && "Product Information"}
-              {activeStep === 1 && "Media"}
-              {activeStep === 2 && "Social / SEO"}
-              {activeStep === 3 && "Pricing"}
-            </Typography>
-          )}
-        </Box>
-
-        {/* Actions */}
-        <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
-          <Button variant="outlined" disabled={isFirst} onClick={handleBack}>
-            {backLabel ?? "Back"}
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleNext}
-            disabled={isLast}
+          {/* Dark strip + Stepper */}
+          <Paper
+            elevation={6}
             sx={{
-              borderRadius: 2,
-              px: 3,
-              background: "linear-gradient(180deg, #2c2c2c 0%, #1e1e1e 100%)",
-              color: "#fff",
-              boxShadow: "0 3px 10px rgba(0,0,0,.25)",
-              "&:hover": {
-                background: "linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%)",
-              },
+              borderRadius: 3,
+              px: 2,
+              py: 1.5,
+              mb: 3,
+              background: "linear-gradient(180deg, #3a3a3a 0%, #2b2b2b 100%)",
             }}
           >
-            {nextLabel ?? (isLast ? "Finish" : "Next")}
-          </Button>
-        </Box>
-      </Paper>
-    </Stack>
+            <Stepper
+              alternativeLabel
+              activeStep={activeStep}
+              connector={<DarkBarConnector />}
+            >
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel
+                    StepIconComponent={DotStepIcon}
+                    sx={{
+                      "& .MuiStepLabel-label": {
+                        color: "rgba(255,255,255,.75)",
+                        fontWeight: 600,
+                        letterSpacing: ".4px",
+                        "&.Mui-active": { color: "#fff" },
+                        "&.Mui-completed": { color: "rgba(255,255,255,.9)" },
+                        whiteSpace: "nowrap",
+                      },
+                    }}
+                  >
+                    {label}
+                  </StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Paper>
+
+          {/* Step body */}
+          <Box sx={{ minHeight: 220 }}>
+            {renderStep ? (
+              renderStep(activeStep)
+            ) : (
+              <Typography variant="h6" sx={{ mb: 2 }}>
+                {activeStep === 0 && "Product Information"}
+                {activeStep === 1 && "Media"}
+                {activeStep === 2 && "Social / SEO"}
+                {activeStep === 3 && "Pricing"}
+              </Typography>
+            )}
+          </Box>
+
+          {/* Actions */}
+          <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+            <Button variant="outlined" disabled={isFirst} onClick={handleBack}>
+              {backLabel ?? "Back"}
+            </Button>
+            <Button
+              variant="contained"
+              type="button" // 🔒 her zaman button: otomatik submit yok
+              onClick={handlePrimaryClick} // ✅ tek handler: validate -> next/submit
+              sx={{
+                borderRadius: 2,
+                px: 3,
+                background: "linear-gradient(180deg, #2c2c2c 0%, #1e1e1e 100%)",
+                color: "#fff",
+                boxShadow: "0 3px 10px rgba(0,0,0,.25)",
+                "&:hover": {
+                  background:
+                    "linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%)",
+                },
+              }}
+            >
+              {nextLabel ?? (isLast ? "Finish" : "Next")}
+            </Button>
+          </Box>
+        </Paper>
+      </Stack>
+    </form>
   );
 };
 
