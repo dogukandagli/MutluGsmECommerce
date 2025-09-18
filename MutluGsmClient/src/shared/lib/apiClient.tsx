@@ -1,6 +1,6 @@
 import axios, { type AxiosResponse } from "axios";
 
-axios.create({ baseURL: "https://localhost:7261/" });
+axios.defaults.baseURL = "https://localhost:7261/";
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use();

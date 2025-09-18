@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using MutluGsmServer.Application.Features.Categories.Commands.CreateCategory;
 using MutluGsmServer.Application.Features.Products.Commands.CreateProduct;
 using TS.Result;
@@ -12,12 +13,14 @@ public static class ProductModule
         RouteGroupBuilder group = app.MapGroup("/products").WithTags("Products");
 
         group.MapPost(string.Empty,
-            async (ProductCreateCommand request, ISender sender, CancellationToken cancellationToken) =>
+            async ([FromForm]ProductCreateCommand request, ISender sender, CancellationToken cancellationToken) =>
             {
                 var response = await sender.Send(request, cancellationToken);
                 return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
             }
-            ).Produces<Result<string>>()
+            )
+            .Accepts<ProductCreateCommand>("multipart/form-data")
+            .Produces<Result<string>>()
             .WithName("ProductCreate");
     }
 }

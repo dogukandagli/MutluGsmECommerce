@@ -1,15 +1,11 @@
 ﻿using FluentValidation;
 using GenericRepository;
 using MediatR;
-using MutluGsmServer.Application.Features.Categories.Commands.CreateCategory;
+using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
+using Microsoft.AspNetCore.Http;
 using MutluGsmServer.Domain.Products;
 using MutluGsmServer.Domain.Products.ValueObjects;
 using MutluGsmServer.Domain.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TS.Result;
 
 namespace MutluGsmServer.Application.Features.Products.Commands.CreateProduct;
@@ -23,7 +19,10 @@ public sealed record ProductCreateCommand(
     Guid CategoryId,
     Guid? brandId,
     string? Description, 
-    bool featured): IRequest<Result<string>>;
+    bool featured,
+    List<IFormFile> File,
+    int MainIndex
+    ): IRequest<Result<string>>;
 
 public sealed class ProductCreateCommandValidator : AbstractValidator<ProductCreateCommand>
 {
@@ -34,6 +33,8 @@ public sealed class ProductCreateCommandValidator : AbstractValidator<ProductCre
         RuleFor(p => p.Price).GreaterThan(0).WithMessage("Geçerli bir değer giriniz!");
         RuleFor(p => p.Condition).NotEmpty().WithMessage("Ürün durumu boş olamaz!");
         RuleFor(p => p.CategoryId).NotEmpty().WithMessage("Kategori boş olamaz!");
+        RuleFor(p => p.File).NotEmpty().WithMessage("Ürün görseli yüklemelisiniz!");
+        RuleFor(p => p.MainIndex).GreaterThanOrEqualTo(0).WithMessage("Lütfen ana resimi işaretleyiniz.");
     }
 }
 
@@ -42,6 +43,9 @@ internal sealed class ProductCreateCommandHandler(IProductRepository productRepo
 {
     public async Task<Result<string>> Handle(ProductCreateCommand request, CancellationToken cancellationToken)
     {
+        if (await productRepository.AnyAsync(p => p.Name.Value == request.Name, cancellationToken))
+            return Result<string>.Failure("Bu isimde ürün var");
+
         Name name = new(request.Name);
         Quantity quantity = new(request.Quantity);
         ConditionEnum condition = ConditionEnum.FromValue(request.Condition);
@@ -53,6 +57,7 @@ internal sealed class ProductCreateCommandHandler(IProductRepository productRepo
             request.brandId,
             request.Description,
             request.featured);
+
 
         productRepository.Add(product);
         await unitOfWork.SaveChangesAsync();

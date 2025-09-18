@@ -15,6 +15,7 @@ import {
 import { stepConnectorClasses } from "@mui/material/StepConnector";
 import type { StepIconProps } from "@mui/material/StepIcon";
 import { useFormContext, type FieldValues } from "react-hook-form";
+import Product from "../api/productApi";
 
 // --------- Defaults ---------
 const DEFAULT_STEPS = [
@@ -87,6 +88,8 @@ export interface ProductCreateStepperProps {
   /** Buton yazıları */
   nextLabel?: string;
   backLabel?: string;
+  files?: File[];
+  mainIndex: number;
 }
 
 // --------- Component ---------
@@ -99,6 +102,8 @@ const ProductCreateStepper: React.FC<ProductCreateStepperProps> = ({
   subtitle = "This information will describe more about the product.",
   nextLabel,
   backLabel,
+  files,
+  mainIndex,
 }) => {
   const [activeStep, setActiveStep] = React.useState<number>(
     Math.min(Math.max(initialStep, 0), Math.max(steps.length - 1, 0))
@@ -118,7 +123,7 @@ const ProductCreateStepper: React.FC<ProductCreateStepperProps> = ({
 
   // Map each step to its relevant form fields (update field names as needed)
   const stepFields: string[][] = [
-    ["name"],
+    ["name", "category"],
     ["media"],
     ["social", "seo"],
     ["price", "discount"],
@@ -150,7 +155,21 @@ const ProductCreateStepper: React.FC<ProductCreateStepperProps> = ({
   const { trigger, handleSubmit } = useFormContext();
 
   async function submitForm(data: FieldValues) {
-    console.log(data);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("categoryId", data.category);
+    formData.append("brandId", data.brand);
+    formData.append("description", data.description);
+    if (files) {
+      files.forEach((f) => {
+        formData.append("file", f);
+      });
+    }
+    formData.append("mainIndex", String(mainIndex));
+
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
   }
   return (
     <form onSubmit={handleSubmit(submitForm)} noValidate>
