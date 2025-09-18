@@ -18,12 +18,7 @@ import { useFormContext, type FieldValues } from "react-hook-form";
 import Product from "../api/productApi";
 
 // --------- Defaults ---------
-const DEFAULT_STEPS = [
-  "1. PRODUCT INFO",
-  "2. MEDIA",
-  "3. SOCIAL",
-  "4. PRICING",
-];
+const DEFAULT_STEPS = ["1.Ürün Bilgisi", "2.Medya", "3.Fıyat"];
 
 // --------- Connector (dark thin bar) ---------
 const DarkBarConnector = styled(StepConnector)(({ theme }) => ({
@@ -98,7 +93,7 @@ const ProductCreateStepper: React.FC<ProductCreateStepperProps> = ({
   initialStep = 0,
   onStepChange,
   renderStep,
-  title = "Add New Product",
+  title = "Yeni bir ürün ekle",
   subtitle = "This information will describe more about the product.",
   nextLabel,
   backLabel,
@@ -124,7 +119,6 @@ const ProductCreateStepper: React.FC<ProductCreateStepperProps> = ({
   // Map each step to its relevant form fields (update field names as needed)
   const stepFields: string[][] = [
     ["name", "category"],
-    ["media"],
     ["social", "seo"],
     ["price", "discount"],
   ];
@@ -156,20 +150,27 @@ const ProductCreateStepper: React.FC<ProductCreateStepperProps> = ({
 
   async function submitForm(data: FieldValues) {
     const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("categoryId", data.category);
-    formData.append("brandId", data.brand);
-    formData.append("description", data.description);
+    formData.append("Name", data.name);
+    formData.append("Quantity", String(data.quantity));
+    formData.append("Price", String(data.price).replace(",", "."));
+    if (data.originalPrice !== "" && data.originalPrice !== undefined)
+      formData.append(
+        "OriginalPrice",
+        String(data.originalPrice).replace(",", ".")
+      );
+    formData.append("Condition", String(data.condition));
+    formData.append("CategoryId", String(data.category));
+    formData.append("BrandId", String(data.brand));
+    if (data.description) formData.append("Description", data.description);
+    formData.append("Featured", String(data.featured));
     if (files) {
-      files.forEach((f) => {
-        formData.append("file", f);
-      });
+      files.forEach((f) => formData.append("file", f));
     }
-    formData.append("mainIndex", String(mainIndex));
-
+    formData.append("MainIndex", String(mainIndex));
     formData.forEach((value, key) => {
       console.log(key, value);
     });
+    Product.post(formData);
   }
   return (
     <form onSubmit={handleSubmit(submitForm)} noValidate>

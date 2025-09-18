@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
     <PackageReference Include="MediatR" Version="13.0.0" />
+    <PackageReference Include="TS.FileService" Version="9.0.0" />
     <PackageReference Include="TS.Result" Version="9.0.1" />
   </ItemGroup>
 

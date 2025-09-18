@@ -155,6 +155,23 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Http.Features/5.0.17": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "5.0.1",
+          "System.IO.Pipelines": "5.0.2"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Http.Features.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Http.Features.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
         "type": "package",
         "compile": {
@@ -1324,7 +1341,7 @@
       "System.IO.Pipelines/7.0.0": {
         "type": "package",
         "compile": {
-          "lib/net7.0/_._": {
+          "lib/net7.0/System.IO.Pipelines.dll": {
             "related": ".xml"
           }
         },
@@ -1666,6 +1683,18 @@
           "lib/net9.0/GenericRepository.dll": {}
         }
       },
+      "TS.FileService/9.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Features": "5.0.17"
+        },
+        "compile": {
+          "lib/net9.0/TS.FileService.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0/TS.FileService.dll": {}
+        }
+      },
       "TS.Result/9.0.1": {
         "type": "package",
         "compile": {
@@ -1682,6 +1711,7 @@
           "FluentValidation.AspNetCore": "11.3.1",
           "MediatR": "13.0.0",
           "MutluGsmServer.Domain": "1.0.0",
+          "TS.FileService": "9.0.0",
           "TS.Result": "9.0.1"
         },
         "compile": {
@@ -1878,6 +1908,25 @@
         "lib/netstandard2.0/MediatR.Contracts.xml",
         "mediatr.contracts.2.0.1.nupkg.sha512",
         "mediatr.contracts.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Http.Features/5.0.17": {
+      "sha512": "3jG2xS+dx8DDCGV/F+STdPTg89lX3ao3dF/VEPvJaz3wzBIjuadipTtYNEXDIVuOPZwb6jdmhrX9jkzOIBm5cw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.http.features/5.0.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.AspNetCore.Http.Features.dll",
+        "lib/net461/Microsoft.AspNetCore.Http.Features.xml",
+        "lib/net5.0/Microsoft.AspNetCore.Http.Features.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Http.Features.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.xml",
+        "microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+        "microsoft.aspnetcore.http.features.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
@@ -4699,6 +4748,20 @@
         "logo.jpg",
         "ts.entityframeworkcore.genericrepository.9.0.4.nupkg.sha512",
         "ts.entityframeworkcore.genericrepository.nuspec"
+      ]
+    },
+    "TS.FileService/9.0.0": {
+      "sha512": "WulyV6BPWkbB0npGHawLvTcru6DbhEJ4g3bcAnFDVtXHIzvBHoKhL0ezbfvemY7Vw+OSDwgms+7WIqhoRLL16A==",
+      "type": "package",
+      "path": "ts.fileservice/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.jpg",
+        "lib/net9.0/TS.FileService.dll",
+        "ts.fileservice.9.0.0.nupkg.sha512",
+        "ts.fileservice.nuspec"
       ]
     },
     "TS.Result/9.0.1": {

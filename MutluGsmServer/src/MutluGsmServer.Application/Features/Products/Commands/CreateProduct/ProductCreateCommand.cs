@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GenericFileService.Files;
 using GenericRepository;
 using MediatR;
 using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
@@ -20,9 +21,9 @@ public sealed record ProductCreateCommand(
     Guid? brandId,
     string? Description, 
     bool featured,
-    List<IFormFile> File,
-    int MainIndex
-    ): IRequest<Result<string>>;
+    int MainIndex,
+    IFormFileCollection File
+    ) : IRequest<Result<string>>;
 
 public sealed class ProductCreateCommandValidator : AbstractValidator<ProductCreateCommand>
 {
@@ -34,7 +35,7 @@ public sealed class ProductCreateCommandValidator : AbstractValidator<ProductCre
         RuleFor(p => p.Condition).NotEmpty().WithMessage("Ürün durumu boş olamaz!");
         RuleFor(p => p.CategoryId).NotEmpty().WithMessage("Kategori boş olamaz!");
         RuleFor(p => p.File).NotEmpty().WithMessage("Ürün görseli yüklemelisiniz!");
-        RuleFor(p => p.MainIndex).GreaterThanOrEqualTo(0).WithMessage("Lütfen ana resimi işaretleyiniz.");
+        RuleFor(p => p.MainIndex).GreaterThanOrEqualTo(0).WithMessage("Lütfen bir tane ana resim seçiniz.");
     }
 }
 
@@ -45,6 +46,7 @@ internal sealed class ProductCreateCommandHandler(IProductRepository productRepo
     {
         if (await productRepository.AnyAsync(p => p.Name.Value == request.Name, cancellationToken))
             return Result<string>.Failure("Bu isimde ürün var");
+        
 
         Name name = new(request.Name);
         Quantity quantity = new(request.Quantity);
@@ -58,6 +60,15 @@ internal sealed class ProductCreateCommandHandler(IProductRepository productRepo
             request.Description,
             request.featured);
 
+        for (int i = 0; i < request.File.Count; i++)
+        {
+            var file = request.File[i];
+            string fileName = FileService.FileSaveToServer(file, "wwwroot/images/");
+            bool isMain = (i == request.MainIndex);
+
+            ProductImage image = new(fileName,product.Id, isMain);
+            product.AddImage(fileName, isMain);
+        }
 
         productRepository.Add(product);
         await unitOfWork.SaveChangesAsync();

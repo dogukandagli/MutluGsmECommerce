@@ -1,7 +1,9 @@
 import {
   Button,
+  Checkbox,
   Chip,
   Container,
+  FormControlLabel,
   IconButton,
   MenuItem,
   TextField,
@@ -27,8 +29,15 @@ import StarIcon from "@mui/icons-material/Star";
 const Schema = z.object({
   name: z.string().min(1, "Ürün adı zorunlu"),
   category: z.string().uuid("Geçerli kategori seçin"),
-  description: z.string(),
-  brand: z.string(),
+  description: z.string().optional(),
+  brand: z.string().optional(),
+  originalPrice: z
+    .string()
+    .min(1, { message: "Original price 0'dan küçük olamaz" }),
+  price: z.string().optional(),
+  featured: z.boolean(),
+  condition: z.int({ message: "Lütfen Seçiniz" }),
+  quantity: z.string().min(1, { message: "Stok 0'dan küçük olamaz" }),
 });
 type FromValues = z.infer<typeof Schema>;
 
@@ -39,8 +48,8 @@ export default function ProductCreatePage() {
     defaultValues: {
       name: "",
       category: "",
-      description: "",
-      brand: "",
+      originalPrice: "",
+      featured: false,
     },
   });
   const [categories, setCategories] = useState<ICategorySelect[]>([]);
@@ -88,6 +97,8 @@ export default function ProductCreatePage() {
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <FormProvider {...methods}>
         <ProductCreateStepper
+          mainIndex={mainIndex}
+          files={files}
           onStepChange={(i) => console.log("step ->", i)}
           renderStep={(i) => {
             switch (i) {
@@ -159,7 +170,7 @@ export default function ProductCreatePage() {
                                   multiline
                                   rows={4}
                                   margin="normal"
-                                  variant="standard"
+                                  variant="outlined"
                                   fullWidth
                                   error={!!fieldState.error}
                                   helperText={fieldState.error?.message}
@@ -321,9 +332,120 @@ export default function ProductCreatePage() {
                   </Box>
                 );
               case 2:
-                return <>/* Social/SEO alanların buraya */</>;
-              case 3:
-                return <>/* Pricing alanların buraya */</>;
+                return (
+                  <Box>
+                    <Typography variant="h6" fontWeight={700} mb={2}>
+                      Ürün Bilgisi
+                    </Typography>
+                    <Grid container spacing={3}>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Stack spacing={2}>
+                          <Controller
+                            control={control}
+                            name="originalPrice"
+                            render={({ field, fieldState }) => (
+                              <TextField
+                                {...field}
+                                type="number"
+                                label="Fiyat"
+                                variant="outlined"
+                                fullWidth
+                                required
+                                error={!!fieldState.error}
+                                helperText={fieldState.error?.message}
+                              />
+                            )}
+                          />
+                        </Stack>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Stack spacing={2}>
+                          <Controller
+                            control={control}
+                            name="price"
+                            render={({ field, fieldState }) => (
+                              <TextField
+                                {...field}
+                                type="number"
+                                label="İndirimli Fiyat"
+                                variant="outlined"
+                                fullWidth
+                                error={!!fieldState.error}
+                                helperText={fieldState.error?.message}
+                              />
+                            )}
+                          />
+                        </Stack>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Stack spacing={2}>
+                          <Controller
+                            name="featured"
+                            control={control}
+                            render={({ field }) => (
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    checked={field.value}
+                                    onChange={(e) =>
+                                      field.onChange(e.target.checked)
+                                    }
+                                  />
+                                }
+                                label="Öne Çıkan"
+                              />
+                            )}
+                          />
+                        </Stack>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Stack spacing={2}>
+                          <Controller
+                            name="condition"
+                            control={control}
+                            render={({ field, fieldState }) => (
+                              <TextField
+                                {...field}
+                                select
+                                label="Durum"
+                                variant="standard"
+                                fullWidth
+                                error={!!fieldState.error}
+                                helperText={fieldState.error?.message}
+                              >
+                                <MenuItem key={0} value={0}>
+                                  Sıfır
+                                </MenuItem>
+                                <MenuItem key={1} value={1}>
+                                  İkinci El
+                                </MenuItem>
+                              </TextField>
+                            )}
+                          />
+                        </Stack>
+                      </Grid>
+                      <Grid size={{ xs: 12, md: 6 }}>
+                        <Stack spacing={2}>
+                          <Controller
+                            control={control}
+                            name="quantity"
+                            render={({ field, fieldState }) => (
+                              <TextField
+                                {...field}
+                                type="number"
+                                label="Stok bilgisi"
+                                variant="outlined"
+                                fullWidth
+                                error={!!fieldState.error}
+                                helperText={fieldState.error?.message}
+                              />
+                            )}
+                          />
+                        </Stack>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                );
               default:
                 return null;
             }

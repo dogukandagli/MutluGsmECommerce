@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[13.0.0, )"
             },
+            "TS.FileService": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "TS.Result": {
               "target": "Package",
               "version": "[9.0.1, )"

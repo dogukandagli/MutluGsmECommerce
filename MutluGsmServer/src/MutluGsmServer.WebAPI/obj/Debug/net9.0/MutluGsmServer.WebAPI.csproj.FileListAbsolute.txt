@@ -370,3 +370,5 @@ C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.
 C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\obj\Debug\net9.0\MutluGsmServer.WebAPI.genruntimeconfig.cache
 C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\obj\Debug\net9.0\ref\MutluGsmServer.WebAPI.dll
 C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\obj\Debug\net9.0\MutluGsmServer.WebAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\bin\Debug\net9.0\MutluGsmServer.WebAPI.staticwebassets.runtime.json
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\bin\Debug\net9.0\TS.FileService.dll

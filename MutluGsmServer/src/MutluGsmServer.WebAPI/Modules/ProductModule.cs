@@ -21,6 +21,7 @@ public static class ProductModule
             )
             .Accepts<ProductCreateCommand>("multipart/form-data")
             .Produces<Result<string>>()
-            .WithName("ProductCreate");
+            .WithName("ProductCreate")
+            .DisableAntiforgery();
     }
 }
