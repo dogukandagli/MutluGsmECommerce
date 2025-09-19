@@ -10,7 +10,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import ProductCreateStepper from "../../../features/products/components/ProductCreateStepper";
+import ProductCreateStepper from "../../../features/products/components/Create/ProductCreateStepper";
 import Grid from "@mui/material/Grid";
 import { Box, Stack } from "@mui/system";
 import { z } from "zod";
