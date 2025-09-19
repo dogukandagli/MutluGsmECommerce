@@ -1,5 +1,10 @@
+import { Container } from "@mui/system";
 import ProductCreateStepper from "../components/Create/ProductCreateStepper";
 
 export default function ProductCreatePage() {
-  return <ProductCreateStepper mainIndex={0} />;
+  return (
+    <Container maxWidth="lg" sx={{ py: 6 }}>
+      <ProductCreateStepper />
+    </Container>
+  );
 }
