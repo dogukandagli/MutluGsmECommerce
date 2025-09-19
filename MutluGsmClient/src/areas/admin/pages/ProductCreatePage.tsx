@@ -99,7 +99,6 @@ export default function ProductCreatePage() {
         <ProductCreateStepper
           mainIndex={mainIndex}
           files={files}
-          onStepChange={(i) => console.log("step ->", i)}
           renderStep={(i) => {
             switch (i) {
               case 0:
