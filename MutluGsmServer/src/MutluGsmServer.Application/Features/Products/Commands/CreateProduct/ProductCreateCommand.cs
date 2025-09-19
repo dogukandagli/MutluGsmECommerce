@@ -66,7 +66,6 @@ internal sealed class ProductCreateCommandHandler(IProductRepository productRepo
             string fileName = FileService.FileSaveToServer(file, "wwwroot/images/");
             bool isMain = (i == request.MainIndex);
 
-            ProductImage image = new(fileName,product.Id, isMain);
             product.AddImage(fileName, isMain);
         }
 

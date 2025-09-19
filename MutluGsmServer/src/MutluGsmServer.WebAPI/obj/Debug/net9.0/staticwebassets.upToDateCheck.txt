@@ -1,3 +1,11 @@
 wwwroot\images\134027071113092766.Ekran Görüntüsü (6).png
 wwwroot\images\134027080212651299.Ekran görüntüsü 2025-09-01 163136.png
 wwwroot\images\134027080603272722.Ekran görüntüsü 2025-09-01 163136.png
+wwwroot\images\134027482372021422.ControlUnitBUS.png
+wwwroot\images\134027482372046541.dogukan_dagli_2022510193_HW1_a_bdf.png
+wwwroot\images\134027484929057756.ControlUnitBUS.png
+wwwroot\images\134027484929075531.dogukan_dagli_2022510193_HW1_a_bdf.png
+wwwroot\images\134027485142919367.ControlUnitBUS.png
+wwwroot\images\134027485142938037.dogukan_dagli_2022510193_HW1_a_bdf.png
+wwwroot\images\134027486652013482.Ekran Görüntüsü (20).png
+wwwroot\images\134027486652024403.Ekran Görüntüsü (21).png

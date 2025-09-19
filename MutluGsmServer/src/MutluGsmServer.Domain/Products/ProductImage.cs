@@ -11,12 +11,12 @@ public sealed class ProductImage : Entity
 
     private ProductImage() { }
 
-    public ProductImage( string imageUrl, Guid ıd, bool isMain)
+    public ProductImage( string imageUrl, Guid productId, bool isMain)
     {
         if (string.IsNullOrWhiteSpace(imageUrl))
             throw new ArgumentException("ImageUrl boş olamaz.");
         ImageUrl = imageUrl;
-        Id = ıd;
+        ProductId = productId;
         IsMain = isMain;
     }
 
