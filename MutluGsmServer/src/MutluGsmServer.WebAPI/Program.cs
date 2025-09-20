@@ -46,7 +46,10 @@ app.UseCors(policy => policy
 .SetIsOriginAllowed(t => true));
 
 app.RegisterRoutes();
+
 app.UseExceptionHandler();
+
+app.UseStaticFiles();
 
 app.MapControllers().RequireRateLimiting("fixed");
 app.Run();

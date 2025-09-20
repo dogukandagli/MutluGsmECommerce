@@ -23,21 +23,24 @@ public sealed class ProductDto : EntityDto
     public string? BrandName { get; set; } 
     public string? Description { get; set; }
     public bool featured { get; set; }
+    public string ImageUrl { get; set; } = default!;
 }
 
 public static class ProductExtensions
 {
     public static IQueryable<ProductDto> MapTo(this IQueryable<EntityWithAuditDto<Product>> entities,
         IQueryable<Category> categories,
-        IQueryable<Brand> brands)
+        IQueryable<Brand> brands,
+        IQueryable<ProductImage> productImages)
     {
 
         var res = (from Entity in entities
+                        join ProductImage in productImages on Entity.Entity.Id equals ProductImage.ProductId where ProductImage.IsMain == true
                         join Category in categories on Entity.Entity.CategoryId equals Category.Id
                         join Brand in brands on Entity.Entity.BrandId equals Brand.Id into bj
                         from Brand in bj.DefaultIfEmpty()
                         select new ProductDto
-                        {
+                        { 
                             Name = Entity.Entity.Name.Value,
                             brandId = Entity.Entity.BrandId,
                             BrandName = Brand.Name.Value,
@@ -55,6 +58,7 @@ public static class ProductExtensions
                             Quantity = Entity.Entity.Quantity.Value,
                             UpdatedDate = Entity.Entity.UpdatedDate,
                             Id = Entity.Entity.Id,
+                            ImageUrl = ProductImage.ImageUrl,
                         }
                        ).AsQueryable();
 

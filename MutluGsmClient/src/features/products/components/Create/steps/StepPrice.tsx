@@ -21,7 +21,7 @@ export default function StepPrice() {
           <Stack spacing={2}>
             <Controller
               control={control}
-              name="originalPrice"
+              name="price"
               render={({ field, fieldState }) => (
                 <TextField
                   {...field}
@@ -41,7 +41,7 @@ export default function StepPrice() {
           <Stack spacing={2}>
             <Controller
               control={control}
-              name="price"
+              name="originalPrice"
               render={({ field, fieldState }) => (
                 <TextField
                   {...field}
@@ -87,6 +87,7 @@ export default function StepPrice() {
                   label="Durum"
                   variant="standard"
                   fullWidth
+                  required
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
                 >
@@ -113,6 +114,7 @@ export default function StepPrice() {
                   label="Stok bilgisi"
                   variant="outlined"
                   fullWidth
+                  required
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
                 />

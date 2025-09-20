@@ -15,23 +15,58 @@ import { useState } from "react";
 import { DarkBarConnector } from "../Stepper/DarkBarConnector";
 import { DotStepIcon } from "../Stepper/DotStepIcon";
 import StepInformation from "./steps/StepInformation";
-import StepMedia from "./steps/Stepmedia";
 import StepPrice from "./steps/StepPrice";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import StepMedia from "./steps/StepMedia";
 
 const Schema = z.object({
   name: z.string().min(1, "Ürün adı zorunlu"),
   category: z.string().uuid("Geçerli kategori seçin"),
   description: z.string().optional(),
   brand: z.string().optional(),
+  price: z
+    .string()
+    .trim()
+    .transform((v) => Number(v))
+    .refine((v) => !Number.isNaN(v), {
+      message: "Geçerli bir sayı giriniz",
+    })
+    .refine((v) => v >= 1, {
+      message: "Fiyat en az 1 olmalı",
+    })
+    .refine((v) => v <= 999999, {
+      message: "Fiyat çok yüksek",
+    }),
   originalPrice: z
     .string()
-    .min(1, { message: "Original price 0'dan küçük olamaz" }),
-  price: z.string().optional(),
+    .trim()
+    .optional() // opsiyonel alan
+    .transform((v) => (v === "" || v === undefined ? undefined : Number(v)))
+    .refine((v) => v === undefined || !Number.isNaN(v), {
+      message: "Geçerli bir sayı giriniz",
+    })
+    .refine((v) => v === undefined || v >= 1, {
+      message: "Fiyat en az 1 olmalı",
+    })
+    .refine((v) => v === undefined || v <= 999999, {
+      message: "Fiyat çok yüksek",
+    }),
   featured: z.boolean(),
   condition: z.int({ message: "Lütfen Seçiniz" }),
-  quantity: z.string().min(1, { message: "Stok 0'dan küçük olamaz" }),
+  quantity: z
+    .string()
+    .trim()
+    .transform((v) => (v === "" ? undefined : Number(v)))
+    .refine((v) => v === undefined || !Number.isNaN(v), {
+      message: "Geçerli bir sayı giriniz",
+    })
+    .refine((v) => v === undefined || v >= 1, {
+      message: "Stok en az 1 olmalı",
+    })
+    .refine((v) => v === undefined || v <= 999999, {
+      message: "Stok cok yuksek",
+    }),
 });
 type FromValues = z.infer<typeof Schema>;
 
@@ -44,7 +79,7 @@ export default function ProductCreateStepper({}) {
     defaultValues: {
       name: "",
       category: "",
-      originalPrice: "",
+      originalPrice: 0,
       featured: false,
     },
   });
@@ -97,18 +132,20 @@ export default function ProductCreateStepper({}) {
     formData.append("Name", data.name);
     formData.append("Quantity", String(data.quantity));
     formData.append("Price", String(data.price).replace(",", "."));
-    if (data.originalPrice !== "" && data.originalPrice !== undefined)
+    if (data.originalPrice)
       formData.append(
         "OriginalPrice",
         String(data.originalPrice).replace(",", ".")
       );
     formData.append("Condition", String(data.condition));
     formData.append("CategoryId", String(data.category));
-    formData.append("BrandId", String(data.brand));
+
+    if (data.brand) formData.append("BrandId", String(data.brand));
+
     if (data.description) formData.append("Description", data.description);
-    formData.append("Featured", String(data.featured));
+    formData.append("featured", String(data.featured));
     if (files) {
-      files.forEach((f) => formData.append("file", f));
+      files.forEach((f) => formData.append("File", f));
     }
     formData.append("MainIndex", String(mainIndex));
     formData.forEach((value, key) => {

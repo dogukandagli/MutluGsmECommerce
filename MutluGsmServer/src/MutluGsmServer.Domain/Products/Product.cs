@@ -11,7 +11,7 @@ public sealed class Product : Entity
 {
     private Product() { }
     public Product(Name name, Quantity qty, decimal price, decimal? originalPrice,
-                   ConditionEnum condition, Guid categoryId, Guid? brandId, string? description = null, bool featured = false)
+                   ConditionEnum condition, Guid categoryId, Guid? brandId, string? description, bool featured = false)
     {
         SetName(name);
         SetQuantity(qty);

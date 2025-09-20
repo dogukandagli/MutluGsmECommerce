@@ -9,3 +9,8 @@ wwwroot\images\134027485142919367.ControlUnitBUS.png
 wwwroot\images\134027485142938037.dogukan_dagli_2022510193_HW1_a_bdf.png
 wwwroot\images\134027486652013482.Ekran Görüntüsü (20).png
 wwwroot\images\134027486652024403.Ekran Görüntüsü (21).png
+wwwroot\images\134027488662119868.Ekran Görüntüsü (20).png
+wwwroot\images\134027488662138645.Ekran Görüntüsü (21).png
+wwwroot\images\134027784576942758.Ekran Görüntüsü (63).png
+wwwroot\images\134027784576980671.Ekran Görüntüsü (69).png
+wwwroot\images\134028378738629680.49314.webp

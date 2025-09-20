@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MutluGsmServer.WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12c19560611a095bcde3355433eba8e163aef7f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a37137c85d0808513be42ea5fe68d63555896d16")]
 [assembly: System.Reflection.AssemblyProductAttribute("MutluGsmServer.WebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MutluGsmServer.WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
