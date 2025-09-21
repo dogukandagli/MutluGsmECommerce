@@ -30,20 +30,40 @@ import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
-export default function Sidebar() {
-  const [tasksOpen, setTasksOpen] = React.useState(false);
-  const [usersOpen, setUsersOpen] = React.useState(false);
+interface HeaderProps {
+  sideBarOpen: boolean;
+  handleSideBar: () => void;
+  mobile: boolean;
+}
+
+export default function Sidebar({
+  sideBarOpen,
+  handleSideBar,
+  mobile,
+}: HeaderProps) {
+  const [tasksOpen, setTasksOpen] = useState(false);
+  const [usersOpen, setUsersOpen] = useState(false);
+
+  const mobileProps = mobile
+    ? {
+        variant: "temporary" as const,
+        open: sideBarOpen,
+        onClose: handleSideBar,
+      }
+    : { variant: "persistent" as const, open: sideBarOpen }; // persistent'ta onClose gereksiz
 
   return (
     <Drawer
-      variant="permanent"
+      anchor="left"
+      {...mobileProps}
       sx={{
         width: drawerWidth,
         flexShrink: 0,
-        [`& .MuiDrawer-paper`]: {
+        "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
         },
