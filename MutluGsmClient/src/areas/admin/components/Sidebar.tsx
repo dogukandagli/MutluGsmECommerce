@@ -11,10 +11,6 @@ import {
   Avatar,
   IconButton,
   Chip,
-  Card,
-  CardContent,
-  LinearProgress,
-  Button,
   Collapse,
 } from "@mui/material";
 
@@ -24,12 +20,10 @@ import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
-import SupportRoundedIcon from "@mui/icons-material/SupportRounded";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useState } from "react";
+import { NavLink } from "react-router";
 
 const drawerWidth = 240;
 
@@ -53,7 +47,7 @@ export default function Sidebar({
         open: sideBarOpen,
         onClose: handleSideBar,
       }
-    : { variant: "persistent" as const, open: sideBarOpen }; // persistent'ta onClose gereksiz
+    : { variant: "permanent" as const, open: sideBarOpen }; // persistent'ta onClose gereksiz
 
   return (
     <Drawer
@@ -108,7 +102,7 @@ export default function Sidebar({
             <ListItemIcon>
               <AssignmentRoundedIcon />
             </ListItemIcon>
-            <ListItemText primary="Tasks" />
+            <ListItemText primary="Ürün" />
             <KeyboardArrowDownIcon
               sx={{
                 transform: tasksOpen ? "rotate(180deg)" : "rotate(0deg)",
@@ -119,10 +113,16 @@ export default function Sidebar({
         </ListItem>
         <Collapse in={tasksOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>All tasks</ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>Backlog</ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>In progress</ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>Done</ListItemButton>
+            <ListItemButton component={NavLink} to="products" sx={{ pl: 4 }}>
+              Ürünler
+            </ListItemButton>
+            <ListItemButton
+              component={NavLink}
+              to="products/new"
+              sx={{ pl: 4 }}
+            >
+              Ürün Oluştur
+            </ListItemButton>
           </List>
         </Collapse>
 
@@ -162,51 +162,6 @@ export default function Sidebar({
       </List>
 
       <Divider />
-
-      {/* Support & Settings */}
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <SupportRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Support" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <SettingsRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Settings" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-
-      {/* Used space card */}
-      <Box sx={{ p: 2 }}>
-        <Card variant="outlined">
-          <CardContent>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography variant="subtitle2">Used space</Typography>
-              <IconButton size="small">
-                <CloseRoundedIcon fontSize="small" />
-              </IconButton>
-            </Box>
-            <Typography variant="caption">
-              Your team has used 80% of your available space. Need more?
-            </Typography>
-            <LinearProgress variant="determinate" value={80} sx={{ my: 1 }} />
-            <Button size="small" variant="contained">
-              Upgrade plan
-            </Button>
-          </CardContent>
-        </Card>
-      </Box>
 
       <Divider />
 

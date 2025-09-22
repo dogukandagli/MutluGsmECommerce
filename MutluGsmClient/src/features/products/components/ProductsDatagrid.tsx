@@ -1,9 +1,5 @@
 import type { ColDef, GridReadyEvent } from "ag-grid-community";
-import {
-  AllCommunityModule,
-  ClientSideRowModelModule,
-  ModuleRegistry,
-} from "ag-grid-community";
+
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AgGridReact } from "ag-grid-react";
@@ -20,13 +16,26 @@ import OdataProvider from "ag-grid-odata";
 import SearchIcon from "@mui/icons-material/Search";
 import { ActionsCellRenderer } from "../../../shared/cell-renderers/ActionsCellRenderer";
 import { ProductCellRenderer } from "../../../shared/cell-renderers/ProductCellRenderer";
-import { Box, Container } from "@mui/system";
-import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
+import { Box } from "@mui/system";
+import {
+  CircularProgress,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
+import { fetchOdataProducts } from "../store/productSlice";
 
-// sadece community modülleri
-ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
+import {
+  ModuleRegistry,
+  AllCommunityModule,
+  InfiniteRowModelModule,
+} from "ag-grid-community";
+
+ModuleRegistry.registerModules([AllCommunityModule, InfiniteRowModelModule]);
 
 interface Props {
   gridTheme?: string;
@@ -59,6 +68,9 @@ function appendExtraFilter(options: string, extraFilter: string | null) {
 }
 
 export const ProductsDataGrid: FunctionComponent<Props> = () => {
+  const { status } = useAppSelector((state) => state.product);
+  const dispatch = useAppDispatch();
+
   const gridRef = useRef<AgGridReact>(null);
   const [isDarkMode, setIsDarkMode] = useState(false); // 👈 local state
   const gridTheme = "ag-theme-quartz"; // varsayılan
@@ -130,89 +142,90 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
   );
 
   // Grid Ready → ag-grid-odata datasource
-  const onGridReady = useCallback((e: GridReadyEvent) => {
-    const buildSearchFilter = (q: string) => {
-      if (!q) return null;
-      const esc = q.replace(/'/g, "''");
-      const fields = ["name", "categoryName", "brandName", "description"];
-      return fields.map((f) => `contains(${f},'${esc}')`).join(" or ");
-    };
+  const onGridReady = useCallback(
+    (e: GridReadyEvent) => {
+      const buildSearchFilter = (q: string) => {
+        if (!q) return null;
+        const esc = q.replace(/'/g, "''");
+        const fields = ["name", "categoryName", "brandName", "description"];
+        return fields.map((f) => `contains(${f},'${esc}')`).join(" or ");
+      };
 
-    const ds = new OdataProvider({
-      // ag-grid-odata bize ?$top=...&$skip=...&$orderby=...&$filter=... gibi bir options string verir
-      callApi: async (options: string) => {
-        const extra = buildSearchFilter(quickFilterTextRef.current);
-        const merged = appendExtraFilter(options, extra);
-        const url = `${ODATA_BASE}${merged}`;
-        const res = await fetch(url, {
-          headers: { Accept: "application/json" },
-        });
-        return res.json(); // { value: [], "@odata.count": N }
-      },
-    });
+      const ds = new OdataProvider({
+        // ag-grid-odata bize ?$top=...&$skip=...&$orderby=...&$filter=... gibi bir options string verir
+        callApi: async (options: string) => {
+          const extra = buildSearchFilter(quickFilterTextRef.current);
+          const merged = appendExtraFilter(options, extra);
 
-    e.api.setGridOption("datasource", ds);
-  }, []);
+          const action = await dispatch(fetchOdataProducts(merged));
+          if (fetchOdataProducts.fulfilled.match(action)) {
+            return action.payload; // { value: IProduct[], "@odata.count": number }
+          } // { value: [], "@odata.count": N }
+          throw action.error;
+        },
+      });
+
+      e.api.setGridOption("datasource", ds);
+    },
+    [dispatch]
+  );
 
   return (
-    <Box sx={{ py: 2 }}>
-      <Container maxWidth="lg">
-        {/* header: tabs + search */}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "end",
-            gap: 2,
-            flexWrap: "wrap",
-            mb: 2,
+    <Box sx={{ width: "100%", px: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "end",
+          gap: 2,
+          flexWrap: "wrap",
+          mb: 2,
+        }}
+      >
+        <TextField
+          placeholder="Search product..."
+          size="small"
+          value={searchValue}
+          onChange={onFilterTextBoxChanged}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon fontSize="small" />
+              </InputAdornment>
+            ),
           }}
-        >
-          <TextField
-            placeholder="Search product..."
-            size="small"
-            value={searchValue}
-            onChange={onFilterTextBoxChanged}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon fontSize="small" />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Tooltip title={isDarkMode ? "Aydınlık" : "Karanlık"}>
-            <IconButton onClick={() => setIsDarkMode((prev) => !prev)}>
-              {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-            </IconButton>
-          </Tooltip>
-        </Box>
+        />
+        <Tooltip title={isDarkMode ? "Aydınlık" : "Karanlık"}>
+          <IconButton onClick={() => setIsDarkMode((prev) => !prev)}>
+            {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+        </Tooltip>
+      </Box>
 
-        {/* grid */}
-        <Box
-          className={themeClass}
-          sx={{
-            width: "100%",
-            minHeight: 420,
-          }}
-        >
-          <AgGridReact
-            theme="legacy"
-            ref={gridRef}
-            columnDefs={colDefs}
-            defaultColDef={defaultColDef}
-            rowHeight={80}
-            rowModelType="infinite" // ag-grid-odata bunu kullanır
-            cacheBlockSize={10}
-            pagination
-            paginationPageSize={10}
-            onGridReady={onGridReady}
-            domLayout="autoHeight"
-            masterDetail
-            detailRowAutoHeight
-          />
-        </Box>
-      </Container>
+      {/* grid */}
+      <Box
+        className={themeClass}
+        sx={{
+          width: "100%",
+          minHeight: 420,
+        }}
+      >
+        <AgGridReact
+          theme="legacy"
+          ref={gridRef}
+          columnDefs={colDefs}
+          defaultColDef={defaultColDef}
+          rowHeight={80}
+          rowModelType="infinite" // ag-grid-odata bunu kullanır
+          cacheBlockSize={10}
+          pagination
+          paginationPageSize={10}
+          paginationPageSizeSelector={[10, 20, 50, 100]}
+          onGridReady={onGridReady}
+          domLayout="autoHeight"
+          detailRowAutoHeight
+        />
+      </Box>
     </Box>
   );
 };

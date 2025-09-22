@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { Outlet } from "react-router";
 import Header from "../../areas/admin/components/Header";
 import Sidebar from "../../areas/admin/components/Sidebar";
@@ -21,13 +21,17 @@ export default function AdminLayout() {
 
   return (
     <>
-      <Header handleSideBar={handleSideBar} />
-      <Sidebar
-        sideBarOpen={sideBarOpen}
-        handleSideBar={handleSideBar}
-        mobile={mobile}
-      />
-      <Outlet />
+      <Box
+        sx={!isMobile ? { display: "flex", height: "100%", width: "100%" } : {}}
+      >
+        <Header handleSideBar={handleSideBar} />
+        <Sidebar
+          sideBarOpen={sideBarOpen}
+          handleSideBar={handleSideBar}
+          mobile={mobile}
+        />
+        <Outlet />
+      </Box>
     </>
   );
 }
