@@ -45,6 +45,7 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Description)
                .HasMaxLength(2000);
 
+        builder.HasQueryFilter(x => !x.IsDeleted);
 
     }
 }

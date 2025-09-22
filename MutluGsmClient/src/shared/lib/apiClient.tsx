@@ -1,10 +1,37 @@
-import axios, { type AxiosResponse } from "axios";
+import axios, { AxiosError, type AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "https://localhost:7261/";
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use();
-axios.interceptors.response.use();
+axios.interceptors.response.use(
+  (response) => {
+    const apiResponse = response.data as ApiResponse;
+
+    if (apiResponse.isSuccessful) {
+      toast.success(apiResponse.data);
+    } else {
+      toast.error(apiResponse.errorMessages);
+    }
+    return response;
+  },
+  (error: AxiosError) => {
+    const { data } = error.response as AxiosResponse<ApiResponse>;
+
+    if (data.isSuccessful) {
+      toast.success(data.data);
+    } else {
+      if (Array.isArray(data.errorMessages) && data.errorMessages.length > 0) {
+        data.errorMessages.forEach((message: string) => {
+          toast.error(message);
+        });
+      } else {
+        toast.error("Bilinmeyen hata");
+      }
+    }
+  }
+);
 
 const queries = {
   get: (url: string) =>
@@ -18,3 +45,10 @@ const queries = {
 };
 
 export default queries;
+
+export interface ApiResponse {
+  data?: string;
+  errorMessages?: string[];
+  isSuccessful: boolean;
+  statusCode: number;
+}

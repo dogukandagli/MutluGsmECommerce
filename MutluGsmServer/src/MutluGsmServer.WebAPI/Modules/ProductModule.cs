@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MutluGsmServer.Application.Features.Categories.Commands.CreateCategory;
 using MutluGsmServer.Application.Features.Products.Commands.CreateProduct;
+using MutluGsmServer.Application.Features.Products.Commands.ProductDelete;
 using TS.Result;
 
 namespace MutluGsmServer.WebAPI.Modules;
@@ -23,5 +24,15 @@ public static class ProductModule
             .Produces<Result<string>>()
             .WithName("ProductCreate")
             .DisableAntiforgery();
+
+        group.MapPost("{id}",
+            async (Guid id, ISender sender, CancellationToken cancellationToken) =>
+            {
+                var response = await sender.Send(new ProductDeleteCommand(id), cancellationToken);
+                return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
+            }
+            ).Produces<Result<string>>()
+            .WithName("ProductDelete");
+
     }
 }

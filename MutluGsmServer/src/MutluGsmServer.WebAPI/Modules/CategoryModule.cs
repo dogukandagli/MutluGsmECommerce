@@ -19,5 +19,6 @@ public static class CategoryModule
             }
             ).Produces<Result<string>>()
             .WithName("CategoryCreate");
+        
     }
 }

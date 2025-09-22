@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.application\\features\\products\\commands\\createproduct\\productcreatecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|solutionrelative:src\\mutlugsmserver.application\\features\\products\\commands\\createproduct\\productcreatecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.application\\features\\products\\commands\\productdelete\\productdeletecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|solutionrelative:src\\mutlugsmserver.application\\features\\products\\commands\\productdelete\\productdeletecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.application\\features\\products\\queries\\getallproduct\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|solutionrelative:src\\mutlugsmserver.application\\features\\products\\queries\\getallproduct\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.webapi\\modules\\productmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|solutionrelative:src\\mutlugsmserver.webapi\\modules\\productmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.webapi\\modules\\categorymodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897A5F11-4103-366B-EBED-DAE967CB6E7B}|src\\MutluGsmServer.WebAPI\\MutluGsmServer.WebAPI.csproj|solutionrelative:src\\mutlugsmserver.webapi\\modules\\categorymodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +30,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProductCreateCommand.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Commands\\CreateProduct\\ProductCreateCommand.cs",
-              "RelativeDocumentMoniker": "src\\MutluGsmServer.Application\\Features\\Products\\Commands\\CreateProduct\\ProductCreateCommand.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Commands\\CreateProduct\\ProductCreateCommand.cs",
-              "RelativeToolTip": "src\\MutluGsmServer.Application\\Features\\Products\\Commands\\CreateProduct\\ProductCreateCommand.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCAAAABNAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ProductModule.cs",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\ProductModule.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.WebAPI\\Modules\\ProductModule.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\ProductModule.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\Modules\\ProductModule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-20T10:53:36.328Z",
+              "WhenOpened": "2025-09-22T11:30:44.301Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductDto.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Queries\\GetAllProduct\\ProductDto.cs",
-              "RelativeDocumentMoniker": "src\\MutluGsmServer.Application\\Features\\Products\\Queries\\GetAllProduct\\ProductDto.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Queries\\GetAllProduct\\ProductDto.cs",
-              "RelativeToolTip": "src\\MutluGsmServer.Application\\Features\\Products\\Queries\\GetAllProduct\\ProductDto.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACoAAAAaAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "CategoryModule.cs",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\Modules\\CategoryModule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-20T10:33:26.25Z",
+              "WhenOpened": "2025-09-22T11:29:40.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductDeleteCommand.cs",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Commands\\ProductDelete\\ProductDeleteCommand.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.Application\\Features\\Products\\Commands\\ProductDelete\\ProductDeleteCommand.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Commands\\ProductDelete\\ProductDeleteCommand.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.Application\\Features\\Products\\Commands\\ProductDelete\\ProductDeleteCommand.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-22T11:24:02.486Z",
               "EditorCaption": ""
             }
           ]
