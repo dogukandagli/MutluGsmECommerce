@@ -7,20 +7,17 @@ axios.defaults.withCredentials = true;
 axios.interceptors.request.use();
 axios.interceptors.response.use(
   (response) => {
-    const apiResponse = response.data as ApiResponse;
-
-    if (apiResponse.isSuccessful) {
-      toast.success(apiResponse.data);
-    } else {
-      toast.error(apiResponse.errorMessages);
-    }
     return response;
   },
   (error: AxiosError) => {
     const { data } = error.response as AxiosResponse<ApiResponse>;
 
     if (data.isSuccessful) {
-      toast.success(data.data);
+      if (data) {
+        toast.success(data.data);
+      } else {
+        toast.error("Bilinmeyen hata");
+      }
     } else {
       if (Array.isArray(data.errorMessages) && data.errorMessages.length > 0) {
         data.errorMessages.forEach((message: string) => {
@@ -30,6 +27,7 @@ axios.interceptors.response.use(
         toast.error("Bilinmeyen hata");
       }
     }
+    return Promise.reject(error.response);
   }
 );
 

@@ -12,8 +12,8 @@ import {
 import { FormProvider, useForm, type FieldValues } from "react-hook-form";
 import Product from "../../api/productApi";
 import { useState } from "react";
-import { DarkBarConnector } from "../Stepper/DarkBarConnector";
-import { DotStepIcon } from "../Stepper/DotStepIcon";
+import { DarkBarConnector } from "../../../../shared/components/Stepper/DarkBarConnector";
+import { DotStepIcon } from "../../../../shared/components/Stepper/DotStepIcon";
 import StepInformation from "./steps/StepInformation";
 import StepPrice from "./steps/StepPrice";
 import { z } from "zod";
@@ -79,7 +79,6 @@ export default function ProductCreateStepper({}) {
     defaultValues: {
       name: "",
       category: "",
-      originalPrice: 0,
       featured: false,
     },
   });

@@ -14,3 +14,11 @@ wwwroot\images\134027488662138645.Ekran Görüntüsü (21).png
 wwwroot\images\134027784576942758.Ekran Görüntüsü (63).png
 wwwroot\images\134027784576980671.Ekran Görüntüsü (69).png
 wwwroot\images\134028378738629680.49314.webp
+wwwroot\images\134030204716041321.49314.webp
+wwwroot\images\134030212440796207.49314.webp
+wwwroot\images\134030212590628200.49314.webp
+wwwroot\images\134030212724900525.49314.webp
+wwwroot\images\134030216534857966.49314.webp
+wwwroot\images\134030216763405881.49314.webp
+wwwroot\images\134030217218202529.49314.webp
+wwwroot\images\134030217710331498.49314.webp
