@@ -1,65 +1,78 @@
 import type { CustomCellRendererProps } from "ag-grid-react";
-import { useCallback } from "react";
-import { Stack, Button, IconButton, Tooltip } from "@mui/material";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import { useState } from "react";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
+import { deleteProduct } from "../../features/products/store/productSlice";
+import { LoadingButton } from "@mui/lab";
 
-export const ActionsCellRenderer = ({ api, node }: CustomCellRendererProps) => {
-  const onRemoveClick = useCallback(() => {
+export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
+  const { api, node } = params;
+
+  const dispatch = useAppDispatch();
+  const { status } = useAppSelector((state) => state.product);
+
+  const onRemoveClick = () => {
     const row = node.data;
-    api.applyTransaction({ remove: [row] });
-  }, [api, node]);
 
-  const onToggleSelling = useCallback(() => {
-    const row = node.data;
-    const isPaused = row.status === "paused";
-    const isOutOfStock = row.available <= 0;
+    dispatch(deleteProduct(row.id));
+    api.refreshInfiniteCache();
+    setOpen(false);
+  };
 
-    // Orijinal mantığı birebir koruduk:
-    // paused değilse → paused
-    // paused ise ve stok varsa → active
-    // paused ise ve stok yoksa → outOfStock
-    row.status = !isPaused ? "paused" : !isOutOfStock ? "active" : "outOfStock";
+  const [open, setOpen] = useState(false);
 
-    api.applyTransaction({ update: [row] });
-  }, [api, node]);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-  const isPaused = node?.data?.status === "paused";
-  const isOutOfStock = (node?.data?.available ?? 0) <= 0;
-
-  const ToggleIcon = isPaused ? PlayCircleOutlineIcon : PauseCircleOutlineIcon;
-  const toggleLabel = isPaused
-    ? isOutOfStock
-      ? "Mark Out of Stock"
-      : "Resume Selling"
-    : "Hold Selling";
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <Stack direction="row-reverse" spacing={1} alignItems="center">
+    <>
       <Tooltip title="Remove row">
         <IconButton
           size="small"
           color="error"
-          onClick={onRemoveClick}
+          onClick={handleClickOpen}
           aria-label="remove"
         >
-          <DeleteOutlineIcon fontSize="small" />
+          <DeleteIcon fontSize="small" />
         </IconButton>
       </Tooltip>
-
-      <Button
-        size="small"
-        variant="outlined"
-        color={isPaused ? "success" : "warning"}
-        onClick={onToggleSelling}
-        startIcon={<ToggleIcon fontSize="small" />}
-        sx={{ minHeight: 40 }}
-        // Eğer paused durumunda stok yoksa butonu pasifleştirmek istersen:
-        // disabled={isPaused && isOutOfStock}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        {toggleLabel}
-      </Button>
-    </Stack>
+        <DialogTitle id="alert-dialog-title">
+          Ürünü silmek istiyor musunuz?
+        </DialogTitle>
+
+        <DialogActions>
+          <Button onClick={handleClose}>Vazgeç</Button>
+          <LoadingButton
+            variant="outlined"
+            loadingPosition="start"
+            loading={status === "pendingDeleteProduct"}
+            startIcon={<DeleteIcon />}
+            onClick={onRemoveClick}
+            autoFocus
+          >
+            Sil
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };

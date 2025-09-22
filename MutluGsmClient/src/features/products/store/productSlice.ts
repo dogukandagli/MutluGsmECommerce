@@ -11,8 +11,15 @@ export const fetchOdataProducts = createAsyncThunk<
   ODataResponse<IProduct>,
   string
 >("products/fetchOdataProducts", async (merged) => {
-  return await Product.get(merged);
+  return await Product.getProducts(merged);
 });
+
+export const deleteProduct = createAsyncThunk<null, string>(
+  "products/deleteProduct",
+  async (id) => {
+    return await Product.deleteProduct(id);
+  }
+);
 
 const productsAdapter = createEntityAdapter<IProduct>();
 
@@ -30,6 +37,12 @@ export const productSlice = createSlice({
     });
     builder.addCase(fetchOdataProducts.fulfilled, (state, action) => {
       productsAdapter.upsertMany(state, action.payload.value);
+      state.status = "idle";
+    });
+    builder.addCase(deleteProduct.pending, (state) => {
+      state.status = "pendingDeleteProduct";
+    });
+    builder.addCase(deleteProduct.fulfilled, (state) => {
       state.status = "idle";
     });
   },

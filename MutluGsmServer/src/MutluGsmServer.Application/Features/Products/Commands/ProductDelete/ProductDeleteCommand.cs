@@ -24,7 +24,7 @@ internal sealed class ProductDeleteCommandHandler(
 
         if (product == null)
         {
-            return Result<string>.Failure("Ürü6n bulunamadı");
+            return Result<string>.Failure("Ürün bulunumadı veya silindi!");
         }
         product.Delete();
         productRepository.Update(product);

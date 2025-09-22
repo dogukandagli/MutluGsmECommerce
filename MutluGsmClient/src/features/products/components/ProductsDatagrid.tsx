@@ -1,5 +1,9 @@
-import type { ColDef, GridReadyEvent } from "ag-grid-community";
-
+import type { ColDef, GridReadyEvent, GetRowIdParams } from "ag-grid-community";
+import {
+  AllCommunityModule,
+  ClientSideRowModelModule,
+  ModuleRegistry,
+} from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AgGridReact } from "ag-grid-react";
@@ -17,33 +21,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import { ActionsCellRenderer } from "../../../shared/cell-renderers/ActionsCellRenderer";
 import { ProductCellRenderer } from "../../../shared/cell-renderers/ProductCellRenderer";
 import { Box } from "@mui/system";
-import {
-  CircularProgress,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Tooltip,
-} from "@mui/material";
+import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
+import { useAppDispatch } from "../../../app/store/hooks";
 import { fetchOdataProducts } from "../store/productSlice";
 
-import {
-  ModuleRegistry,
-  AllCommunityModule,
-  InfiniteRowModelModule,
-} from "ag-grid-community";
-
-ModuleRegistry.registerModules([AllCommunityModule, InfiniteRowModelModule]);
+// sadece community modülleri
+ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
 
 interface Props {
   gridTheme?: string;
   isDarkMode?: boolean;
 }
-
-// ---- OData ----
-const ODATA_BASE = "https://localhost:7261/odata/Products";
 
 function appendExtraFilter(options: string, extraFilter: string | null) {
   if (!extraFilter) return options;
@@ -68,7 +58,7 @@ function appendExtraFilter(options: string, extraFilter: string | null) {
 }
 
 export const ProductsDataGrid: FunctionComponent<Props> = () => {
-  const { status } = useAppSelector((state) => state.product);
+  // const { status } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
 
   const gridRef = useRef<AgGridReact>(null);
@@ -93,7 +83,7 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
     {
       field: "name",
       headerName: "Ürün Adı",
-      cellRenderer: ProductCellRenderer, // data.imageUrl + data.name kullan
+      cellRenderer: ProductCellRenderer,
       width: 180,
     },
     { field: "categoryName", headerName: "Kategori", width: 90 },
@@ -133,7 +123,7 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
       valueFormatter: (p) =>
         p.value ? new Date(p.value).toLocaleString("tr-TR") : "",
     },
-    { field: "actions", cellRenderer: ActionsCellRenderer, minWidth: 150 },
+    { field: "actions", cellRenderer: ActionsCellRenderer, width: 100 },
   ]);
 
   const defaultColDef = useMemo<ColDef>(
@@ -142,33 +132,29 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
   );
 
   // Grid Ready → ag-grid-odata datasource
-  const onGridReady = useCallback(
-    (e: GridReadyEvent) => {
-      const buildSearchFilter = (q: string) => {
-        if (!q) return null;
-        const esc = q.replace(/'/g, "''");
-        const fields = ["name", "categoryName", "brandName", "description"];
-        return fields.map((f) => `contains(${f},'${esc}')`).join(" or ");
-      };
+  const onGridReady = useCallback((e: GridReadyEvent) => {
+    const buildSearchFilter = (q: string) => {
+      if (!q) return null;
+      const esc = q.replace(/'/g, "''");
+      const fields = ["name", "categoryName", "brandName", "description"];
+      return fields.map((f) => `contains(${f},'${esc}')`).join(" or ");
+    };
 
-      const ds = new OdataProvider({
-        // ag-grid-odata bize ?$top=...&$skip=...&$orderby=...&$filter=... gibi bir options string verir
-        callApi: async (options: string) => {
-          const extra = buildSearchFilter(quickFilterTextRef.current);
-          const merged = appendExtraFilter(options, extra);
+    const ds = new OdataProvider({
+      // ag-grid-odata bize ?$top=...&$skip=...&$orderby=...&$filter=... gibi bir options string verir
+      callApi: async (options: string) => {
+        const extra = buildSearchFilter(quickFilterTextRef.current);
+        const merged = appendExtraFilter(options, extra);
 
-          const action = await dispatch(fetchOdataProducts(merged));
-          if (fetchOdataProducts.fulfilled.match(action)) {
-            return action.payload; // { value: IProduct[], "@odata.count": number }
-          } // { value: [], "@odata.count": N }
-          throw action.error;
-        },
-      });
+        const action = await dispatch(fetchOdataProducts(merged));
+        return action.payload; // { value: [], "@odata.count": N }
+      },
+    });
 
-      e.api.setGridOption("datasource", ds);
-    },
-    [dispatch]
-  );
+    e.api.setGridOption("datasource", ds);
+  }, []);
+
+  const getRowId = (p: { data: { id: string } }) => p.data.id;
 
   return (
     <Box sx={{ width: "100%", px: 3 }}>
@@ -224,6 +210,7 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
           onGridReady={onGridReady}
           domLayout="autoHeight"
           detailRowAutoHeight
+          getRowId={getRowId}
         />
       </Box>
     </Box>
