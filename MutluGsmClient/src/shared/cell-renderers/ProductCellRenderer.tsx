@@ -11,9 +11,9 @@ export const ProductCellRenderer: FunctionComponent<
   return (
     <div className={styles.productCell}>
       <div className={styles.image}>
-        {data.imageUrl && (
+        {data.mainImageUrl && (
           <img
-            src={`https://localhost:7261/images/${data.imageUrl}`}
+            src={`https://localhost:7261/images/${data.mainImageUrl}`}
             alt={data.name}
           />
         )}

@@ -12,9 +12,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
 import { deleteProduct } from "../../features/products/store/productSlice";
 import { LoadingButton } from "@mui/lab";
+import { NavLink } from "react-router";
 
 export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
   const { api, node } = params;
+  const id = params.node.data?.id;
 
   const dispatch = useAppDispatch();
   const { status } = useAppSelector((state) => state.product);
@@ -24,7 +26,7 @@ export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
 
     dispatch(deleteProduct(row.id));
     api.refreshInfiniteCache();
-    setOpen(false);
+    handleClose();
   };
 
   const [open, setOpen] = useState(false);
@@ -34,7 +36,9 @@ export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    if (status === "idle") {
+      setOpen(false);
+    }
   };
 
   return (
@@ -44,6 +48,17 @@ export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
           size="small"
           color="error"
           onClick={handleClickOpen}
+          aria-label="remove"
+        >
+          <DeleteIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Remove row">
+        <IconButton
+          size="small"
+          color="error"
+          component={NavLink}
+          to={`/admin/products/edit/${id}`}
           aria-label="remove"
         >
           <DeleteIcon fontSize="small" />

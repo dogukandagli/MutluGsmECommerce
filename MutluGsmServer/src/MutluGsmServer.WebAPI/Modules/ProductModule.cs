@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MutluGsmServer.Application.Features.Categories.Commands.CreateCategory;
 using MutluGsmServer.Application.Features.Products.Commands.CreateProduct;
 using MutluGsmServer.Application.Features.Products.Commands.ProductDelete;
 using TS.Result;
@@ -14,7 +13,7 @@ public static class ProductModule
         RouteGroupBuilder group = app.MapGroup("/products").WithTags("Products");
 
         group.MapPost(string.Empty,
-            async ([FromForm]ProductCreateCommand request, ISender sender, CancellationToken cancellationToken) =>
+            async ([FromForm] ProductCreateCommand request, ISender sender, CancellationToken cancellationToken) =>
             {
                 var response = await sender.Send(request, cancellationToken);
                 return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
@@ -25,7 +24,7 @@ public static class ProductModule
             .WithName("ProductCreate")
             .DisableAntiforgery();
 
-        group.MapPost("{id}",
+        group.MapDelete("{id}",
             async (Guid id, ISender sender, CancellationToken cancellationToken) =>
             {
                 var response = await sender.Send(new ProductDeleteCommand(id), cancellationToken);

@@ -8,9 +8,9 @@ import {
   StepLabel,
   Button,
   Typography,
+  CircularProgress,
 } from "@mui/material";
 import { FormProvider, useForm, type FieldValues } from "react-hook-form";
-import Product from "../../api/productApi";
 import { useState } from "react";
 import { DarkBarConnector } from "../../../../shared/components/Stepper/DarkBarConnector";
 import { DotStepIcon } from "../../../../shared/components/Stepper/DotStepIcon";
@@ -19,6 +19,9 @@ import StepPrice from "./steps/StepPrice";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import StepMedia from "./steps/StepMedia";
+import { createProduct } from "../../store/productSlice";
+import { useAppDispatch, useAppSelector } from "../../../../app/store/hooks";
+import { LoadingButton } from "@mui/lab";
 
 const Schema = z.object({
   name: z.string().min(1, "Ürün adı zorunlu"),
@@ -126,6 +129,9 @@ export default function ProductCreateStepper({}) {
 
   const handleBack = () => setActiveStep(activeStep - 1);
 
+  const dispatch = useAppDispatch();
+  const { status } = useAppSelector((state) => state.product);
+
   async function submitForm(data: FieldValues) {
     const formData = new FormData();
     formData.append("Name", data.name);
@@ -150,7 +156,7 @@ export default function ProductCreateStepper({}) {
     formData.forEach((value, key) => {
       console.log(key, value);
     });
-    Product.post(formData);
+    dispatch(createProduct(formData));
   }
 
   return (
@@ -220,13 +226,24 @@ export default function ProductCreateStepper({}) {
               >
                 {"Geri"}
               </Button>
-              <Button
+
+              <LoadingButton
+                loading={status === "pendingCreateProduct"}
+                loadingPosition="start"
+                loadingIndicator={
+                  <CircularProgress size={16} thickness={5} sx={{ mr: 1 }} />
+                }
                 variant="contained"
+                disableElevation
                 type="button"
                 onClick={handleNext}
+                disabled={status === "pendingCreateProduct"}
                 sx={{
                   borderRadius: 2,
                   px: 3,
+                  minWidth: 140,
+                  height: 40,
+                  textTransform: "none",
                   background:
                     "linear-gradient(180deg, #2c2c2c 0%, #1e1e1e 100%)",
                   color: "#fff",
@@ -235,10 +252,18 @@ export default function ProductCreateStepper({}) {
                     background:
                       "linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%)",
                   },
+                  "&.Mui-disabled": {
+                    opacity: 0.9,
+                    color: "#fff",
+                  },
                 }}
               >
-                {isLast ? "Kaydet" : "İleri"}
-              </Button>
+                {isLast
+                  ? status === "pendingCreateProduct"
+                    ? "Kaydediliyor…"
+                    : "Kaydet"
+                  : "İleri"}
+              </LoadingButton>
             </Box>
           </Paper>
         </Stack>

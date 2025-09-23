@@ -267,7 +267,7 @@
     "ContainingType": "MutluGsmServer.WebAPI.Modules.ProductModule\u002B\u003C\u003Ec",
     "Method": "\u003CRegisterProductRoutes\u003Eb__0_1",
     "RelativePath": "products/{id}",
-    "HttpMethod": "POST",
+    "HttpMethod": "DELETE",
     "IsController": false,
     "Order": 0,
     "Parameters": [

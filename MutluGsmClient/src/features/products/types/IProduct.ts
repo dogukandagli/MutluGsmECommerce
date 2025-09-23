@@ -10,7 +10,8 @@ export interface IProduct {
   brandName: string | null;
   description: string | null;
   featured: boolean;
-  imageUrl: string;
+  mainImageUrl: string;
+  imageUrl: string[];
   createdDate: string;
   updatedDate: string | null;
   isDeleted: boolean;
