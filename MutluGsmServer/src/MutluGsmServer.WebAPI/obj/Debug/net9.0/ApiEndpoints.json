@@ -266,6 +266,34 @@
   {
     "ContainingType": "MutluGsmServer.WebAPI.Modules.ProductModule\u002B\u003C\u003Ec",
     "Method": "\u003CRegisterProductRoutes\u003Eb__0_1",
+    "RelativePath": "products/",
+    "HttpMethod": "PUT",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "MutluGsmServer.Application.Features.Products.Commands.UpdateProduct.ProductUpdateCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "TS.Result.Result\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Products"
+    ],
+    "EndpointName": "UpdateProduct"
+  },
+  {
+    "ContainingType": "MutluGsmServer.WebAPI.Modules.ProductModule\u002B\u003C\u003Ec",
+    "Method": "\u003CRegisterProductRoutes\u003Eb__0_2",
     "RelativePath": "products/{id}",
     "HttpMethod": "DELETE",
     "IsController": false,

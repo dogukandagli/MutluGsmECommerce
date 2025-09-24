@@ -3,15 +3,21 @@ using MutluGsmServer.Domain.Brands;
 using MutluGsmServer.Domain.Categories;
 using MutluGsmServer.Domain.Products.ValueObjects;
 using MutluGsmServer.Domain.Shared;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MutluGsmServer.Domain.Products;
 
 public sealed class Product : Entity
 {
     private Product() { }
-    public Product(Name name, Quantity qty, decimal price, decimal? originalPrice,
-                   ConditionEnum condition, Guid categoryId, Guid? brandId, string? description, bool featured = false)
+    public Product(Name name,
+        Quantity qty,
+        decimal price,
+        decimal? originalPrice,
+                   ConditionEnum condition,
+                   Guid categoryId, Guid? brandId,
+                   string? description,
+                   bool featured = false
+                   )
     {
         SetName(name);
         SetQuantity(qty);
@@ -24,24 +30,29 @@ public sealed class Product : Entity
         SetFeatured(featured);
     }
 
-    public Name Name { get;private set; } 
-    public Quantity Quantity { get; private set; } 
-    public decimal Price { get; private set; } 
+    public Name Name { get; private set; }
+    public Quantity Quantity { get; private set; }
+    public decimal Price { get; private set; }
     public decimal? OriginalPrice { get; private set; }
-    public ConditionEnum Condition { get; private set; } 
+    public ConditionEnum Condition { get; private set; }
     public string? Description { get; private set; }
-    public Guid CategoryId { get; private set; } 
-    public Category Category { get; private set; } 
+    public Guid CategoryId { get; private set; }
+    public Category Category { get; private set; }
     public Guid? BrandId { get; private set; }
-    public Brand Brand { get; private set; } 
-   
+    public Brand Brand { get; private set; }
+
     public ICollection<ProductImage> _images { get; private set; } = new List<ProductImage>();
 
     public bool Featured { get; private set; }
 
+    public void SetProductImage(ICollection<ProductImage> productImages)
+    {
+        _images = productImages;
+    }
+
     public void SetName(Name name)
     {
-        Name = name ;
+        Name = name;
     }
     public void SetQuantity(Quantity qty)
     {
@@ -87,11 +98,11 @@ public sealed class Product : Entity
         Featured = featured;
     }
 
-    public void AddImage(string imageUrl, bool isMain=false)
+    public void AddImage(string imageUrl, bool isMain = false)
     {
-        if(_images.Any(i=>i.ImageUrl == imageUrl))
+        if (_images.Any(i => i.ImageUrl == imageUrl))
             throw new ArgumentException("Bu resim zaten ekli.");
-        if(isMain && _images.Any(i=>i.IsMain))
+        if (isMain && _images.Any(i => i.IsMain))
             throw new ArgumentException("Zaten ana resim var. Önce onu kaldırın.");
 
         var makeMain = isMain || !_images.Any();
@@ -104,11 +115,7 @@ public sealed class Product : Entity
         var image = _images.FirstOrDefault(i => i.Id == imageId);
         if (image == null)
             throw new ArgumentException("Resim bulunamadı.");
-        bool wasMain = image.IsMain;
-        if (image.IsMain && _images.Any())
-        {
-            _images.FirstOrDefault().SetMain(true);
-        }
+        _images.Remove(image);
     }
     public void SetMainImage(Guid imageGuid)
     {

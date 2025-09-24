@@ -22,6 +22,13 @@ export const createProduct = createAsyncThunk<void, FormData>(
   }
 );
 
+export const updateProduct = createAsyncThunk<void, FormData>(
+  "products/updateProduct",
+  async (formdata) => {
+    return await Product.updateProduct(formdata);
+  }
+);
+
 export const deleteProduct = createAsyncThunk<void, string>(
   "products/deleteProduct",
   async (id) => {
@@ -63,6 +70,15 @@ export const productSlice = createSlice({
       state.status = "idle";
     });
     builder.addCase(createProduct.rejected, (state) => {
+      state.status = "idle";
+    });
+    builder.addCase(updateProduct.pending, (state) => {
+      state.status = "pendingUpdateProduct";
+    });
+    builder.addCase(updateProduct.fulfilled, (state) => {
+      state.status = "idle";
+    });
+    builder.addCase(updateProduct.rejected, (state) => {
       state.status = "idle";
     });
   },

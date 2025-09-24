@@ -9,7 +9,8 @@ public sealed class ProductDto : EntityDto
 {
     public string Name { get; set; } = default!;
     public int Quantity { get; set; } = default!;
-    public decimal Price = default!;
+
+    public decimal Price { get; set; } = default!;
     public decimal? OriginalPrice { get; set; }
     public int Condition { get; set; } = default!;
     public Guid CategoryId { get; set; }

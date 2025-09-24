@@ -2,6 +2,7 @@ export interface IProduct {
   id: string;
   name: string;
   quantity: number;
+  price: number;
   originalPrice: number | null;
   condition: number;
   categoryId: string;

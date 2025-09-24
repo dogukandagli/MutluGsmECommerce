@@ -1,4 +1,4 @@
-import type { ColDef, GridReadyEvent, GetRowIdParams } from "ag-grid-community";
+import type { ColDef, GridReadyEvent } from "ag-grid-community";
 import {
   AllCommunityModule,
   ClientSideRowModelModule,
@@ -123,7 +123,12 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
       valueFormatter: (p) =>
         p.value ? new Date(p.value).toLocaleString("tr-TR") : "",
     },
-    { field: "actions", cellRenderer: ActionsCellRenderer, width: 100 },
+    {
+      field: "actions",
+      cellRenderer: ActionsCellRenderer,
+      width: 100,
+      pinned: "right",
+    },
   ]);
 
   const defaultColDef = useMemo<ColDef>(

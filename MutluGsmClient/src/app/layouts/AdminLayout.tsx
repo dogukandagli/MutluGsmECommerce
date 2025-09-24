@@ -22,7 +22,16 @@ export default function AdminLayout() {
   return (
     <>
       <Box
-        sx={!isMobile ? { display: "flex", height: "100%", width: "100%" } : {}}
+        sx={
+          !isMobile
+            ? {
+                display: "flex",
+                height: "100vh",
+                width: "100%",
+                bgcolor: (t) => t.palette.grey[50],
+              }
+            : { bgcolor: (t) => t.palette.grey[50] }
+        }
       >
         <Header handleSideBar={handleSideBar} />
         <Sidebar

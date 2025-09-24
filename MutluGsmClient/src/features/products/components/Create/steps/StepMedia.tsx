@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import { useDropzone } from "react-dropzone";
-import Grid from "@mui/material/GridLegacy";
+import Grid from "@mui/material/Grid";
 
 type StepMediaProps = {
   files: File[];
@@ -75,9 +75,9 @@ export default function StepMedia({
       </Box>
 
       {files.length > 0 && (
-        <Grid container spacing={2} mt={2}>
+        <Grid container mt={2}>
           {files.map((file, index) => (
-            <Grid item xs={12} md={3} key={index}>
+            <Grid size={{ xs: 6, md: 2 }} key={index}>
               <Box
                 sx={{
                   position: "relative",

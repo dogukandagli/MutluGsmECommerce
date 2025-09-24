@@ -2,7 +2,6 @@
 using GenericFileService.Files;
 using GenericRepository;
 using MediatR;
-using Microsoft.AspNetCore.DataProtection.KeyManagement.Internal;
 using Microsoft.AspNetCore.Http;
 using MutluGsmServer.Domain.Products;
 using MutluGsmServer.Domain.Products.ValueObjects;
@@ -16,10 +15,10 @@ public sealed record ProductCreateCommand : IRequest<Result<string>>
     public string Name { get; init; } = default!;
     public int Quantity { get; init; }
     public decimal Price { get; init; }
-    public decimal? OriginalPrice { get; init; } 
+    public decimal? OriginalPrice { get; init; }
     public int Condition { get; init; }
     public Guid CategoryId { get; init; }
-    public Guid? BrandId { get; init; } 
+    public Guid? BrandId { get; init; }
     public string? Description { get; init; }
     public bool Featured { get; init; }
     public int MainIndex { get; init; }
@@ -40,14 +39,14 @@ public sealed class ProductCreateCommandValidator : AbstractValidator<ProductCre
     }
 }
 
-internal sealed class ProductCreateCommandHandler(IProductRepository productRepository,IUnitOfWork unitOfWork) :
+internal sealed class ProductCreateCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork) :
     IRequestHandler<ProductCreateCommand, Result<string>>
 {
     public async Task<Result<string>> Handle(ProductCreateCommand request, CancellationToken cancellationToken)
     {
         if (await productRepository.AnyAsync(p => p.Name.Value == request.Name, cancellationToken))
             return Result<string>.Failure("Bu isimde ürün var");
-        
+
 
         Name name = new(request.Name);
         Quantity quantity = new(request.Quantity);

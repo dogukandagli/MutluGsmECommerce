@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.OData;
+﻿using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.RateLimiting;
 using MutluGsmServer.Application;
 using MutluGsmServer.Infrastructure;
@@ -27,7 +27,7 @@ options.AddFixedWindowLimiter("fixed", opt =>
 {
     opt.PermitLimit = 100;
     opt.Window = TimeSpan.FromMinutes(1);
-    opt.QueueProcessingOrder =QueueProcessingOrder.OldestFirst;
+    opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
     opt.QueueLimit = 100;
 })
 );
