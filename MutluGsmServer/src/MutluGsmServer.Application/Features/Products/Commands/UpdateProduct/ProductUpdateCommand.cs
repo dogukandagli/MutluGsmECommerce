@@ -41,6 +41,7 @@ public sealed class ProductUpdateCommandValidator : AbstractValidator<ProductUpd
 
 internal sealed class ProductUpdateCommandHandler(
     IProductRepository productRepository,
+    IProductImageRepository productImageRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<ProductUpdateCommand, Result<string>>
 {
     public async Task<Result<string>> Handle(ProductUpdateCommand request, CancellationToken cancellationToken)
@@ -62,10 +63,34 @@ internal sealed class ProductUpdateCommandHandler(
         Quantity quantity = new(request.Quantity);
         ConditionEnum condition = ConditionEnum.FromValue(request.Condition);
 
+
         foreach (var img in product._images.ToList())
         {
+            ProductImage image = await productImageRepository.FirstOrDefaultAsync(i => i.Id == img.Id);
+            if (image == null)
+                throw new ArgumentException("Resim bulunamadı.");
+
+            image.Delete();
+
             product.RemoveImage(img.Id);
+
+            productImageRepository.Update(image);
+
         }
+        for (int i = 0; i < request.File?.Count; i++)
+        {
+            var file = request.File[i];
+            string fileName = FileService.FileSaveToServer(file, "wwwroot/images/");
+            bool isMain = (i == 0);
+            ProductImage productImage = new(fileName, product.Id, isMain);
+
+            product.AddImage(productImage);
+
+            productImageRepository.Add(productImage);
+
+        }
+
+
 
 
         product.SetName(name);
@@ -89,13 +114,9 @@ internal sealed class ProductUpdateCommandHandler(
         product.SetStatus(request.IsActive);
 
 
-        for (int i = 0; i < request.File?.Count; i++)
-        {
-            var file = request.File[i];
-            string fileName = FileService.FileSaveToServer(file, "wwwroot/images/");
-            bool isMain = (i == 0);                      // burada ana resmi belirliyoruz
-            product.AddImage(fileName, isMain);          // AddImage yeni nesneyi Added durumuna sokmalı
-        }
+
+
+        productRepository.Update(product);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

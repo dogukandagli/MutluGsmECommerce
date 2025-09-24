@@ -45,11 +45,6 @@ public sealed class Product : Entity
 
     public bool Featured { get; private set; }
 
-    public void SetProductImage(ICollection<ProductImage> productImages)
-    {
-        _images = productImages;
-    }
-
     public void SetName(Name name)
     {
         Name = name;
@@ -98,16 +93,15 @@ public sealed class Product : Entity
         Featured = featured;
     }
 
-    public void AddImage(string imageUrl, bool isMain = false)
+    public void AddImage(ProductImage productImage)
     {
-        if (_images.Any(i => i.ImageUrl == imageUrl))
+        if (_images.Any(i => i.ImageUrl == productImage.ImageUrl))
             throw new ArgumentException("Bu resim zaten ekli.");
-        if (isMain && _images.Any(i => i.IsMain))
+        if (productImage.IsMain && _images.Any(i => i.IsMain))
             throw new ArgumentException("Zaten ana resim var. Önce onu kaldırın.");
 
-        var makeMain = isMain || !_images.Any();
 
-        _images.Add(new ProductImage(imageUrl, Id, makeMain));
+        _images.Add(productImage);
     }
 
     public void RemoveImage(Guid imageId)
@@ -115,8 +109,11 @@ public sealed class Product : Entity
         var image = _images.FirstOrDefault(i => i.Id == imageId);
         if (image == null)
             throw new ArgumentException("Resim bulunamadı.");
+
         _images.Remove(image);
     }
+
+
     public void SetMainImage(Guid imageGuid)
     {
         if (!_images.Any(i => i.Id == imageGuid))
