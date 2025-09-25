@@ -1,6 +1,6 @@
 ﻿using Ardalis.SmartEnum;
 
-namespace MutluGsmServer.Domain.Products;
+namespace MutluGsmServer.Domain.Products.ValueObjects;
 
 public sealed class ConditionEnum : SmartEnum<ConditionEnum>
 {

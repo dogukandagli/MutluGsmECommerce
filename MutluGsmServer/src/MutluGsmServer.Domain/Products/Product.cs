@@ -9,7 +9,8 @@ namespace MutluGsmServer.Domain.Products;
 public sealed class Product : Entity
 {
     private Product() { }
-    public Product(Name name,
+    public Product(Name name
+        , List<ProductImage> Images,
         Quantity qty,
         decimal price,
         decimal? originalPrice,
@@ -28,6 +29,7 @@ public sealed class Product : Entity
         SetBrandId(brandId);
         SetDescription(description);
         SetFeatured(featured);
+        SetProductImages(Images);
     }
 
     public Name Name { get; private set; }
@@ -40,10 +42,14 @@ public sealed class Product : Entity
     public Category Category { get; private set; }
     public Guid? BrandId { get; private set; }
     public Brand Brand { get; private set; }
-
-    public ICollection<ProductImage> _images { get; private set; } = new List<ProductImage>();
-
+    public List<ProductImage> _images = new List<ProductImage>();
     public bool Featured { get; private set; }
+
+    public void SetProductImages(ICollection<ProductImage> images)
+    {
+        _images.Clear();
+        _images.AddRange(images);
+    }
 
     public void SetName(Name name)
     {
@@ -91,40 +97,6 @@ public sealed class Product : Entity
     public void SetFeatured(bool featured)
     {
         Featured = featured;
-    }
-
-    public void AddImage(ProductImage productImage)
-    {
-        if (_images.Any(i => i.ImageUrl == productImage.ImageUrl))
-            throw new ArgumentException("Bu resim zaten ekli.");
-        if (productImage.IsMain && _images.Any(i => i.IsMain))
-            throw new ArgumentException("Zaten ana resim var. Önce onu kaldırın.");
-
-
-        _images.Add(productImage);
-    }
-
-    public void RemoveImage(Guid imageId)
-    {
-        var image = _images.FirstOrDefault(i => i.Id == imageId);
-        if (image == null)
-            throw new ArgumentException("Resim bulunamadı.");
-
-        _images.Remove(image);
-    }
-
-
-    public void SetMainImage(Guid imageGuid)
-    {
-        if (!_images.Any(i => i.Id == imageGuid))
-        {
-            throw new ArgumentException("Resim bulunamadı.");
-        }
-
-        foreach (var img in _images)
-        {
-            img.SetMain(img.Id == imageGuid);
-        }
     }
 
 }

@@ -51,24 +51,28 @@ internal sealed class ProductCreateCommandHandler(IProductRepository productRepo
         Name name = new(request.Name);
         Quantity quantity = new(request.Quantity);
         ConditionEnum condition = ConditionEnum.FromValue(request.Condition);
-
-        Product product = new(name,
-            quantity, request.Price,
-            request.OriginalPrice,
-            condition, request.CategoryId,
-            request.BrandId,
-            request.Description,
-            request.Featured);
+        List<ProductImage> productImages = new List<ProductImage>();
 
         for (int i = 0; i < request.File!.Count; i++)
         {
             var file = request.File[i];
             string fileName = FileService.FileSaveToServer(file, "wwwroot/images/");
             bool isMain = (i == request.MainIndex);
-            ProductImage productImage = new(fileName, product.Id, isMain);
-
-            product.AddImage(productImage);
+            ProductImage productImage = new(fileName, isMain);
+            productImages.Add(productImage);
         }
+
+        Product product = new(
+            name,
+            productImages,
+            quantity,
+            request.Price,
+            request.OriginalPrice,
+            condition,
+            request.CategoryId,
+            request.BrandId,
+            request.Description,
+            request.Featured);
 
         productRepository.Add(product);
         await unitOfWork.SaveChangesAsync();

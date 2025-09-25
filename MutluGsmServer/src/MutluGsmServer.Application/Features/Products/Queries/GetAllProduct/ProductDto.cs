@@ -28,8 +28,8 @@ public static class ProductExtensions
 {
     public static IQueryable<ProductDto> MapTo(this IQueryable<EntityWithAuditDto<Product>> entities,
         IQueryable<Category> categories,
-        IQueryable<Brand> brands,
-        IQueryable<ProductImage> productImages)
+        IQueryable<Brand> brands
+       )
     {
 
         var res = (from Entity in entities
@@ -55,8 +55,8 @@ public static class ProductExtensions
                        Quantity = Entity.Entity.Quantity.Value,
                        UpdatedDate = Entity.Entity.UpdatedDate,
                        Id = Entity.Entity.Id,
-                       mainImageUrl = Entity.Entity._images.Where(i => i.IsMain == true).Select(i => i.ImageUrl).FirstOrDefault(),
-                       imageUrl = Entity.Entity._images.Where(i => i.IsMain == false).Select(i => i.ImageUrl).ToList()
+                       mainImageUrl = Entity.Entity._images.Where(i => i.isMain == true).Select(i => i.imageUrl).FirstOrDefault(),
+                       imageUrl = Entity.Entity._images.Where(i => i.isMain == false).Select(i => i.imageUrl).ToList()
                    }
                        ).AsQueryable();
 

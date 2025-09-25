@@ -22,7 +22,7 @@ public sealed record ProductUpdateCommand : IRequest<Result<string>>
     public Guid? BrandId { get; init; }
     public string? Description { get; init; }
     public bool Featured { get; init; }
-    public IFormFileCollection? File { get; init; }
+    public IFormFileCollection File { get; init; } = default!;
     public bool IsActive { get; init; }
 }
 
@@ -41,7 +41,6 @@ public sealed class ProductUpdateCommandValidator : AbstractValidator<ProductUpd
 
 internal sealed class ProductUpdateCommandHandler(
     IProductRepository productRepository,
-    IProductImageRepository productImageRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<ProductUpdateCommand, Result<string>>
 {
     public async Task<Result<string>> Handle(ProductUpdateCommand request, CancellationToken cancellationToken)
@@ -53,7 +52,7 @@ internal sealed class ProductUpdateCommandHandler(
             return Result<string>.Failure("Ürün bulunumadı");
         }
 
-        if (request.File?.Count() == 0)
+        if (request.File?.Count() > 1 && request.File[0] == null)
         {
             return Result<string>.Failure("Ana resim olmak zorunda!");
         }
@@ -63,35 +62,17 @@ internal sealed class ProductUpdateCommandHandler(
         Quantity quantity = new(request.Quantity);
         ConditionEnum condition = ConditionEnum.FromValue(request.Condition);
 
+        List<ProductImage> productImages = new List<ProductImage>();
 
-        foreach (var img in product._images.ToList())
-        {
-            ProductImage image = await productImageRepository.FirstOrDefaultAsync(i => i.Id == img.Id);
-            if (image == null)
-                throw new ArgumentException("Resim bulunamadı.");
-
-            image.Delete();
-
-            product.RemoveImage(img.Id);
-
-            productImageRepository.Update(image);
-
-        }
-        for (int i = 0; i < request.File?.Count; i++)
+        for (int i = 0; i < request.File!.Count; i++)
         {
             var file = request.File[i];
             string fileName = FileService.FileSaveToServer(file, "wwwroot/images/");
             bool isMain = (i == 0);
-            ProductImage productImage = new(fileName, product.Id, isMain);
-
-            product.AddImage(productImage);
-
-            productImageRepository.Add(productImage);
-
+            ProductImage productImage = new(fileName, isMain);
+            productImages.Add(productImage);
         }
-
-
-
+        product.SetProductImages(productImages);
 
         product.SetName(name);
         product.SetQuantity(quantity);
@@ -112,8 +93,6 @@ internal sealed class ProductUpdateCommandHandler(
         }
         product.SetFeatured(request.Featured);
         product.SetStatus(request.IsActive);
-
-
 
 
         productRepository.Update(product);

@@ -2,12 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MutluGsmServer.Domain.Products;
 using MutluGsmServer.Domain.Products.ValueObjects;
-using MutluGsmServer.Domain.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MutluGsmServer.Infrastructure.Configurations;
 
@@ -21,14 +15,14 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.OwnsOne(p => p.Name, nb =>
         {
             nb.Property(n => n.Value)
-              .HasColumnName("Name")   
+              .HasColumnName("Name")
               .IsRequired();
         });
 
         builder.OwnsOne(p => p.Quantity, nb =>
         {
             nb.Property(n => n.Value)
-              .HasColumnName("Quantity")   
+              .HasColumnName("Quantity")
               .IsRequired();
         });
 
@@ -44,6 +38,25 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired();
         builder.Property(p => p.Description)
                .HasMaxLength(2000);
+
+        builder.OwnsMany(p => p._images, img =>
+        {
+            img.ToTable("ProductImages");
+            img.WithOwner().HasForeignKey("ProductId");
+
+            img.Property<Guid>("Id");
+            img.HasKey("Id");
+
+            img.Property(i => i.imageUrl)
+               .HasColumnName("ImageUrl")
+               .HasMaxLength(500)
+               .IsRequired();
+
+            img.Property(i => i.isMain)
+               .HasColumnName("IsMain")
+               .IsRequired();
+        }
+        );
 
         builder.HasQueryFilter(x => !x.IsDeleted);
 

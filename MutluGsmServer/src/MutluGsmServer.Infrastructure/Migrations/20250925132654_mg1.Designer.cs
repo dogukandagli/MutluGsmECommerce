@@ -12,7 +12,7 @@ using MutluGsmServer.Infrastructure.Context;
 namespace MutluGsmServer.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250915142757_mg1")]
+    [Migration("20250925132654_mg1")]
     partial class mg1
     {
         /// <inheritdoc />
@@ -129,46 +129,6 @@ namespace MutluGsmServer.Infrastructure.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("MutluGsmServer.Domain.Products.ProductImage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DeletedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTimeOffset?>("UpdatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId", "ImageUrl")
-                        .IsUnique();
-
-                    b.ToTable("ProductImages", (string)null);
-                });
-
             modelBuilder.Entity("MutluGsmServer.Domain.Brands.Brand", b =>
                 {
                     b.OwnsOne("MutluGsmServer.Domain.Shared.Name", "Name", b1 =>
@@ -247,6 +207,35 @@ namespace MutluGsmServer.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
+                    b.OwnsMany("MutluGsmServer.Domain.Products.ValueObjects.ProductImage", "_images", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<Guid>("ProductId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("imageUrl")
+                                .IsRequired()
+                                .HasMaxLength(500)
+                                .HasColumnType("nvarchar(500)")
+                                .HasColumnName("ImageUrl");
+
+                            b1.Property<bool>("isMain")
+                                .HasColumnType("bit")
+                                .HasColumnName("IsMain");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("ProductId");
+
+                            b1.ToTable("ProductImages", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
                     b.OwnsOne("MutluGsmServer.Domain.Products.ValueObjects.Quantity", "Quantity", b1 =>
                         {
                             b1.Property<Guid>("ProductId")
@@ -273,17 +262,8 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                     b.Navigation("Quantity")
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("MutluGsmServer.Domain.Products.ProductImage", b =>
-                {
-                    b.HasOne("MutluGsmServer.Domain.Products.Product", "Product")
-                        .WithMany("_images")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
+                    b.Navigation("_images");
                 });
 
             modelBuilder.Entity("MutluGsmServer.Domain.Brands.Brand", b =>
@@ -294,11 +274,6 @@ namespace MutluGsmServer.Infrastructure.Migrations
             modelBuilder.Entity("MutluGsmServer.Domain.Categories.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("MutluGsmServer.Domain.Products.Product", b =>
-                {
-                    b.Navigation("_images");
                 });
 #pragma warning restore 612, 618
         }
