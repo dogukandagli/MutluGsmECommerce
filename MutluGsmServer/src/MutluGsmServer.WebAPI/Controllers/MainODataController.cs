@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
@@ -15,7 +14,7 @@ namespace MutluGsmServer.WebAPI.Controllers;
 [Route("odata")]
 [ApiController]
 [EnableQuery]
-public class MainODataController(ISender sender)  : ODataController
+public class MainODataController(ISender sender) : ODataController
 {
     public static IEdmModel GetEdmModel()
     {

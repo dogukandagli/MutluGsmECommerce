@@ -1,5 +1,32 @@
 [
   {
+    "ContainingType": "MutluGsmServer.WebAPI.Modules.AuthModule\u002B\u003C\u003Ec",
+    "Method": "\u003CRegisterAuthRoutes\u003Eb__0_0",
+    "RelativePath": "auth/login",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "MutluGsmServer.Application.Features.Auth.LoginCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "TS.Result.Result\u00601[[MutluGsmServer.Application.Features.Auth.LoginCommandResponse, MutluGsmServer.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Auth"
+    ]
+  },
+  {
     "ContainingType": "MutluGsmServer.WebAPI.Modules.BrandModule\u002B\u003C\u003Ec",
     "Method": "\u003CRegisterBrandRoutes\u003Eb__0_0",
     "RelativePath": "brands/",

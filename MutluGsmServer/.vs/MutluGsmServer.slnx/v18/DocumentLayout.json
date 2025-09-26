@@ -1,19 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DESKTOP_Q19NC4U_SQLEXPRESS/MutluGsmDb/True/SqlTable/dbo.Products.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E90DF324-344D-8F5C-E7CC-B9DF0CCF8DD6}|src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.infrastructure\\configurations\\productconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E90DF324-344D-8F5C-E7CC-B9DF0CCF8DD6}|src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj|solutionrelative:src\\mutlugsmserver.infrastructure\\configurations\\productconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.application\\features\\products\\commands\\updateproduct\\productupdatecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{65A8D6BE-0776-0574-A2F8-731D7F0D5FD7}|src\\MutluGsmServer.Application\\MutluGsmServer.Application.csproj|solutionrelative:src\\mutlugsmserver.application\\features\\products\\commands\\updateproduct\\productupdatecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -21,47 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "dbo.Products [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/DESKTOP_Q19NC4U_SQLEXPRESS/MutluGsmDb/True/SqlTable/dbo.Products.sql",
-              "ToolTip": "dbo.Products [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-09-25T14:41:18.631Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductConfiguration.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\Configurations\\ProductConfiguration.cs",
-              "RelativeDocumentMoniker": "src\\MutluGsmServer.Infrastructure\\Configurations\\ProductConfiguration.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\Configurations\\ProductConfiguration.cs",
-              "RelativeToolTip": "src\\MutluGsmServer.Infrastructure\\Configurations\\ProductConfiguration.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwDQAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T14:35:37.788Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProductUpdateCommand.cs",
-              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Commands\\UpdateProduct\\ProductUpdateCommand.cs",
-              "RelativeDocumentMoniker": "src\\MutluGsmServer.Application\\Features\\Products\\Commands\\UpdateProduct\\ProductUpdateCommand.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Products\\Commands\\UpdateProduct\\ProductUpdateCommand.cs",
-              "RelativeToolTip": "src\\MutluGsmServer.Application\\Features\\Products\\Commands\\UpdateProduct\\ProductUpdateCommand.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAiwBgAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T13:38:03.298Z",
-              "EditorCaption": ""
             }
           ]
         }

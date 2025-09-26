@@ -95,8 +95,15 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
       width: 100,
     },
     {
-      field: "originalPrice",
+      field: "price",
       headerName: "Fiyat",
+      filter: "agNumberColumnFilter",
+      width: 120,
+      valueFormatter: (p) => (p.value != null ? `${p.value} ₺` : "-"),
+    },
+    {
+      field: "originalPrice",
+      headerName: "İndirimli Fiyat",
       filter: "agNumberColumnFilter",
       width: 120,
       valueFormatter: (p) => (p.value != null ? `${p.value} ₺` : "-"),
@@ -107,8 +114,18 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
       width: 120,
       valueFormatter: (p) => (p.value === 1 ? "Yeni" : "İkinci El"),
     },
-    { field: "featured", headerName: "Vitrin", width: 100 },
-    { field: "isActive", headerName: "Aktif", width: 50 },
+    {
+      field: "featured",
+      headerName: "Vitrin",
+      width: 100,
+      valueFormatter: (p) => (p.value === true ? "Vitrinde" : "Değil"),
+    },
+    {
+      field: "isActive",
+      headerName: "Aktif",
+      width: 50,
+      valueFormatter: (p) => (p.value === true ? "Aktif" : "Aktif Değil"),
+    },
     {
       field: "createdDate",
       headerName: "Kayıt Tarihi",

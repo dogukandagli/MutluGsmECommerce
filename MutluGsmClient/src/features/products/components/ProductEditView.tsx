@@ -207,7 +207,7 @@ export default function ProductEditView() {
     if (data.description) formData.append("Description", data.description);
     formData.append("featured", data.featured);
     if (files) {
-      files.forEach((f) => formData.append("Files", f));
+      files.forEach((f) => formData.append("Files", f!));
     }
     formData.append("Id", product.id);
     formData.append("isActive", data.active);
@@ -219,8 +219,6 @@ export default function ProductEditView() {
       );
     formData.append("Price", String(data.price).replace(",", "."));
     formData.append("Quantity", String(data.quantity));
-
-    console.log(files);
 
     dispatch(updateProduct(formData));
   }

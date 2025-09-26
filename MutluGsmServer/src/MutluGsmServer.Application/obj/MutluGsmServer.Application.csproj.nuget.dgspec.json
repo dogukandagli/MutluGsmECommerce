@@ -142,6 +142,10 @@
               "target": "Package",
               "version": "[8.2.0, )"
             },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
             "TS.EntityFrameworkCore.GenericRepository": {
               "target": "Package",
               "version": "[9.0.4, )"

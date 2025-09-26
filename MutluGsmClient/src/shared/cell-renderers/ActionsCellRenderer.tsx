@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
 import { deleteProduct } from "../../features/products/store/productSlice";
 import { LoadingButton } from "@mui/lab";
 import { NavLink } from "react-router";
+import EditIcon from "@mui/icons-material/Edit";
 
 export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
   const { api, node } = params;
@@ -43,7 +44,7 @@ export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
 
   return (
     <>
-      <Tooltip title="Remove row">
+      <Tooltip title="Ürünü sil">
         <IconButton
           size="small"
           color="error"
@@ -53,15 +54,15 @@ export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
           <DeleteIcon fontSize="small" />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Remove row">
+      <Tooltip title="Ürünü düzenle">
         <IconButton
           size="small"
           color="error"
           component={NavLink}
           to={`/admin/products/edit/${id}`}
-          aria-label="remove"
+          aria-label="edit"
         >
-          <DeleteIcon fontSize="small" />
+          <EditIcon fontSize="small" />
         </IconButton>
       </Tooltip>
       <Dialog

@@ -1,13 +1,16 @@
 ﻿using GenericRepository;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MutluGsmServer.Domain.Abstractions;
 using MutluGsmServer.Domain.Brands;
 using MutluGsmServer.Domain.Categories;
 using MutluGsmServer.Domain.Products;
+using MutluGsmServer.Domain.User;
 
 namespace MutluGsmServer.Infrastructure.Context;
 
-internal sealed class ApplicationDbContext : DbContext, IUnitOfWork
+internal sealed class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>, IUnitOfWork
 {
 
     public ApplicationDbContext(DbContextOptions options) : base(options)
@@ -21,6 +24,11 @@ internal sealed class ApplicationDbContext : DbContext, IUnitOfWork
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.Ignore<IdentityUserClaim<Guid>>();
+        modelBuilder.Ignore<IdentityRoleClaim<Guid>>();
+        modelBuilder.Ignore<IdentityUserToken<Guid>>();
+        modelBuilder.Ignore<IdentityUserLogin<Guid>>();
+        modelBuilder.Ignore<IdentityUserRole<Guid>>();
     }
 
 

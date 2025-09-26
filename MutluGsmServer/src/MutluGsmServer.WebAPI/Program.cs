@@ -31,7 +31,12 @@ options.AddFixedWindowLimiter("fixed", opt =>
     opt.QueueLimit = 100;
 })
 );
+
+
+
 builder.Services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();
+
+
 
 var app = builder.Build();
 
@@ -45,11 +50,19 @@ app.UseCors(policy => policy
 .WithOrigins("http://localhost:3000")
 .SetIsOriginAllowed(t => true));
 
-app.RegisterRoutes();
-
-app.UseExceptionHandler();
-
 app.UseStaticFiles();
 
-app.MapControllers().RequireRateLimiting("fixed");
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.RegisterRoutes();
+app.UseExceptionHandler();
+
+
+app.MapControllers()
+    .RequireRateLimiting("fixed")
+   ;
+
+ExtensionsMiddleware.CreateFirstUser(app);
+
 app.Run();

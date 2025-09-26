@@ -22,6 +22,26 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles", (string)null);
+                });
+
             modelBuilder.Entity("MutluGsmServer.Domain.Brands.Brand", b =>
                 {
                     b.Property<Guid>("Id")
@@ -126,6 +146,79 @@ namespace MutluGsmServer.Infrastructure.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
+            modelBuilder.Entity("MutluGsmServer.Domain.User.AppUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("varchar(15)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", (string)null);
+                });
+
             modelBuilder.Entity("MutluGsmServer.Domain.Brands.Brand", b =>
                 {
                     b.OwnsOne("MutluGsmServer.Domain.Shared.Name", "Name", b1 =>
@@ -140,7 +233,7 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                             b1.HasKey("BrandId");
 
-                            b1.ToTable("Brands");
+                            b1.ToTable("Brands", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("BrandId");
@@ -164,7 +257,7 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                             b1.HasKey("CategoryId");
 
-                            b1.ToTable("Categories");
+                            b1.ToTable("Categories", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CategoryId");
@@ -198,7 +291,24 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                             b1.HasKey("ProductId");
 
-                            b1.ToTable("Products");
+                            b1.ToTable("Products", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.OwnsOne("MutluGsmServer.Domain.Products.ValueObjects.Quantity", "Quantity", b1 =>
+                        {
+                            b1.Property<Guid>("ProductId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Value")
+                                .HasColumnType("int")
+                                .HasColumnName("Quantity");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
@@ -228,23 +338,6 @@ namespace MutluGsmServer.Infrastructure.Migrations
                             b1.HasIndex("ProductId");
 
                             b1.ToTable("ProductImages", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProductId");
-                        });
-
-                    b.OwnsOne("MutluGsmServer.Domain.Products.ValueObjects.Quantity", "Quantity", b1 =>
-                        {
-                            b1.Property<Guid>("ProductId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<int>("Value")
-                                .HasColumnType("int")
-                                .HasColumnName("Quantity");
-
-                            b1.HasKey("ProductId");
-
-                            b1.ToTable("Products");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");

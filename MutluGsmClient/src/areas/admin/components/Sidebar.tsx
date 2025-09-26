@@ -78,24 +78,6 @@ export default function Sidebar({
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <DashboardRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem disablePadding>
-          <ListItemButton selected>
-            <ListItemIcon>
-              <ShoppingCartRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Orders" />
-          </ListItemButton>
-        </ListItem>
-
         {/* Tasks */}
         <ListItem disablePadding>
           <ListItemButton onClick={() => setTasksOpen(!tasksOpen)}>
@@ -126,18 +108,6 @@ export default function Sidebar({
           </List>
         </Collapse>
 
-        {/* Messages */}
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <QuestionAnswerRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Messages" />
-            <Chip label="4" color="primary" size="small" />
-          </ListItemButton>
-        </ListItem>
-
-        {/* Users */}
         <ListItem disablePadding>
           <ListItemButton onClick={() => setUsersOpen(!usersOpen)}>
             <ListItemIcon>
