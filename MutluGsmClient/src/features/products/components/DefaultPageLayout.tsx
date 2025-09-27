@@ -1,0 +1,119 @@
+import {
+  Box,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  Chip,
+  Button,
+} from "@mui/material";
+import type { IProduct } from "../types/IProduct";
+
+type ProductHeroProps = {
+  product: IProduct;
+};
+
+export default function ProductHero({ product }: ProductHeroProps) {
+  return (
+    <Box
+      component="section"
+      sx={{
+        borderTop: "1px solid rgba(0,0,0,0.12)",
+        borderBottom: "1px solid rgba(0,0,0,0.12)",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid
+          container
+          spacing={{ xs: 3, md: 6 }}
+          alignItems="center"
+          // md'de yatay; mobilde dikey otomatik olur
+          direction={{
+            xs: "column",
+            md: false ? "row-reverse" : "row",
+          }}
+        >
+          {/* Görsel */}
+          <Grid size={{ xs: 12, md: 5 }} sx={{ order: { xs: 1, md: 2 } }}>
+            <Box
+              sx={{
+                mx: { xs: "auto", md: 0 },
+                width: { xs: 220, sm: 260, md: 340 },
+                height: { xs: 220, sm: 260, md: 340 },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                component="img"
+                src={`https://localhost:7261/images/${product.mainImageUrl}`}
+                alt={product.name}
+                sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
+            </Box>
+          </Grid>
+
+          {/* Metin + aksiyon */}
+          <Grid size={{ xs: 12, md: 7 }} sx={{ order: { xs: 2, md: 1 } }}>
+            <Stack
+              spacing={1}
+              alignItems={{ xs: "center", md: "flex-start" }}
+              textAlign={{ xs: "center", md: "left" }}
+            >
+              {true && (
+                <Chip
+                  label="YENİ"
+                  color="warning"
+                  size="small"
+                  sx={{ fontWeight: 700 }}
+                />
+              )}
+
+              <Typography
+                variant="h3"
+                component="h1"
+                sx={{
+                  fontWeight: 800,
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.1,
+                  fontSize: { xs: 28, sm: 34, md: 40 },
+                }}
+              >
+                {product.name}
+              </Typography>
+
+              {product.name && (
+                <Typography
+                  variant="body1"
+                  color="text.secondary"
+                  sx={{ maxWidth: 560 }}
+                >
+                  {product.description}
+                </Typography>
+              )}
+
+              <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                {product.price}
+              </Typography>
+
+              <Button
+                variant="outlined"
+                size="large"
+                sx={{
+                  borderRadius: 999,
+                  px: 3,
+                  textTransform: "none",
+                  fontWeight: 600,
+                  alignSelf: { xs: "center", md: "flex-start" },
+                }}
+              >
+                Modelleri görüntüleyin
+              </Button>
+            </Stack>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
+  );
+}

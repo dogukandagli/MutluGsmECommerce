@@ -21,14 +21,13 @@ import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
 import { useParams } from "react-router";
 import { selectProductById, updateProduct } from "../store/productSlice";
-import type { ICategorySelect } from "../types/ICategorySelect";
 import type { IBrandSelect } from "../types/IBrandSelect";
 import { useEffect, useState } from "react";
-import Category from "../../category/api/categoryApi";
 import Brand from "../../brands/api/brandApi";
 import { Controller, useForm, type FieldValues } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import { LoadingButton } from "@mui/lab";
+import { selectAllCategory } from "../../category/store/categorySlice";
 
 export default function ProductEditView() {
   const dispatch = useAppDispatch();
@@ -37,16 +36,14 @@ export default function ProductEditView() {
   const product = useAppSelector((state) => selectProductById(state, id!));
   const { status } = useAppSelector((state) => state.product);
 
-  const [categories, setCategories] = useState<ICategorySelect[]>([]);
   const [brands, setBrands] = useState<IBrandSelect[]>([]);
   const [files, setFiles] = useState<(File | null)[]>([]);
   const [mainfoto, setmainfoto] = useState(true);
   const [fileloaded, setfileloaded] = useState(false);
 
+  const categories = useAppSelector((state) => selectAllCategory(state));
+
   useEffect(() => {
-    Category.get("id,name").then((data) => {
-      setCategories(data.value as ICategorySelect[]);
-    });
     Brand.get("id,name").then((data) => {
       setBrands(data.value as IBrandSelect[]);
     });
