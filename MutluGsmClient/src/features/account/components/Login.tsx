@@ -1,9 +1,5 @@
-"use client";
-
-import * as React from "react";
 import {
   Box,
-  Button,
   Container,
   Divider,
   IconButton,
@@ -18,16 +14,28 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { useForm, type FieldValues } from "react-hook-form";
+import { LoadingButton } from "@mui/lab";
+import { useAppDispatch } from "../../../app/store/hooks";
+import { login } from "../store/authSlice";
 
 function Login() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const dispatch = useAppDispatch();
 
-  const handleSignIn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    // TODO: giriş mantığını bağla
-    console.log({ email, password });
-  };
+  async function submitForm(data: FieldValues) {
+    await dispatch(login(data));
+  }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm({
+    defaultValues: {
+      userNameorEmail: "",
+      password: "",
+    },
+  });
 
   return (
     <Container
@@ -70,13 +78,16 @@ function Login() {
         </Stack>
 
         {/* Form */}
-        <Stack component="form" spacing={2}>
+        <Stack component="form" spacing={2} onSubmit={handleSubmit(submitForm)}>
           <TextField
+            {...register("userNameorEmail", {
+              required: "Email veya kullanıcı adı girmeniz zorunlu!",
+            })}
             fullWidth
-            label="Email address"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            label="Email yada Kullanici adi"
+            placeholder="Emalinizi veya kullanıcı adınızı giriniz"
+            error={!!errors.userNameorEmail}
+            helperText={errors.userNameorEmail?.message}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -87,12 +98,17 @@ function Login() {
           />
 
           <TextField
+            {...register("password", {
+              required: "Parola girmelisiniz!",
+              minLength: {
+                value: 4,
+                message: "En az 4 karakter girmelisiniz!",
+              },
+            })}
             fullWidth
-            label="Password"
+            label="Şifre"
             type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Şifrenizi giriniz"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -102,14 +118,16 @@ function Login() {
             }}
           />
 
-          <Button
+          <LoadingButton
+            loading={isSubmitting}
             size="large"
             variant="contained"
             fullWidth
-            onClick={handleSignIn}
+            type="submit"
+            disabled={!isValid}
           >
-            Sign in
-          </Button>
+            Giriş Yap
+          </LoadingButton>
         </Stack>
 
         {/* Divider + Social */}

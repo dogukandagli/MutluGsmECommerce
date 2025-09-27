@@ -1,5 +1,4 @@
 import AdminLayout from "../../../app/layouts/AdminLayout";
-import Login from "../components/Login";
 import ProductCreatePage from "../pages/ProductCreatePage";
 import ProductEditPage from "../pages/ProductEditPage";
 import ProductsPage from "../pages/ProductsPage";
@@ -11,6 +10,5 @@ export const adminRoutes = {
     { path: "products", element: <ProductsPage /> },
     { path: "products/new", element: <ProductCreatePage /> },
     { path: "products/edit/:id", element: <ProductEditPage /> },
-    { path: "login", element: <Login /> },
   ],
 };

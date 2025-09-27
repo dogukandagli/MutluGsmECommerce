@@ -1,7 +1,6 @@
 import {
   Drawer,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -10,20 +9,19 @@ import {
   Box,
   Avatar,
   IconButton,
-  Chip,
-  Collapse,
+  MenuItem,
+  Menu,
+  ListSubheader,
 } from "@mui/material";
 
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
-import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
-import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
-import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { useState } from "react";
 import { NavLink } from "react-router";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined"; // Products
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined"; // Create Product
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 const drawerWidth = 240;
 
@@ -38,8 +36,12 @@ export default function Sidebar({
   handleSideBar,
   mobile,
 }: HeaderProps) {
-  const [tasksOpen, setTasksOpen] = useState(false);
-  const [usersOpen, setUsersOpen] = useState(false);
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  const menuOpen = Boolean(menuAnchor);
+
+  const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
+    setMenuAnchor(e.currentTarget);
+  const handleMenuClose = () => setMenuAnchor(null);
 
   const mobileProps = mobile
     ? {
@@ -59,95 +61,130 @@ export default function Sidebar({
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
+          border: "1px solid",
+          borderColor: "divider",
+          borderRadius: 3,
+          boxShadow: (theme) => theme.shadows[12],
+          m: 2,
+          height: (theme) => `calc(100dvh - ${theme.spacing(4)})`,
+          overflow: "hidden",
+
+          backgroundClip: "padding-box",
         },
       }}
     >
-      <Box sx={{ p: 2 }}>
-        <Typography variant="h6">Acme Co.</Typography>
-      </Box>
-      <Divider />
-
-      {/* Menü */}
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <HomeRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItemButton>
-        </ListItem>
-
-        {/* Tasks */}
-        <ListItem disablePadding>
-          <ListItemButton onClick={() => setTasksOpen(!tasksOpen)}>
-            <ListItemIcon>
-              <AssignmentRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Ürün" />
-            <KeyboardArrowDownIcon
-              sx={{
-                transform: tasksOpen ? "rotate(180deg)" : "rotate(0deg)",
-                transition: "0.2s",
-              }}
-            />
-          </ListItemButton>
-        </ListItem>
-        <Collapse in={tasksOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton component={NavLink} to="products" sx={{ pl: 4 }}>
-              Ürünler
-            </ListItemButton>
-            <ListItemButton
-              component={NavLink}
-              to="products/new"
-              sx={{ pl: 4 }}
-            >
-              Ürün Oluştur
-            </ListItemButton>
-          </List>
-        </Collapse>
-
-        <ListItem disablePadding>
-          <ListItemButton onClick={() => setUsersOpen(!usersOpen)}>
-            <ListItemIcon>
-              <GroupRoundedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Users" />
-            <KeyboardArrowDownIcon
-              sx={{
-                transform: usersOpen ? "rotate(180deg)" : "rotate(0deg)",
-                transition: "0.2s",
-              }}
-            />
-          </ListItemButton>
-        </ListItem>
-        <Collapse in={usersOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>My profile</ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>Create a new user</ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>Roles & permission</ListItemButton>
-          </List>
-        </Collapse>
-      </List>
-
-      <Divider />
-
-      <Divider />
-
-      {/* User info */}
-      <Box sx={{ display: "flex", alignItems: "center", p: 2, mt: "auto" }}>
-        <Avatar
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=40"
-          sx={{ mr: 1 }}
-        />
-        <Box sx={{ flex: 1, minWidth: 0 }}>
-          <Typography variant="subtitle2">Siriwat K.</Typography>
-          <Typography variant="caption">siriwatk@test.com</Typography>
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          p: 2,
+        }}
+      >
+        {/* Header (logo) */}
+        <Box sx={{ display: "flex", alignItems: "center", height: 48 }}>
+          <Box
+            component="img"
+            alt="Logo"
+            src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+            sx={{ height: 24, objectFit: "cover" }}
+          />
         </Box>
-        <IconButton size="small">
-          <LogoutRoundedIcon fontSize="small" />
-        </IconButton>
+
+        {/* Nav sections */}
+        <Box sx={{ flex: 1, overflow: "auto" }}>
+          <List
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                Products
+              </ListSubheader>
+            }
+          >
+            <ListItemButton component={NavLink} to="products">
+              <ListItemIcon>
+                <Inventory2OutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Products" />
+            </ListItemButton>
+            <ListItemButton component={NavLink} to="products/new">
+              <ListItemIcon>
+                <AddBoxOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Create Product" />
+            </ListItemButton>
+          </List>
+
+          <Divider sx={{ my: 1 }} />
+
+          <List
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                Account
+              </ListSubheader>
+            }
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonOutlineIcon />
+              </ListItemIcon>
+              <ListItemText primary="User" />
+            </ListItemButton>
+            <ListItemButton>
+              <ListItemIcon>
+                <SettingsOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="My Profile" />
+            </ListItemButton>
+          </List>
+        </Box>
+
+        {/* Footer (user + menu) */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+          <Avatar
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+            sx={{ width: 36, height: 36 }}
+          >
+            J
+          </Avatar>
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Typography variant="subtitle2" noWrap>
+              John Smith
+            </Typography>
+            <Typography variant="caption" color="text.secondary" noWrap>
+              Product Manager
+            </Typography>
+          </Box>
+          <IconButton size="small" onClick={handleMenuOpen}>
+            <MoreHorizIcon />
+          </IconButton>
+          <Menu
+            anchorEl={menuAnchor}
+            open={menuOpen}
+            onClose={handleMenuClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+            transformOrigin={{ vertical: "top", horizontal: "left" }}
+          >
+            <MenuItem onClick={handleMenuClose}>
+              <ListItemIcon>
+                <PersonOutlineIcon fontSize="small" />
+              </ListItemIcon>
+              Profile
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+              <ListItemIcon>
+                <SettingsOutlinedIcon fontSize="small" />
+              </ListItemIcon>
+              Settings
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+              <ListItemIcon>
+                <LogoutOutlinedIcon fontSize="small" />
+              </ListItemIcon>
+              Log out
+            </MenuItem>
+          </Menu>
+        </Box>
       </Box>
     </Drawer>
   );
