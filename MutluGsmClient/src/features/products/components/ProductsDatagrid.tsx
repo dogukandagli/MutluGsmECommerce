@@ -200,7 +200,7 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
         }}
       >
         <TextField
-          placeholder="Search product..."
+          placeholder="Ürün Ara..."
           size="small"
           value={searchValue}
           onChange={onFilterTextBoxChanged}

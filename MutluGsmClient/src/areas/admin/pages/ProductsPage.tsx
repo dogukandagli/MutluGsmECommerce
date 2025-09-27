@@ -29,11 +29,10 @@ export default function ProductsPage() {
             component={NavLink}
             to="/admin/products"
             underline="hover"
-            color="inherit"
+            color="text.primary"
           >
             Ürünler
           </Link>
-          <Typography color="text.primary">Yeni Ürün</Typography>
         </Breadcrumbs>
       </Container>
 

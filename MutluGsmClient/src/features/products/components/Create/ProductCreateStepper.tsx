@@ -16,68 +16,15 @@ import { DarkBarConnector } from "../../../../shared/components/Stepper/DarkBarC
 import { DotStepIcon } from "../../../../shared/components/Stepper/DotStepIcon";
 import StepInformation from "./steps/StepInformation";
 import StepPrice from "./steps/StepPrice";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import StepMedia from "./steps/StepMedia";
 import { createProduct } from "../../store/productSlice";
 import { useAppDispatch, useAppSelector } from "../../../../app/store/hooks";
 import { LoadingButton } from "@mui/lab";
 
-const Schema = z.object({
-  name: z.string().min(1, "Ürün adı zorunlu"),
-  category: z.string().uuid("Geçerli kategori seçin"),
-  description: z.string().optional(),
-  brand: z.string().optional(),
-  price: z
-    .string()
-    .trim()
-    .transform((v) => Number(v))
-    .refine((v) => !Number.isNaN(v), {
-      message: "Geçerli bir sayı giriniz",
-    })
-    .refine((v) => v >= 1, {
-      message: "Fiyat en az 1 olmalı",
-    })
-    .refine((v) => v <= 999999, {
-      message: "Fiyat çok yüksek",
-    }),
-  originalPrice: z
-    .string()
-    .trim()
-    .optional() // opsiyonel alan
-    .transform((v) => (v === "" || v === undefined ? undefined : Number(v)))
-    .refine((v) => v === undefined || !Number.isNaN(v), {
-      message: "Geçerli bir sayı giriniz",
-    })
-    .refine((v) => v === undefined || v >= 1, {
-      message: "Fiyat en az 1 olmalı",
-    })
-    .refine((v) => v === undefined || v <= 999999, {
-      message: "Fiyat çok yüksek",
-    }),
-  featured: z.boolean(),
-  condition: z.int({ message: "Lütfen Seçiniz" }),
-  quantity: z
-    .string()
-    .trim()
-    .transform((v) => (v === "" ? undefined : Number(v)))
-    .refine((v) => v === undefined || !Number.isNaN(v), {
-      message: "Geçerli bir sayı giriniz",
-    })
-    .refine((v) => v === undefined || v >= 1, {
-      message: "Stok en az 1 olmalı",
-    })
-    .refine((v) => v === undefined || v <= 999999, {
-      message: "Stok cok yuksek",
-    }),
-});
-type FromValues = z.infer<typeof Schema>;
-
 export default function ProductCreateStepper({}) {
   const steps = ["1.Ürün Bilgisi", "2.Medya", "3.Fıyat"];
 
-  const methods = useForm<FromValues>({
-    resolver: zodResolver(Schema),
+  const methods = useForm({
     mode: "onChange",
     defaultValues: {
       name: "",

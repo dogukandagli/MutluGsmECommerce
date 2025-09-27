@@ -33,7 +33,7 @@ export default function Header({ handleSideBar }: HeaderProps) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          Acme Co.
+          Mutlu Gsm
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="error">

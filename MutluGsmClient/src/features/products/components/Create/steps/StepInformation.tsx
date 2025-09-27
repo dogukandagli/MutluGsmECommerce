@@ -34,6 +34,7 @@ export default function StepInformation() {
               <Controller
                 name="name"
                 control={control}
+                rules={{ required: "Ürün ismi girmelisiniz." }}
                 render={({ field, fieldState }) => (
                   <TextField
                     {...field}
@@ -54,7 +55,7 @@ export default function StepInformation() {
               <Controller
                 name="category"
                 control={control}
-                rules={{ required: "Kategori seçmelisiniz" }} // validation örneği
+                rules={{ required: "Kategori seçmelisiniz" }}
                 render={({ field, fieldState }) => (
                   <TextField
                     {...field}

@@ -4,16 +4,24 @@ import {
   Button,
   Dialog,
   DialogActions,
+  DialogContent,
+  DialogContentText,
   DialogTitle,
+  Divider,
   IconButton,
+  Stack,
   Tooltip,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
-import { deleteProduct } from "../../features/products/store/productSlice";
+import {
+  deleteProduct,
+  selectProductById,
+} from "../../features/products/store/productSlice";
 import { LoadingButton } from "@mui/lab";
 import { NavLink } from "react-router";
 import EditIcon from "@mui/icons-material/Edit";
+import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 
 export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
   const { api, node } = params;
@@ -22,12 +30,22 @@ export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
   const dispatch = useAppDispatch();
   const { status } = useAppSelector((state) => state.product);
 
+  const product = useAppSelector((state) => selectProductById(state, id!));
+
+  const loading = status === "pendingDeleteProduct";
+
   const onRemoveClick = () => {
     const row = node.data;
 
-    dispatch(deleteProduct(row.id));
-    api.refreshInfiniteCache();
-    handleClose();
+    dispatch(deleteProduct(row.id))
+      .unwrap()
+      .then(() => {
+        api.refreshInfiniteCache(); // tabloyu yenile
+        handleClose(); // dialog kapat
+      })
+      .catch((err) => {
+        console.error("Silme hatası:", err);
+      });
   };
 
   const [open, setOpen] = useState(false);
@@ -67,20 +85,41 @@ export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
       </Tooltip>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={loading ? undefined : handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          Ürünü silmek istiyor musunuz?
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+        >
+          <WarningAmberRoundedIcon color="error" />
+          {product?.name} isimli ürünü silmek istiyor musunuz?
         </DialogTitle>
 
-        <DialogActions>
-          <Button onClick={handleClose}>Vazgeç</Button>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Bu işlem geri alınamaz. Ürün kalıcı olarak silinecektir.
+          </DialogContentText>
+          <Divider sx={{ mt: 2 }} />
+          <Stack
+            spacing={0.5}
+            sx={{ mt: 2, fontSize: 13, color: "text.secondary" }}
+          >
+            <span>• İlgili varyantlar ve stok bilgileri de kaldırılır.</span>
+            <span>• Yayında ise vitrinlerden düşer.</span>
+          </Stack>
+        </DialogContent>
+
+        <DialogActions sx={{ p: 2 }}>
+          <Button onClick={handleClose} disabled={loading}>
+            Vazgeç
+          </Button>
           <LoadingButton
-            variant="outlined"
+            variant="contained"
+            color="error"
             loadingPosition="start"
-            loading={status === "pendingDeleteProduct"}
+            loading={loading}
             startIcon={<DeleteIcon />}
             onClick={onRemoveClick}
             autoFocus

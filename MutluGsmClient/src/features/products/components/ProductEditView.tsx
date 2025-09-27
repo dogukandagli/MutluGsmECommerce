@@ -11,17 +11,15 @@ import {
   Divider,
   Stack,
   Button,
-  Switch,
-  FormControlLabel,
   Avatar,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Save from "@mui/icons-material/Save";
 import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
 import { useParams } from "react-router";
-import { z } from "zod";
 import { selectProductById, updateProduct } from "../store/productSlice";
 import type { ICategorySelect } from "../types/ICategorySelect";
 import type { IBrandSelect } from "../types/IBrandSelect";
@@ -29,65 +27,15 @@ import { useEffect, useState } from "react";
 import Category from "../../category/api/categoryApi";
 import Brand from "../../brands/api/brandApi";
 import { Controller, useForm, type FieldValues } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useDropzone } from "react-dropzone";
-
-const Schema = z.object({
-  name: z.string().min(1, "Ürün adı zorunlu"),
-  category: z.string().uuid("Geçerli kategori seçin"),
-  description: z.string().optional(),
-  brand: z.string().optional(),
-  price: z
-    .string()
-    .trim()
-    .transform((v) => Number(v))
-    .refine((v) => !Number.isNaN(v), {
-      message: "Geçerli bir sayı giriniz",
-    })
-    .refine((v) => v >= 1, {
-      message: "Fiyat en az 1 olmalı",
-    })
-    .refine((v) => v <= 999999, {
-      message: "Fiyat çok yüksek",
-    }),
-  originalPrice: z
-    .string()
-    .trim()
-    .optional() // opsiyonel alan
-    .transform((v) => (v === "" || v === undefined ? undefined : Number(v)))
-    .refine((v) => v === undefined || !Number.isNaN(v), {
-      message: "Geçerli bir sayı giriniz",
-    })
-    .refine((v) => v === undefined || v >= 1, {
-      message: "Fiyat en az 1 olmalı",
-    })
-    .refine((v) => v === undefined || v <= 999999, {
-      message: "Fiyat çok yüksek",
-    }),
-  featured: z.boolean(),
-  condition: z.number().int(),
-  quantity: z
-    .string()
-    .trim()
-    .transform((v) => (v === "" ? undefined : Number(v)))
-    .refine((v) => v === undefined || !Number.isNaN(v), {
-      message: "Geçerli bir sayı giriniz",
-    })
-    .refine((v) => v === undefined || v >= 1, {
-      message: "Stok en az 1 olmalı",
-    })
-    .refine((v) => v === undefined || v <= 999999, {
-      message: "Stok cok yuksek",
-    }),
-  active: z.boolean(),
-});
-type FromValues = z.infer<typeof Schema>;
+import { LoadingButton } from "@mui/lab";
 
 export default function ProductEditView() {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
 
   const product = useAppSelector((state) => selectProductById(state, id!));
+  const { status } = useAppSelector((state) => state.product);
 
   const [categories, setCategories] = useState<ICategorySelect[]>([]);
   const [brands, setBrands] = useState<IBrandSelect[]>([]);
@@ -111,20 +59,28 @@ export default function ProductEditView() {
   }, [id]);
   const isNew = !product?.id;
 
-  const { control, handleSubmit } = useForm<FromValues>({
-    resolver: zodResolver(Schema),
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     mode: "onChange",
     defaultValues: {
       name: product?.name,
       quantity: product?.quantity,
       price: product?.price,
       originalPrice: product?.originalPrice ?? undefined,
-      condition: product?.condition,
+
       category: product?.categoryId,
-      brand: product?.brandId ?? undefined,
-      description: product?.description ?? undefined, // burada null olabilir
-      featured: product?.featured ?? false,
-      active: product?.isActive,
+
+      brand: String(product?.brandId ?? ""),
+
+      condition: String(product?.condition),
+      featured: String(product?.featured),
+      active: String(product?.isActive),
+
+      description: product?.description ?? undefined,
     },
   });
 
@@ -248,22 +204,37 @@ export default function ProductEditView() {
                 Ürün bilgilerini düzenleyin ve kaydedin.
               </Typography>
             </Box>
-            <Button
-              variant="contained"
+            <LoadingButton
+              loading={status === "pendingUpdateProduct"}
+              loadingPosition="start"
+              loadingIndicator={
+                <CircularProgress size={16} thickness={5} sx={{ mr: 1 }} />
+              }
               startIcon={<Save />}
+              variant="contained"
+              disableElevation
               type="submit"
               sx={{
                 borderRadius: 2,
                 px: 3,
+                minWidth: 140,
+                height: 40,
+                textTransform: "none",
                 background: "linear-gradient(180deg, #2c2c2c 0%, #1e1e1e 100%)",
-                ":hover": {
+                color: "#fff",
+                boxShadow: "0 3px 10px rgba(0,0,0,.25)",
+                "&:hover": {
                   background:
                     "linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%)",
                 },
+                "&.Mui-disabled": {
+                  opacity: 0.9,
+                  color: "#fff",
+                },
               }}
             >
-              Kaydet
-            </Button>
+              {status === "pendingUpdateProduct" ? "Kaydediliyor…" : "Kaydet"}
+            </LoadingButton>
           </Stack>
 
           <Grid container spacing={3}>
@@ -442,58 +413,50 @@ export default function ProductEditView() {
                 <CardContent>
                   <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                      <Controller
-                        control={control}
-                        name="name"
-                        render={({ field, fieldState }) => (
-                          <TextField
-                            {...field}
-                            type="string"
-                            label="Ürün adı"
-                            fullWidth
-                            required
-                            error={!!fieldState.error}
-                            helperText={fieldState.error?.message}
-                          />
-                        )}
+                      <TextField
+                        {...register("name", {
+                          required: "Ürün ismi girmelisiniz.",
+                          minLength: {
+                            value: 1,
+                            message: "Ürün ismi girmelisiniz.",
+                          },
+                        })}
+                        fullWidth
+                        label="Ürün İsmi"
+                        type="text"
+                        required
+                        error={!!errors.name}
+                        helperText={errors.name?.message}
                       />
                     </Grid>
 
                     <Grid size={{ xs: 12, md: 6 }}>
-                      <Controller
-                        control={control}
-                        name="quantity"
-                        render={({ field, fieldState }) => (
-                          <TextField
-                            {...field}
-                            type="number"
-                            label="Stok Bilgisi"
-                            fullWidth
-                            required
-                            error={!!fieldState.error}
-                            helperText={fieldState.error?.message}
-                          />
-                        )}
+                      <TextField
+                        {...register("quantity", {
+                          required: "Stok bilgisi girmelisiniz.",
+                          min: {
+                            value: 1,
+                            message: "En az 1 adet stok olabilir.",
+                          },
+                        })}
+                        required
+                        fullWidth
+                        label="Stok bilgisi"
+                        type="number"
+                        placeholder="Stok bilgisi giriniz"
+                        error={!!errors.quantity}
+                        helperText={errors.quantity?.message}
                       />
                     </Grid>
 
                     <Grid size={{ xs: 12 }}>
-                      <Controller
-                        control={control}
-                        name="description"
-                        render={({ field, fieldState }) => (
-                          <TextField
-                            {...field}
-                            label="Açıklama"
-                            multiline
-                            rows={4}
-                            margin="normal"
-                            variant="outlined"
-                            fullWidth
-                            error={!!fieldState.error}
-                            helperText={fieldState.error?.message}
-                          />
-                        )}
+                      <TextField
+                        {...register("description")}
+                        fullWidth
+                        label="Açıklama"
+                        type="text"
+                        error={!!errors.description}
+                        helperText={errors.description?.message}
                       />
                     </Grid>
 
@@ -502,20 +465,20 @@ export default function ProductEditView() {
                         <Controller
                           name="category"
                           control={control}
-                          rules={{ required: "Kategori seçmelisiniz" }} // validation örneği
-                          render={({ field, fieldState }) => (
+                          rules={{ required: "Kategori seçmelisiniz" }}
+                          render={({ field }) => (
                             <TextField
                               {...field}
-                              select
-                              label="Kategori"
                               fullWidth
+                              label="Kategori"
+                              select
                               required
-                              error={!!fieldState.error}
-                              helperText={fieldState.error?.message}
+                              error={!!errors.category}
+                              helperText={errors.category?.message}
                             >
-                              {categories.map((option) => (
-                                <MenuItem key={option.id} value={option.id}>
-                                  {option.name}
+                              {categories.map((c) => (
+                                <MenuItem key={c.id} value={String(c.id)}>
+                                  {c.name}
                                 </MenuItem>
                               ))}
                             </TextField>
@@ -529,18 +492,17 @@ export default function ProductEditView() {
                         <Controller
                           name="brand"
                           control={control}
-                          render={({ field, fieldState }) => (
+                          render={({ field }) => (
                             <TextField
                               {...field}
-                              select
-                              label="Marka"
                               fullWidth
-                              error={!!fieldState.error}
-                              helperText={fieldState.error?.message}
+                              label="Marka"
+                              select
                             >
-                              {brands.map((option) => (
-                                <MenuItem key={option.id} value={option.id}>
-                                  {option.name}
+                              <MenuItem value="">{/* boş */}</MenuItem>
+                              {brands.map((b) => (
+                                <MenuItem key={b.id} value={String(b.id)}>
+                                  {b.name}
                                 </MenuItem>
                               ))}
                             </TextField>
@@ -554,21 +516,19 @@ export default function ProductEditView() {
                         <Controller
                           name="condition"
                           control={control}
+                          rules={{ required: "Durum seçmelisiniz." }}
                           render={({ field, fieldState }) => (
                             <TextField
                               {...field}
-                              select
                               label="Durum"
+                              select
+                              required
                               fullWidth
                               error={!!fieldState.error}
                               helperText={fieldState.error?.message}
                             >
-                              <MenuItem key={0} value={0}>
-                                Yeni
-                              </MenuItem>
-                              <MenuItem key={1} value={1}>
-                                İkinci El
-                              </MenuItem>
+                              <MenuItem value="0">Yeni</MenuItem>
+                              <MenuItem value="1">İkinci El</MenuItem>
                             </TextField>
                           )}
                         />
@@ -580,18 +540,18 @@ export default function ProductEditView() {
                         <Controller
                           name="featured"
                           control={control}
+                          rules={{ required: "Öne çıkan bilgisi gerekli." }}
                           render={({ field }) => (
-                            <FormControlLabel
-                              control={
-                                <Switch
-                                  checked={field.value}
-                                  onChange={(e) =>
-                                    field.onChange(e.target.checked)
-                                  }
-                                />
-                              }
+                            <TextField
+                              {...field}
                               label="Öne Çıkan"
-                            />
+                              select
+                              required
+                              fullWidth
+                            >
+                              <MenuItem value="true">Evet</MenuItem>
+                              <MenuItem value="false">Hayır</MenuItem>
+                            </TextField>
                           )}
                         />
                       </Stack>
@@ -601,18 +561,18 @@ export default function ProductEditView() {
                         <Controller
                           name="active"
                           control={control}
+                          rules={{ required: "Aktiflik gerekli." }}
                           render={({ field }) => (
-                            <FormControlLabel
-                              control={
-                                <Switch
-                                  checked={field.value}
-                                  onChange={(e) =>
-                                    field.onChange(e.target.checked)
-                                  }
-                                />
-                              }
+                            <TextField
+                              {...field}
                               label="Aktif"
-                            />
+                              select
+                              required
+                              fullWidth
+                            >
+                              <MenuItem value="true">Evet</MenuItem>
+                              <MenuItem value="false">Hayır</MenuItem>
+                            </TextField>
                           )}
                         />
                       </Stack>
@@ -634,36 +594,37 @@ export default function ProductEditView() {
                 <CardContent>
                   <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 6 }}>
-                      <Controller
-                        control={control}
-                        name="price"
-                        render={({ field, fieldState }) => (
-                          <TextField
-                            {...field}
-                            type="number"
-                            label="Fiyat"
-                            fullWidth
-                            required
-                            error={!!fieldState.error}
-                            helperText={fieldState.error?.message}
-                          />
-                        )}
+                      <TextField
+                        {...register("price", {
+                          required: "Fiyat girmelisiniz.",
+                          min: {
+                            value: 0.01,
+                            message: "Fiyat 0'dan büyük olmalı.",
+                          },
+                        })}
+                        fullWidth
+                        label="Fiyat"
+                        type="number"
+                        required
+                        placeholder="Fiyat giriniz"
+                        error={!!errors.price}
+                        helperText={errors.price?.message}
                       />
                     </Grid>
                     <Grid size={{ xs: 12, md: 6 }}>
-                      <Controller
-                        control={control}
-                        name="originalPrice"
-                        render={({ field, fieldState }) => (
-                          <TextField
-                            {...field}
-                            type="number"
-                            label="İndirimli Fiyat"
-                            fullWidth
-                            error={!!fieldState.error}
-                            helperText={fieldState.error?.message}
-                          />
-                        )}
+                      <TextField
+                        {...register("originalPrice", {
+                          min: {
+                            value: 0.01,
+                            message: "Fiyat 0'dan büyük olmalı.",
+                          },
+                        })}
+                        fullWidth
+                        label="İndirimli Fiyat"
+                        type="number"
+                        placeholder="İndirimli fiyat giriniz"
+                        error={!!errors.originalPrice}
+                        helperText={errors.originalPrice?.message}
                       />
                     </Grid>
                   </Grid>

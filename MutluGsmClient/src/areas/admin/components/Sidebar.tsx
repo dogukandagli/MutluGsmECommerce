@@ -83,12 +83,12 @@ export default function Sidebar({
         }}
       >
         {/* Header (logo) */}
-        <Box sx={{ display: "flex", alignItems: "center", height: 48 }}>
+        <Box sx={{ display: "flex", alignItems: "center", height: 100 }}>
           <Box
             component="img"
             alt="Logo"
-            src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-            sx={{ height: 24, objectFit: "cover" }}
+            src="https://localhost:7261/images/x5_12717039194c6.jpg"
+            sx={{ height: 100, width: 200, objectFit: "cover" }}
           />
         </Box>
 
@@ -97,7 +97,7 @@ export default function Sidebar({
           <List
             subheader={
               <ListSubheader component="div" disableSticky>
-                Products
+                Ürünler
               </ListSubheader>
             }
           >
@@ -105,13 +105,13 @@ export default function Sidebar({
               <ListItemIcon>
                 <Inventory2OutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary="Products" />
+              <ListItemText primary="Ürünler" />
             </ListItemButton>
             <ListItemButton component={NavLink} to="products/new">
               <ListItemIcon>
                 <AddBoxOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary="Create Product" />
+              <ListItemText primary="Ürün Oluştur" />
             </ListItemButton>
           </List>
 

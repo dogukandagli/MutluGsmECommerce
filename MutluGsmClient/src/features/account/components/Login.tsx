@@ -70,10 +70,10 @@ function Login() {
             sx={{ width: 32, height: 32, objectFit: "cover" }}
           />
           <Typography variant="h5" fontWeight={700}>
-            Welcome back
+            Mutlu Gsm
           </Typography>
           <Typography variant="body2" color="text.secondary" align="center">
-            Sign in to continue to your account
+            Giriş Yapın
           </Typography>
         </Stack>
 
@@ -131,32 +131,7 @@ function Login() {
         </Stack>
 
         {/* Divider + Social */}
-        <Stack alignItems="center" spacing={2.5} mt={4}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            spacing={2}
-            sx={{ width: "100%" }}
-          >
-            <Divider sx={{ flex: 1 }} />
-            <Typography variant="body2" color="text.secondary">
-              or continue with
-            </Typography>
-            <Divider sx={{ flex: 1 }} />
-          </Stack>
-
-          <Stack direction="row" spacing={1}>
-            <IconButton aria-label="Continue with GitHub" onClick={() => {}}>
-              <GitHubIcon />
-            </IconButton>
-            <IconButton aria-label="Continue with Twitter" onClick={() => {}}>
-              <TwitterIcon />
-            </IconButton>
-            <IconButton aria-label="Continue with Email" onClick={() => {}}>
-              <MailOutlineIcon />
-            </IconButton>
-          </Stack>
-        </Stack>
+        <Stack alignItems="center" spacing={2.5} mt={4}></Stack>
 
         {/* Footer Links */}
         <Stack alignItems="center" spacing={1.5} mt={4}>

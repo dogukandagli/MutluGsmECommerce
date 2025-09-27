@@ -8,54 +8,80 @@ import {
 import { Box, Grid, Stack } from "@mui/system";
 import { Controller, useFormContext } from "react-hook-form";
 
+type FormValues = {
+  price: number;
+  originalPrice?: number;
+  featured: boolean;
+  condition: 0 | 1;
+  quantity: number;
+};
+
 export default function StepPrice() {
-  const { control } = useFormContext();
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = useFormContext<FormValues>();
 
   return (
     <Box>
       <Typography variant="h6" fontWeight={700} mb={2}>
         Ürün Bilgisi
       </Typography>
+
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Stack spacing={2}>
-            <Controller
-              control={control}
-              name="price"
-              render={({ field, fieldState }) => (
-                <TextField
-                  {...field}
-                  type="number"
-                  label="Fiyat"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!fieldState.error}
-                  helperText={fieldState.error?.message}
-                />
-              )}
+            <TextField
+              {...register("price", {
+                valueAsNumber: true,
+                required: "Fiyat girmelisiniz.",
+                min: {
+                  value: 0.01,
+                  message: "Fiyat 0'dan büyük olmalı.",
+                },
+              })}
+              fullWidth
+              label="Fiyat"
+              type="number"
+              required
+              placeholder="Fiyat giriniz"
+              error={!!errors.price}
+              helperText={
+                typeof errors.price?.message === "string"
+                  ? errors.price.message
+                  : undefined
+              }
+              inputProps={{ step: "0.01" }}
             />
           </Stack>
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <Stack spacing={2}>
-            <Controller
-              control={control}
-              name="originalPrice"
-              render={({ field, fieldState }) => (
-                <TextField
-                  {...field}
-                  type="number"
-                  label="İndirimli Fiyat"
-                  variant="outlined"
-                  fullWidth
-                  error={!!fieldState.error}
-                  helperText={fieldState.error?.message}
-                />
-              )}
+            <TextField
+              {...register("originalPrice", {
+                valueAsNumber: true,
+                min: {
+                  value: 0.01,
+                  message: "Fiyat 0'dan büyük olmalı.",
+                },
+              })}
+              fullWidth
+              label="İndirimli Fiyat"
+              type="number"
+              placeholder="İndirimli fiyat giriniz"
+              error={!!errors.originalPrice}
+              helperText={
+                typeof errors.originalPrice?.message === "string"
+                  ? errors.originalPrice.message
+                  : undefined
+              }
+              inputProps={{ step: "0.01" }}
             />
           </Stack>
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <Stack spacing={2}>
             <Controller
@@ -65,7 +91,7 @@ export default function StepPrice() {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={field.value}
+                      checked={!!field.value}
                       onChange={(e) => field.onChange(e.target.checked)}
                     />
                   }
@@ -75,50 +101,54 @@ export default function StepPrice() {
             />
           </Stack>
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <Stack spacing={2}>
             <Controller
               name="condition"
               control={control}
+              rules={{ required: "Durum seçmelisiniz." }}
               render={({ field, fieldState }) => (
                 <TextField
                   {...field}
-                  select
                   label="Durum"
-                  variant="standard"
-                  fullWidth
+                  select
                   required
+                  fullWidth
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
                 >
-                  <MenuItem key={0} value={0}>
-                    Sıfır
-                  </MenuItem>
-                  <MenuItem key={1} value={1}>
-                    İkinci El
-                  </MenuItem>
+                  <MenuItem value={0}>Yeni</MenuItem>
+                  <MenuItem value={1}>İkinci El</MenuItem>
                 </TextField>
               )}
             />
           </Stack>
         </Grid>
+
         <Grid size={{ xs: 12, md: 6 }}>
           <Stack spacing={2}>
-            <Controller
-              control={control}
-              name="quantity"
-              render={({ field, fieldState }) => (
-                <TextField
-                  {...field}
-                  type="number"
-                  label="Stok bilgisi"
-                  variant="outlined"
-                  fullWidth
-                  required
-                  error={!!fieldState.error}
-                  helperText={fieldState.error?.message}
-                />
-              )}
+            <TextField
+              {...register("quantity", {
+                valueAsNumber: true,
+                required: "Stok bilgisi girmelisiniz.",
+                min: {
+                  value: 1,
+                  message: "En az 1 adet stok olabilir.",
+                },
+              })}
+              required
+              fullWidth
+              label="Stok bilgisi"
+              type="number"
+              placeholder="Stok bilgisi giriniz"
+              error={!!errors.quantity}
+              helperText={
+                typeof errors.quantity?.message === "string"
+                  ? errors.quantity.message
+                  : undefined
+              }
+              inputProps={{ step: "1", min: 1 }}
             />
           </Stack>
         </Grid>

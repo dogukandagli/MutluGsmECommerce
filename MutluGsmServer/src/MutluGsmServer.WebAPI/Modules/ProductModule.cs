@@ -11,7 +11,7 @@ public static class ProductModule
 {
     public static void RegisterProductRoutes(this IEndpointRouteBuilder app)
     {
-        RouteGroupBuilder group = app.MapGroup("/products").WithTags("Products");
+        RouteGroupBuilder group = app.MapGroup("/products").WithTags("Products").RequireAuthorization();
 
         group.MapPost(string.Empty,
             async ([FromForm] ProductCreateCommand request, ISender sender, CancellationToken cancellationToken) =>
@@ -48,5 +48,4 @@ public static class ProductModule
             .WithName("ProductDelete");
 
     }
-
 }
