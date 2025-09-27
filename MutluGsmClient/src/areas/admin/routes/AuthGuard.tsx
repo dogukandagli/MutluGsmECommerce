@@ -19,6 +19,7 @@ export function AuthGuard() {
     if (!d.exp || d.exp < now) {
       return <Navigate to="login" replace state={{ from: location }} />;
     }
+
     return <Outlet />;
   } catch {
     return <Navigate to="login" replace state={{ from: location }} />;

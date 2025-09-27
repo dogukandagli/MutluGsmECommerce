@@ -242,7 +242,7 @@ export default function ProductEditView() {
           >
             <Box>
               <Typography variant="h5" fontWeight={700}>
-                {isNew ? "Yeni Ürün" : "Make the changes below"}
+                {isNew ? "Yeni Ürün" : "Aşağıdaki değişiklikleri yapın"}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Ürün bilgilerini düzenleyin ve kaydedin.
@@ -262,7 +262,7 @@ export default function ProductEditView() {
                 },
               }}
             >
-              Save
+              Kaydet
             </Button>
           </Stack>
 
@@ -363,7 +363,7 @@ export default function ProductEditView() {
                     variant="subtitle1"
                     sx={{ mt: 3, fontWeight: 700, textAlign: "center" }}
                   >
-                    Product Image
+                    Ürün Fotoğrafı
                   </Typography>
                   <Typography
                     variant="body2"
@@ -438,7 +438,7 @@ export default function ProductEditView() {
                   mb: 3,
                 }}
               >
-                <CardHeader title="Product Information" sx={{ pb: 0 }} />
+                <CardHeader title="Ürün Bilgisi" sx={{ pb: 0 }} />
                 <CardContent>
                   <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 6 }}>
@@ -630,7 +630,7 @@ export default function ProductEditView() {
                   borderColor: "divider",
                 }}
               >
-                <CardHeader title="Pricing" sx={{ pb: 0 }} />
+                <CardHeader title="Fiyatlama" sx={{ pb: 0 }} />
                 <CardContent>
                   <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 6 }}>
@@ -677,12 +677,12 @@ export default function ProductEditView() {
                 sx={{ mt: 2 }}
               >
                 <Typography variant="caption" color="text.secondary">
-                  Created:{" "}
+                  Oluşturuldu:{" "}
                   {new Date(product.createdDate).toLocaleString("tr-TR")}
                 </Typography>
                 {product.updatedDate && (
                   <Typography variant="caption" color="text.secondary">
-                    Updated:{" "}
+                    Değiştirildi:{" "}
                     {new Date(product.updatedDate).toLocaleString("tr-TR")}
                   </Typography>
                 )}

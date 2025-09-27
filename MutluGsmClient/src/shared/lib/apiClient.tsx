@@ -4,7 +4,13 @@ import { toast } from "react-toastify";
 axios.defaults.baseURL = "https://localhost:7261/";
 axios.defaults.withCredentials = true;
 
-axios.interceptors.request.use();
+axios.interceptors.request.use((request) => {
+  const accessToken = localStorage.getItem("response");
+  if (accessToken) request.headers.Authorization = `Bearer ${accessToken}`;
+
+  return request;
+});
+
 axios.interceptors.response.use(
   (response) => {
     const data = response.data;

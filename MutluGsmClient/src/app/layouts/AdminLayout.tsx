@@ -39,7 +39,9 @@ export default function AdminLayout() {
           handleSideBar={handleSideBar}
           mobile={mobile}
         />
-        <Outlet />
+        <Box component="main" sx={{ flexGrow: 1, overflow: "auto" }}>
+          <Outlet />
+        </Box>
       </Box>
     </>
   );

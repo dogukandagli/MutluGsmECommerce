@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MutluGsmServer.Application.Services;
@@ -13,6 +14,16 @@ public sealed record LoginCommand(string UserNameorEmail,
 public sealed record LoginCommandResponse
 {
     public string AccessToken { get; set; } = default!;
+}
+
+public sealed class LoginCommandValidator : AbstractValidator<LoginCommand>
+{
+    public LoginCommandValidator()
+    {
+        RuleFor(p => p.UserNameorEmail).NotEmpty().WithMessage("Geçerli Email yada kullanıcı adı giriniz");
+        RuleFor(p => p.Password).NotEmpty().WithMessage("Geçerli bir şifre giriniz");
+
+    }
 }
 internal sealed class LoginCommandHandler(
     UserManager<AppUser> userManager,

@@ -179,15 +179,24 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
   const getRowId = (p: { data: { id: string } }) => p.data.id;
 
   return (
-    <Box sx={{ width: "100%", px: 3 }}>
+    <Box
+      sx={{
+        pl: 1,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "end",
+          justifyContent: "start",
+          alignSelf: "start",
           gap: 2,
           flexWrap: "wrap",
-          mb: 2,
+          m: 2,
         }}
       >
         <TextField
@@ -215,7 +224,7 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
         className={themeClass}
         sx={{
           width: "100%",
-          minHeight: 420,
+          px: 1,
         }}
       >
         <AgGridReact

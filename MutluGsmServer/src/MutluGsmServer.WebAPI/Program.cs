@@ -37,7 +37,6 @@ options.AddFixedWindowLimiter("fixed", opt =>
 builder.Services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();
 
 
-
 var app = builder.Build();
 
 app.MapOpenApi();
@@ -61,6 +60,7 @@ app.UseExceptionHandler();
 
 app.MapControllers()
     .RequireRateLimiting("fixed")
+    .RequireAuthorization()
    ;
 
 ExtensionsMiddleware.CreateFirstUser(app);

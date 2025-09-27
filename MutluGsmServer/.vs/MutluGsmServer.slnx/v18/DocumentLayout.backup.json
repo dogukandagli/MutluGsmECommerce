@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E90DF324-344D-8F5C-E7CC-B9DF0CCF8DD6}|src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj|c:\\users\\dagli\\source\\repos\\mutlugsmecommerce\\mutlugsmserver\\src\\mutlugsmserver.infrastructure\\services\\jwtprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E90DF324-344D-8F5C-E7CC-B9DF0CCF8DD6}|src\\MutluGsmServer.Infrastructure\\MutluGsmServer.Infrastructure.csproj|solutionrelative:src\\mutlugsmserver.infrastructure\\services\\jwtprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "JwtProvider.cs",
+              "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\Services\\JwtProvider.cs",
+              "RelativeDocumentMoniker": "src\\MutluGsmServer.Infrastructure\\Services\\JwtProvider.cs",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\Services\\JwtProvider.cs*",
+              "RelativeToolTip": "src\\MutluGsmServer.Infrastructure\\Services\\JwtProvider.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T11:47:06.178Z",
+              "EditorCaption": ""
             }
           ]
         }

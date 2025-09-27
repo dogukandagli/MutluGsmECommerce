@@ -13,6 +13,9 @@ internal sealed class JwtProvider(
     IOptions<JwtOptions> options
     ) : IJwtProvider
 {
+
+
+
     public Task<string> CreateTokenAsync(AppUser user, CancellationToken cancellationToken = default)
     {
 
@@ -38,6 +41,7 @@ internal sealed class JwtProvider(
 
         JwtSecurityTokenHandler handler = new();
         string token = handler.WriteToken(securityToken);
+
 
         return Task.FromResult(token);
     }
