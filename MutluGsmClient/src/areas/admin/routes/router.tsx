@@ -2,13 +2,19 @@ import AdminLayout from "../../../app/layouts/AdminLayout";
 import ProductCreatePage from "../pages/ProductCreatePage";
 import ProductEditPage from "../pages/ProductEditPage";
 import ProductsPage from "../pages/ProductsPage";
+import { AuthGuard } from "./AuthGuard";
 
 export const adminRoutes = {
   path: "/admin",
-  element: <AdminLayout />,
+  element: <AuthGuard />,
   children: [
-    { path: "products", element: <ProductsPage /> },
-    { path: "products/new", element: <ProductCreatePage /> },
-    { path: "products/edit/:id", element: <ProductEditPage /> },
+    {
+      element: <AdminLayout />,
+      children: [
+        { path: "products", element: <ProductsPage /> },
+        { path: "products/new", element: <ProductCreatePage /> },
+        { path: "products/edit/:id", element: <ProductEditPage /> },
+      ],
+    },
   ],
 };

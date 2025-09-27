@@ -2,14 +2,22 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { FieldValues } from "react-hook-form";
 import Auth from "../api/authtApi";
 
-interface AuthState {}
+interface AuthState {
+  accessToken: string;
+}
 
-const initialState: AuthState = {};
+const initialState: AuthState = {
+  accessToken: "",
+};
 
 export const login = createAsyncThunk<void, FieldValues>(
   "account/loghin",
   async (data) => {
-    return await Auth.login(data);
+    const response = await Auth.login(data);
+    const accessToken = response.data.accessToken;
+
+    localStorage.setItem("response", accessToken);
+    return accessToken;
   }
 );
 
