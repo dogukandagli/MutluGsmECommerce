@@ -47,7 +47,10 @@ export default function Header({ cartCount = 0, onSearch }: HeaderProps) {
       position="sticky"
       elevation={0}
       color="default"
-      sx={{ bgcolor: "background.paper" }}
+      sx={{
+        bgcolor: "background.paper",
+        borderBottom: "0.5px solid #ebebeeff",
+      }}
     >
       {/* ÜST ŞERİT */}
       <Box sx={{}}>
@@ -61,22 +64,28 @@ export default function Header({ cartCount = 0, onSearch }: HeaderProps) {
             </Box>
 
             {/* Logo */}
-            <Typography
-              sx={{
-                fontWeight: 800,
-                letterSpacing: "-0.02em",
-                cursor: "pointer",
-                mr: 1,
-              }}
-            >
-              TeknoButik
-            </Typography>
+            <Box component={NavLink} to="/">
+              <Typography
+                sx={{
+                  fontWeight: 800,
+                  letterSpacing: "-0.02em",
+                  cursor: "pointer",
+                  mr: 1,
+                }}
+              >
+                Mutlu Gsm
+              </Typography>
+            </Box>
 
             {/* Arama */}
             <Box
               component="form"
               onSubmit={submitSearch}
-              sx={{ flex: 1, mx: { xs: 1, md: 3 }, maxWidth: 680 }}
+              sx={{
+                flex: 1,
+                mx: { xs: 1, md: 3 },
+                maxWidth: 680,
+              }}
             >
               <TextField
                 value={q}
@@ -119,7 +128,6 @@ export default function Header({ cartCount = 0, onSearch }: HeaderProps) {
       <Box
         sx={{
           display: { xs: "none", md: "block" },
-          borderBottom: "1px solid #d2d2d7",
         }}
       >
         <Container maxWidth="lg">
@@ -136,6 +144,15 @@ export default function Header({ cartCount = 0, onSearch }: HeaderProps) {
                   {c.name}
                 </Button>
               ))}
+              <Button
+                component={NavLink}
+                to={"2.El Ürünler"}
+                key={0}
+                color="inherit"
+                sx={{ fontWeight: 300 }}
+              >
+                2.El Ürünler
+              </Button>
             </Stack>
           </Toolbar>
         </Container>

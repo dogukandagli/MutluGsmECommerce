@@ -20,6 +20,7 @@ import StepMedia from "./steps/StepMedia";
 import { createProduct } from "../../store/productSlice";
 import { useAppDispatch, useAppSelector } from "../../../../app/store/hooks";
 import { LoadingButton } from "@mui/lab";
+import { Container } from "@mui/system";
 
 export default function ProductCreateStepper({}) {
   const steps = ["1.Ürün Bilgisi", "2.Medya", "3.Fıyat"];
@@ -107,114 +108,119 @@ export default function ProductCreateStepper({}) {
   }
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(submitForm)} noValidate>
-        <Stack spacing={3}>
-          {/* Header */}
-          <Typography align="center" variant="h4">
-            Yeni Bir Ürün Ekle
-          </Typography>
+    <Container maxWidth="lg" sx={{ py: 6 }}>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(submitForm)} noValidate>
+          <Stack spacing={3}>
+            {/* Header */}
+            <Typography align="center" variant="h4">
+              Yeni Bir Ürün Ekle
+            </Typography>
 
-          <Paper
-            elevation={1}
-            sx={{
-              p: 3,
-              borderRadius: 3,
-              border: "1px solid",
-              borderColor: "divider",
-            }}
-          >
             <Paper
-              elevation={6}
+              elevation={1}
               sx={{
+                p: 3,
                 borderRadius: 3,
-                px: 2,
-                py: 1.5,
-                mb: 3,
-                background: "linear-gradient(180deg, #3a3a3a 0%, #2b2b2b 100%)",
+                border: "1px solid",
+                borderColor: "divider",
               }}
             >
-              <Stepper
-                alternativeLabel
-                activeStep={activeStep}
-                connector={<DarkBarConnector />}
-              >
-                {steps.map((label) => (
-                  <Step key={label}>
-                    <StepLabel
-                      StepIconComponent={DotStepIcon}
-                      sx={{
-                        "& .MuiStepLabel-label": {
-                          color: "rgba(255,255,255,.75)",
-                          fontWeight: 600,
-                          letterSpacing: ".4px",
-                          "&.Mui-active": { color: "#fff" },
-                          "&.Mui-completed": { color: "rgba(255,255,255,.9)" },
-                          whiteSpace: "nowrap",
-                        },
-                      }}
-                    >
-                      {label}
-                    </StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-            </Paper>
-
-            <Box sx={{ minHeight: 220 }}>
-              {stepComponents.length > 0 && stepComponents[activeStep]}
-            </Box>
-
-            <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
-              <Button
-                variant="outlined"
-                disabled={isFirst}
-                onClick={handleBack}
-              >
-                {"Geri"}
-              </Button>
-
-              <LoadingButton
-                loading={status === "pendingCreateProduct"}
-                loadingPosition="start"
-                loadingIndicator={
-                  <CircularProgress size={16} thickness={5} sx={{ mr: 1 }} />
-                }
-                variant="contained"
-                disableElevation
-                type="button"
-                onClick={handleNext}
-                disabled={status === "pendingCreateProduct"}
+              <Paper
+                elevation={6}
                 sx={{
-                  borderRadius: 2,
-                  px: 3,
-                  minWidth: 140,
-                  height: 40,
-                  textTransform: "none",
+                  borderRadius: 3,
+                  px: 2,
+                  py: 1.5,
+                  mb: 3,
                   background:
-                    "linear-gradient(180deg, #2c2c2c 0%, #1e1e1e 100%)",
-                  color: "#fff",
-                  boxShadow: "0 3px 10px rgba(0,0,0,.25)",
-                  "&:hover": {
-                    background:
-                      "linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%)",
-                  },
-                  "&.Mui-disabled": {
-                    opacity: 0.9,
-                    color: "#fff",
-                  },
+                    "linear-gradient(180deg, #3a3a3a 0%, #2b2b2b 100%)",
                 }}
               >
-                {isLast
-                  ? status === "pendingCreateProduct"
-                    ? "Kaydediliyor…"
-                    : "Kaydet"
-                  : "İleri"}
-              </LoadingButton>
-            </Box>
-          </Paper>
-        </Stack>
-      </form>
-    </FormProvider>
+                <Stepper
+                  alternativeLabel
+                  activeStep={activeStep}
+                  connector={<DarkBarConnector />}
+                >
+                  {steps.map((label) => (
+                    <Step key={label}>
+                      <StepLabel
+                        StepIconComponent={DotStepIcon}
+                        sx={{
+                          "& .MuiStepLabel-label": {
+                            color: "rgba(255,255,255,.75)",
+                            fontWeight: 600,
+                            letterSpacing: ".4px",
+                            "&.Mui-active": { color: "#fff" },
+                            "&.Mui-completed": {
+                              color: "rgba(255,255,255,.9)",
+                            },
+                            whiteSpace: "nowrap",
+                          },
+                        }}
+                      >
+                        {label}
+                      </StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+              </Paper>
+
+              <Box sx={{ minHeight: 220 }}>
+                {stepComponents.length > 0 && stepComponents[activeStep]}
+              </Box>
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+                <Button
+                  variant="outlined"
+                  disabled={isFirst}
+                  onClick={handleBack}
+                >
+                  {"Geri"}
+                </Button>
+
+                <LoadingButton
+                  loading={status === "pendingCreateProduct"}
+                  loadingPosition="start"
+                  loadingIndicator={
+                    <CircularProgress size={16} thickness={5} sx={{ mr: 1 }} />
+                  }
+                  variant="contained"
+                  disableElevation
+                  type="button"
+                  onClick={handleNext}
+                  disabled={status === "pendingCreateProduct"}
+                  sx={{
+                    borderRadius: 2,
+                    px: 3,
+                    minWidth: 140,
+                    height: 40,
+                    textTransform: "none",
+                    background:
+                      "linear-gradient(180deg, #2c2c2c 0%, #1e1e1e 100%)",
+                    color: "#fff",
+                    boxShadow: "0 3px 10px rgba(0,0,0,.25)",
+                    "&:hover": {
+                      background:
+                        "linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%)",
+                    },
+                    "&.Mui-disabled": {
+                      opacity: 0.9,
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  {isLast
+                    ? status === "pendingCreateProduct"
+                      ? "Kaydediliyor…"
+                      : "Kaydet"
+                    : "İleri"}
+                </LoadingButton>
+              </Box>
+            </Paper>
+          </Stack>
+        </form>
+      </FormProvider>
+    </Container>
   );
 }

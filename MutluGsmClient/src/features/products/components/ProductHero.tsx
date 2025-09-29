@@ -27,13 +27,11 @@ export default function ProductHero({ product }: ProductHeroProps) {
           container
           spacing={{ xs: 3, md: 6 }}
           alignItems="center"
-          // md'de yatay; mobilde dikey otomatik olur
           direction={{
             xs: "column",
             md: false ? "row-reverse" : "row",
           }}
         >
-          {/* Görsel */}
           <Grid size={{ xs: 12, md: 5 }} sx={{ order: { xs: 1, md: 2 } }}>
             <Box
               sx={{
@@ -49,13 +47,20 @@ export default function ProductHero({ product }: ProductHeroProps) {
                 component="img"
                 src={`https://localhost:7261/images/${product.mainImageUrl}`}
                 alt={product.name}
-                sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  pt: { xs: 3, md: 0 },
+                }}
               />
             </Box>
           </Grid>
 
-          {/* Metin + aksiyon */}
-          <Grid size={{ xs: 12, md: 7 }} sx={{ order: { xs: 2, md: 1 } }}>
+          <Grid
+            size={{ xs: 12, md: 7 }}
+            sx={{ order: { xs: 2, md: 1 }, p: { xs: 4, md: 0 } }}
+          >
             <Stack
               spacing={1}
               alignItems={{ xs: "center", md: "flex-start" }}

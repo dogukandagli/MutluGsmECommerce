@@ -40,6 +40,8 @@ const productsAdapter = createEntityAdapter<IProduct>();
 
 const initialState = productsAdapter.getInitialState({
   status: "idle",
+  products: null as IProduct[] | null,
+  valueCount: 0,
 });
 
 export const productSlice = createSlice({
@@ -52,6 +54,8 @@ export const productSlice = createSlice({
     });
     builder.addCase(fetchOdataProducts.fulfilled, (state, action) => {
       productsAdapter.upsertMany(state, action.payload.value);
+      state.products = action.payload.value;
+      state.valueCount = Number(action.payload["@odata.count"]);
       state.status = "idle";
     });
     builder.addCase(deleteProduct.pending, (state) => {

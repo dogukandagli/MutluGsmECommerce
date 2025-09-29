@@ -1,9 +1,10 @@
 import axios, { AxiosError, type AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 
-axios.defaults.baseURL = "https://localhost:7261/";
-axios.defaults.withCredentials = true;
+export const apiUrl = "https://localhost:7261/";
 
+axios.defaults.baseURL = apiUrl;
+axios.defaults.withCredentials = true;
 axios.interceptors.request.use((request) => {
   const accessToken = localStorage.getItem("response");
   if (accessToken) request.headers.Authorization = `Bearer ${accessToken}`;
