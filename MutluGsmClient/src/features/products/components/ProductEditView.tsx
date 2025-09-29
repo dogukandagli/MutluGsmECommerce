@@ -19,7 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Save from "@mui/icons-material/Save";
 import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { selectProductById, updateProduct } from "../store/productSlice";
 import type { IBrandSelect } from "../types/IBrandSelect";
 import { useEffect, useState } from "react";
@@ -32,6 +32,7 @@ import { selectAllCategory } from "../../category/store/categorySlice";
 export default function ProductEditView() {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   const product = useAppSelector((state) => selectProductById(state, id!));
   const { status } = useAppSelector((state) => state.product);
@@ -173,7 +174,12 @@ export default function ProductEditView() {
     formData.append("Price", String(data.price).replace(",", "."));
     formData.append("Quantity", String(data.quantity));
 
-    dispatch(updateProduct(formData));
+    dispatch(updateProduct(formData)).then((action) => {
+      if (updateProduct.fulfilled.match(action)) {
+        navigate("/admin/products");
+      }
+    });
+    navigate("/admin/products");
   }
 
   return (

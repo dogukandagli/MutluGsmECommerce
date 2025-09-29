@@ -20,7 +20,7 @@ import {
 import { fetchOdataProducts } from "../../../features/products/store/productSlice";
 import ProductHero from "../../../features/products/components/ProductHero";
 import type { IProduct } from "../../../features/products/types/IProduct";
-import EmptyProduct from "../components/emptyProduct";
+import EmptyProduct from "../components/EmptyProduct";
 
 export default function CategoryProductsPage() {
   const { categoryName } = useParams<{ categoryName: string }>();

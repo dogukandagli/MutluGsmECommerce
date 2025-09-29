@@ -15,8 +15,8 @@ export default function HomePage() {
         }}
       >
         <Container maxWidth="lg">
-          <Typography variant="h5" sx={{ fontSize: { xs: 20, md: 35 }, my: 2 }}>
-            Öne Çıkan Ürünler.
+          <Typography variant="h5" sx={{ fontSize: { xs: 20, md: 30 }, my: 2 }}>
+            Öne Çıkan Ürünleri Keşfet.
           </Typography>
           <NewestOrFeatured query={"$filter=featured eq true"} />
         </Container>
@@ -29,7 +29,7 @@ export default function HomePage() {
       >
         <Container maxWidth="lg">
           <Typography variant="h5" sx={{ fontSize: { xs: 20, md: 35 }, my: 2 }}>
-            En Yeniler.
+            En Yenileri Keşfet.
           </Typography>
           <NewestOrFeatured query={"$top=15"} />
         </Container>

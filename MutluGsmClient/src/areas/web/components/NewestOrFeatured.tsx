@@ -26,7 +26,7 @@ export default function NewestOrFeatured({ query }: props) {
   if (status === "pendingFetchProducts") return <CircularProgress />;
 
   return (
-    <Swiper slidesPerView="auto">
+    <Swiper slidesPerView="auto" spaceBetween={0} grabCursor={true}>
       {products ? (
         products.map((p) => (
           <SwiperSlide

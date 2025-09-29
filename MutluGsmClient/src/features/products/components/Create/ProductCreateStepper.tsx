@@ -21,9 +21,11 @@ import { createProduct } from "../../store/productSlice";
 import { useAppDispatch, useAppSelector } from "../../../../app/store/hooks";
 import { LoadingButton } from "@mui/lab";
 import { Container } from "@mui/system";
+import { useNavigate } from "react-router";
 
 export default function ProductCreateStepper({}) {
   const steps = ["1.Ürün Bilgisi", "2.Medya", "3.Fıyat"];
+  const navigate = useNavigate();
 
   const methods = useForm({
     mode: "onChange",
@@ -104,7 +106,11 @@ export default function ProductCreateStepper({}) {
     formData.forEach((value, key) => {
       console.log(key, value);
     });
-    dispatch(createProduct(formData));
+    dispatch(createProduct(formData)).then((action) => {
+      if (createProduct.fulfilled.match(action)) {
+        navigate("/admin/products");
+      }
+    });
   }
 
   return (

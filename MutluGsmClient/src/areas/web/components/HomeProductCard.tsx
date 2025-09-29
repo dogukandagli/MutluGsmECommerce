@@ -45,8 +45,10 @@ export default function HomeProductCard({ product }: ProductProps) {
 
         <CardContent>
           {/* Badge */}
-          <Chip label="Öne Çıkan" color="success" size="small" sx={{ mb: 2 }} />
 
+          <Typography color="primary" fontSize="17px">
+            Yeni
+          </Typography>
           {/* Başlık */}
           <Typography
             variant="h5"
