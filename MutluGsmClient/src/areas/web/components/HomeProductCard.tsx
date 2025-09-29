@@ -1,11 +1,4 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Chip,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import type { IProduct } from "../../../features/products/types/IProduct";
 import { apiUrl } from "../../../shared/lib/apiClient";
 
@@ -31,10 +24,9 @@ export default function HomeProductCard({ product }: ProductProps) {
           borderRadius: 3,
           p: 2,
           width: "100%",
-          boxShadow: "0 0 16px rgba(26, 27, 27, 0.15)",
+          boxShadow: "0 0 10px rgba(26, 27, 27, 0.15)",
         }}
       >
-        {/* Ürün görseli */}
         <CardMedia
           component="img"
           height="192"
@@ -44,12 +36,9 @@ export default function HomeProductCard({ product }: ProductProps) {
         />
 
         <CardContent>
-          {/* Badge */}
-
           <Typography color="primary" fontSize="17px">
-            Yeni
+            {product.featured == true ? "Öne Çıkan" : "Yeni"}
           </Typography>
-          {/* Başlık */}
           <Typography
             variant="h5"
             component="div"
@@ -57,16 +46,32 @@ export default function HomeProductCard({ product }: ProductProps) {
           >
             {product.name}
           </Typography>
-
-          {/* Açıklama */}
-
-          {/* Fiyat */}
-          <Typography
-            variant="body1"
-            sx={{ fontWeight: "bold", color: "text.primary" }}
-          >
-            {product.price}
-          </Typography>
+          {product.originalPrice ? (
+            <Box display="flex" alignItems="center" gap={1}>
+              <Typography
+                variant="body2"
+                sx={{
+                  textDecoration: "line-through",
+                  color: "text.secondary",
+                }}
+              >
+                {product.price.toLocaleString("tr-TR")} ₺
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: "bold", color: "error.main" }}
+              >
+                {product.originalPrice.toLocaleString("tr-TR")} ₺
+              </Typography>
+            </Box>
+          ) : (
+            <Typography
+              variant="body1"
+              sx={{ fontWeight: "bold", color: "warning.main" }}
+            >
+              {product.price.toLocaleString("tr-TR")} ₺
+            </Typography>
+          )}
         </CardContent>
       </Card>
     </Box>

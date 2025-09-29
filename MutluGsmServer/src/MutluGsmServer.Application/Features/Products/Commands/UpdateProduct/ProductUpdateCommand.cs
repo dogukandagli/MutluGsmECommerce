@@ -60,7 +60,7 @@ internal sealed class ProductUpdateCommandHandler(
 
         Name name = new(request.Name);
         Quantity quantity = new(request.Quantity);
-        ConditionEnum condition = ConditionEnum.FromValue(request.Condition);
+        ConditionEnum condition = ((ConditionEnum)request.Condition);
 
         List<ProductImage> productImages = new List<ProductImage>();
 

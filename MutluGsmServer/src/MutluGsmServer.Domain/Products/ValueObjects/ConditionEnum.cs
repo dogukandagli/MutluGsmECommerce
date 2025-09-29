@@ -1,12 +1,11 @@
-﻿using Ardalis.SmartEnum;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MutluGsmServer.Domain.Products.ValueObjects;
 
-public sealed class ConditionEnum : SmartEnum<ConditionEnum>
+public enum ConditionEnum
 {
-    public static ConditionEnum SifirinciEl = new("Sıfır", 0);
-    public static ConditionEnum IkinciEl = new("İkinci El", 1);
-    public ConditionEnum(string name, int value) : base(name, value)
-    {
-    }
+    [Display(Name = "Sıfır")]
+    SifirinciEl = 0,
+    [Display(Name = "İkinci El")]
+    IkinciEl = 1
 }

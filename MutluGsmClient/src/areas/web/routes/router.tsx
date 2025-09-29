@@ -14,5 +14,9 @@ export const webRoutes = {
       path: "/:categoryName",
       element: <CategoryProductsPage />,
     },
+    {
+      path: "/search/:productName",
+      element: <CategoryProductsPage />,
+    },
   ],
 };

@@ -50,7 +50,7 @@ internal sealed class ProductCreateCommandHandler(IProductRepository productRepo
 
         Name name = new(request.Name);
         Quantity quantity = new(request.Quantity);
-        ConditionEnum condition = ConditionEnum.FromValue(request.Condition);
+        ConditionEnum condition = ((ConditionEnum)request.Condition);
         List<ProductImage> productImages = new List<ProductImage>();
 
         for (int i = 0; i < request.File!.Count; i++)

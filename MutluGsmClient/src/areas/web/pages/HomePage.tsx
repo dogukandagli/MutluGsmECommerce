@@ -31,7 +31,7 @@ export default function HomePage() {
           <Typography variant="h5" sx={{ fontSize: { xs: 20, md: 35 }, my: 2 }}>
             En Yenileri Keşfet.
           </Typography>
-          <NewestOrFeatured query={"$top=15"} />
+          <NewestOrFeatured query={"$orderby=createdDate desc&$top=15 "} />
         </Container>
       </Box>
     </>

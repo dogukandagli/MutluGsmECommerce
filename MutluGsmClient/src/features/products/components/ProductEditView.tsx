@@ -530,8 +530,8 @@ export default function ProductEditView() {
                               error={!!fieldState.error}
                               helperText={fieldState.error?.message}
                             >
-                              <MenuItem value="0">Yeni</MenuItem>
-                              <MenuItem value="1">İkinci El</MenuItem>
+                              <MenuItem value={0}>Yeni</MenuItem>
+                              <MenuItem value={1}>İkinci El</MenuItem>
                             </TextField>
                           )}
                         />

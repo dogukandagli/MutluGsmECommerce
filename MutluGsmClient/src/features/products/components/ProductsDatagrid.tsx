@@ -112,7 +112,7 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
       field: "condition",
       headerName: "Durum",
       width: 120,
-      valueFormatter: (p) => (p.value === 1 ? "Yeni" : "İkinci El"),
+      valueFormatter: (p) => (p.value === 0 ? "Yeni" : "İkinci El"),
     },
     {
       field: "featured",

@@ -24,20 +24,21 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import { useAppSelector } from "../../../app/store/hooks";
 import { selectAllCategory } from "../../../features/category/store/categorySlice";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 type HeaderProps = {
   cartCount?: number;
   onSearch?: (q: string) => void;
 };
 
-export default function Header({ cartCount = 0, onSearch }: HeaderProps) {
+export default function Header({ cartCount = 0 }: HeaderProps) {
   const [q, setQ] = React.useState("");
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const navigate = useNavigate();
 
   const submitSearch = (e?: React.FormEvent) => {
     e?.preventDefault();
-    onSearch?.(q.trim());
+    navigate(`/search/${q}`);
   };
 
   const categories = useAppSelector((state) => selectAllCategory(state));

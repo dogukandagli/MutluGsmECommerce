@@ -43,7 +43,7 @@ public static class ProductExtensions
                        BrandName = Brand.Name.Value,
                        CategoryId = Entity.Entity.CategoryId,
                        CategoryName = Category.Name.Value,
-                       Condition = Entity.Entity.Condition.Value,
+                       Condition = (int)Entity.Entity.Condition,
                        CreatedDate = Entity.Entity.CreatedDate,
                        DeletedDate = Entity.Entity.DeletedDate,
                        Description = Entity.Entity.Description,

@@ -1,4 +1,4 @@
-import { useParams, NavLink } from "react-router";
+import { NavLink, useParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
 
 import { useEffect, useState } from "react";
@@ -22,33 +22,45 @@ import ProductHero from "../../../features/products/components/ProductHero";
 import type { IProduct } from "../../../features/products/types/IProduct";
 import EmptyProduct from "../components/EmptyProduct";
 
+type RouteParams = {
+  productName?: string;
+  categoryName?: string;
+};
+
 export default function CategoryProductsPage() {
-  const { categoryName } = useParams<{ categoryName: string }>();
+  const { productName, categoryName } = useParams<RouteParams>();
+
   const { products, valueCount, status } = useAppSelector(
     (state) => state.product
   );
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
   const pageSize = 10;
-  const [sort, setSort] = useState<string>("createdDate asc");
+  const [sort, setSort] = useState<string>("createdDate desc");
 
   const sortOptions = [
     { label: "Fiyat: Düşükten Yükseğe", value: "price asc" },
     { label: "Fiyat: Yüksekten Düşüğe", value: "price desc" },
-    { label: "En Yeni", value: "createdDate asc" },
-    { label: "En Eski", value: "createdDate desc" },
+    { label: "En Yeni", value: "createdDate desc" },
+    { label: "En Eski", value: "createdDate asc" },
   ];
 
   useEffect(() => {
     if (categoryName) {
       const skip = (page - 1) * pageSize;
+      let filter = "";
+      if (categoryName !== "2.El Ürünler") {
+        filter = `&$filter=categoryName eq '${categoryName}'`;
+      } else {
+        filter = `&$filter=condition eq 1`;
+      }
+      console.log(categoryName);
+      console.log(productName);
       const query =
-        `$top=${pageSize}&$skip=${skip}` +
-        `&$filter=categoryName eq '${categoryName}'` +
-        `&$orderby=${sort}`;
+        `$top=${pageSize}&$skip=${skip}` + filter + `&$orderby=${sort}`;
       dispatch(fetchOdataProducts(query));
     }
-  }, [categoryName, page, sort]);
+  }, [categoryName, page, sort, productName, dispatch]);
 
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -61,13 +73,11 @@ export default function CategoryProductsPage() {
   const pageCount = Math.ceil(valueCount / pageSize);
 
   if (status === "pendingFetchProducts") return <CircularProgress />;
-
   if (valueCount == 0) return <EmptyProduct />;
 
   return (
     <>
       <Container maxWidth="lg">
-        {/* Breadcrumb + Category Name + Sort */}
         <Box
           sx={{
             display: "flex",
@@ -76,7 +86,6 @@ export default function CategoryProductsPage() {
             m: 4,
           }}
         >
-          {/* Sol taraf: Breadcrumb + kategori adı */}
           <Box>
             <Breadcrumbs aria-label="breadcrumb">
               <Link
@@ -108,6 +117,7 @@ export default function CategoryProductsPage() {
           </FormControl>
         </Box>
       </Container>
+
       {products &&
         products.map((p: IProduct) => <ProductHero key={p.id} product={p} />)}
       <Stack spacing={2} alignItems={"center"} sx={{ my: 5 }}>

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MutluGsmServer.Domain.Products;
-using MutluGsmServer.Domain.Products.ValueObjects;
 
 namespace MutluGsmServer.Infrastructure.Configurations;
 
@@ -33,9 +32,7 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.OriginalPrice)
               .HasColumnType("Money");
 
-        builder.Property(p => p.Condition)
-            .HasConversion(con => con.Value, val => ConditionEnum.FromValue(val))
-            .IsRequired();
+
         builder.Property(p => p.Description)
                .HasMaxLength(2000);
 
