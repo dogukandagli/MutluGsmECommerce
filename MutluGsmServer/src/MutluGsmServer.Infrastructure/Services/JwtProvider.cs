@@ -14,7 +14,6 @@ internal sealed class JwtProvider(
     ) : IJwtProvider
 {
 
-
     public Task<string> CreateTokenAsync(AppUser user, CancellationToken cancellationToken = default)
     {
 

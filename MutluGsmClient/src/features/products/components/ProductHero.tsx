@@ -1,6 +1,7 @@
 import { Box, Container, Grid, Stack, Typography, Button } from "@mui/material";
 import type { IProduct } from "../types/IProduct";
 import { apiUrl } from "../../../shared/lib/apiClient";
+import { NavLink } from "react-router";
 
 type ProductHeroProps = {
   product: IProduct;
@@ -122,6 +123,8 @@ export default function ProductHero({ product }: ProductHeroProps) {
                   </Typography>
                 )}
                 <Button
+                  component={NavLink}
+                  to={`/product/${product.id}`}
                   variant="outlined"
                   size="large"
                   sx={{

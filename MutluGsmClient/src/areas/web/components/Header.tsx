@@ -31,6 +31,7 @@ export default function Header() {
   const submitSearch = (e?: React.FormEvent) => {
     e?.preventDefault();
     navigate(`/search/${q}`);
+    setQ("");
   };
 
   const categories = useAppSelector((state) => selectAllCategory(state));
@@ -137,6 +138,8 @@ export default function Header() {
             >
               <Button
                 startIcon={<StorefrontIcon />}
+                component={NavLink}
+                to="contact"
                 color="inherit"
                 sx={{ display: { sm: "inline-flex" } }}
               >

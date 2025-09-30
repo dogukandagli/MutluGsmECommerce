@@ -55,7 +55,7 @@ export default function CategoryProductsPage() {
     } else {
       filter = `&$filter=contains(name,'${value}')`;
     }
-    return `$top=${pageSize}&$skip=${skip}${filter}&$orderby=${sort}`;
+    return `?count=true&$top=${pageSize}&$skip=${skip}${filter}&$orderby=${sort}`;
   }, [type, value, pageSize, skip, sort]);
 
   useEffect(() => {
