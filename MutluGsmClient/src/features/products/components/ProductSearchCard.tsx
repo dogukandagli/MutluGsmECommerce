@@ -44,26 +44,27 @@ export default function ProductSearchCard({ product }: props) {
           component="img"
           src={`${apiUrl}images/${product.mainImageUrl}`}
           alt={product.name}
-          loading="lazy"
           sx={{ objectFit: "contain", height: "100%", width: "100%" }}
         />
       </Box>
 
-      <CardContent sx={{ flexGrow: 1, pt: 0 }}>
+      <CardContent sx={{ pt: 1, height: "84px" }}>
         <Stack spacing={0.5} alignItems="center" textAlign="center">
           <Typography variant="h6" component="h3">
             {product.name}
           </Typography>
-
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ textDecoration: "line-through", mt: 0.5 }}
-          >
-            {product.price}
+          {product.originalPrice && (
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ textDecoration: "line-through", mt: 0.5 }}
+            >
+              {product.originalPrice.toLocaleString("tr-TR")} ₺
+            </Typography>
+          )}
+          <Typography variant="body1" color="text.primary" sx={{ mt: 0.5 }}>
+            {product.price.toLocaleString("tr-TR")} ₺
           </Typography>
-
-          <Typography variant="h6" component="p"></Typography>
         </Stack>
       </CardContent>
 
@@ -83,7 +84,7 @@ export default function ProductSearchCard({ product }: props) {
             width: "60%",
           }}
         >
-          Sepete ekle
+          Ürünü Görüntüle
         </Button>
       </CardActions>
     </Card>

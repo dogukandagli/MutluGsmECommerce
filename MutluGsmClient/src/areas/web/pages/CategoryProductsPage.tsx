@@ -32,7 +32,7 @@ export default function CategoryProductsPage() {
   );
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
-  const pageSize = 10;
+  const pageSize = type !== "search" ? 5 : 9;
   const [sort, setSort] = useState<string>("createdDate desc");
 
   const sortOptions = [

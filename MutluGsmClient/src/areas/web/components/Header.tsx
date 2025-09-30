@@ -207,7 +207,7 @@ export default function Header() {
             sx={{
               flex: 1,
               mx: { xs: 1, md: 3 },
-              maxWidth: 400,
+              maxWidth: 550,
             }}
           >
             <TextField
@@ -216,7 +216,6 @@ export default function Header() {
               placeholder="Aranan kelimeyi buraya yazınız…"
               size="small"
               fullWidth
-              // (İstersen adornment'ı kaldırabilirsin; burada örnek olsun diye bıraktım)
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -225,11 +224,9 @@ export default function Header() {
                 ),
               }}
               sx={{
-                // dış kutuyu (OutlinedInput) hedefliyoruz
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: "12px", // köşeler
+                  borderRadius: "12px",
                   bgcolor: "grey.200",
-                  // kenarlığın durumlara göre rengi
                   "& fieldset": { borderColor: "grey.400" },
                   "&:hover fieldset": { borderColor: "grey.500" },
                   "&.Mui-focused fieldset": {
@@ -237,7 +234,6 @@ export default function Header() {
                     borderWidth: 1,
                   },
                 },
-                // yazı alanının iç pad'i
                 "& .MuiInputBase-input": {
                   paddingY: 1.1,
                 },
