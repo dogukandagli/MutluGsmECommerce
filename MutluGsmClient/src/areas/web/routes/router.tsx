@@ -11,11 +11,7 @@ export const webRoutes = {
       element: <HomePage />,
     },
     {
-      path: "/:categoryName",
-      element: <CategoryProductsPage />,
-    },
-    {
-      path: "/search/:productName",
+      path: "/:type/:value",
       element: <CategoryProductsPage />,
     },
   ],

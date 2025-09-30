@@ -55,13 +55,13 @@ export default function HomeProductCard({ product }: ProductProps) {
                   color: "text.secondary",
                 }}
               >
-                {product.price.toLocaleString("tr-TR")} ₺
+                {product.originalPrice.toLocaleString("tr-TR")} ₺
               </Typography>
               <Typography
                 variant="body1"
                 sx={{ fontWeight: "bold", color: "error.main" }}
               >
-                {product.originalPrice.toLocaleString("tr-TR")} ₺
+                {product.price.toLocaleString("tr-TR")} ₺
               </Typography>
             </Box>
           ) : (

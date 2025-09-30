@@ -68,7 +68,7 @@ export default function StepPrice() {
                 },
               })}
               fullWidth
-              label="İndirimli Fiyat"
+              label="Orijinal Fiyat"
               type="number"
               placeholder="İndirimli fiyat giriniz"
               error={!!errors.originalPrice}

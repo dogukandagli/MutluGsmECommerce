@@ -623,7 +623,7 @@ export default function ProductEditView() {
                           },
                         })}
                         fullWidth
-                        label="İndirimli Fiyat"
+                        label="Orijinal Fiyat"
                         type="number"
                         placeholder="İndirimli fiyat giriniz"
                         error={!!errors.originalPrice}

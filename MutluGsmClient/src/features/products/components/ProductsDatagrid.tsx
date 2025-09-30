@@ -103,7 +103,7 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
     },
     {
       field: "originalPrice",
-      headerName: "İndirimli Fiyat",
+      headerName: "Orijinal Fiyat",
       filter: "agNumberColumnFilter",
       width: 120,
       valueFormatter: (p) => (p.value != null ? `${p.value} ₺` : "-"),

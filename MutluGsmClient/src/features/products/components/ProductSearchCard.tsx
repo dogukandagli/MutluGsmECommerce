@@ -31,7 +31,7 @@ export default function ProductSearchCard({ product }: props) {
         sx={{
           border: (theme) => `1px solid ${theme.palette.divider}`,
           borderRadius: 2,
-          height: 192, // ~h-48
+          height: 192,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

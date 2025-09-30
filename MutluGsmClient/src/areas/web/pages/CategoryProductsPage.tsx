@@ -1,7 +1,7 @@
 import { NavLink, useParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Box,
   Breadcrumbs,
@@ -16,19 +16,16 @@ import {
   Stack,
   Typography,
   type SelectChangeEvent,
+  Grid,
 } from "@mui/material";
 import { fetchOdataProducts } from "../../../features/products/store/productSlice";
 import ProductHero from "../../../features/products/components/ProductHero";
 import type { IProduct } from "../../../features/products/types/IProduct";
 import EmptyProduct from "../components/EmptyProduct";
-
-type RouteParams = {
-  productName?: string;
-  categoryName?: string;
-};
+import ProductSearchCard from "../../../features/products/components/ProductSearchCard";
 
 export default function CategoryProductsPage() {
-  const { productName, categoryName } = useParams<RouteParams>();
+  const { type, value } = useParams();
 
   const { products, valueCount, status } = useAppSelector(
     (state) => state.product
@@ -44,23 +41,26 @@ export default function CategoryProductsPage() {
     { label: "En Yeni", value: "createdDate desc" },
     { label: "En Eski", value: "createdDate asc" },
   ];
+  console.log(type, value);
+  const skip = (page - 1) * pageSize;
+
+  const query = useMemo(() => {
+    let filter = "";
+
+    if (type === "category") {
+      filter =
+        value !== "2.El Ürünler"
+          ? `&$filter=categoryName eq '${value}'`
+          : `&$filter=condition eq 1`;
+    } else {
+      filter = `&$filter=contains(name,'${value}')`;
+    }
+    return `$top=${pageSize}&$skip=${skip}${filter}&$orderby=${sort}`;
+  }, [type, value, pageSize, skip, sort]);
 
   useEffect(() => {
-    if (categoryName) {
-      const skip = (page - 1) * pageSize;
-      let filter = "";
-      if (categoryName !== "2.El Ürünler") {
-        filter = `&$filter=categoryName eq '${categoryName}'`;
-      } else {
-        filter = `&$filter=condition eq 1`;
-      }
-      console.log(categoryName);
-      console.log(productName);
-      const query =
-        `$top=${pageSize}&$skip=${skip}` + filter + `&$orderby=${sort}`;
-      dispatch(fetchOdataProducts(query));
-    }
-  }, [categoryName, page, sort, productName, dispatch]);
+    dispatch(fetchOdataProducts(query));
+  }, [query, dispatch]);
 
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -97,11 +97,11 @@ export default function CategoryProductsPage() {
                 Anasayfa
               </Link>
               <Link underline="hover" color="text.primary">
-                {categoryName}
+                {value}
               </Link>
             </Breadcrumbs>
             <Typography variant="h5" sx={{ fontSize: { xs: 20, md: 50 } }}>
-              {categoryName}
+              {value}
             </Typography>
           </Box>
 
@@ -117,9 +117,22 @@ export default function CategoryProductsPage() {
           </FormControl>
         </Box>
       </Container>
+      {type == "search" ? (
+        <Container>
+          <Grid container spacing={10}>
+            {products &&
+              products.map((p: IProduct) => (
+                <Grid size={{ xs: 12, md: 4 }}>
+                  <ProductSearchCard product={p} />
+                </Grid>
+              ))}
+          </Grid>
+        </Container>
+      ) : (
+        products &&
+        products.map((p: IProduct) => <ProductHero key={p.id} product={p} />)
+      )}
 
-      {products &&
-        products.map((p: IProduct) => <ProductHero key={p.id} product={p} />)}
       <Stack spacing={2} alignItems={"center"} sx={{ my: 5 }}>
         <Pagination
           count={pageCount}

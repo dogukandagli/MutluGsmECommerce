@@ -8,7 +8,6 @@ import {
   Box,
   Stack,
   Button,
-  Badge,
   TextField,
   InputAdornment,
   Drawer,
@@ -19,19 +18,12 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import { useAppSelector } from "../../../app/store/hooks";
 import { selectAllCategory } from "../../../features/category/store/categorySlice";
 import { NavLink, useNavigate } from "react-router";
 
-type HeaderProps = {
-  cartCount?: number;
-  onSearch?: (q: string) => void;
-};
-
-export default function Header({ cartCount = 0 }: HeaderProps) {
+export default function Header() {
   const [q, setQ] = React.useState("");
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const navigate = useNavigate();
@@ -54,28 +46,40 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
       }}
     >
       {/* ÜST ŞERİT */}
-      <Box sx={{}}>
+      <Box>
         <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ minHeight: 72, gap: 1.5 }}>
-            {/* Mobil: hamburger */}
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <IconButton size="large" onClick={() => setOpenDrawer(true)}>
-                <MenuIcon />
-              </IconButton>
-            </Box>
+          <Toolbar
+            disableGutters
+            sx={{
+              justifyContent: "space-between",
+              minHeight: 72,
+              gap: 1.5,
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              {/* Mobil: hamburger */}
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <IconButton size="large" onClick={() => setOpenDrawer(true)}>
+                  <MenuIcon />
+                </IconButton>
+              </Box>
 
-            {/* Logo */}
-            <Box component={NavLink} to="/">
-              <Typography
-                sx={{
-                  fontWeight: 800,
-                  letterSpacing: "-0.02em",
-                  cursor: "pointer",
-                  mr: 1,
-                }}
-              >
-                Mutlu Gsm
-              </Typography>
+              {/* Logo */}
+              <Box sx={{ display: "inline=block" }}>
+                <Typography
+                  component={NavLink}
+                  to="/"
+                  sx={{
+                    fontWeight: 800,
+                    letterSpacing: "-0.02em",
+                    fontSize: { xs: 22, md: 26 },
+                    color: "text.error",
+                    textDecoration: "none", // çizgi yok
+                  }}
+                >
+                  Mutlu Gsm
+                </Typography>
+              </Box>
             </Box>
 
             {/* Arama */}
@@ -84,8 +88,9 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
               onSubmit={submitSearch}
               sx={{
                 flex: 1,
+                display: { xs: "none", md: "inline-block" },
                 mx: { xs: 1, md: 3 },
-                maxWidth: 680,
+                maxWidth: 400,
               }}
             >
               <TextField
@@ -94,6 +99,7 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
                 placeholder="Aranan kelimeyi buraya yazınız…"
                 size="small"
                 fullWidth
+                // (İstersen adornment'ı kaldırabilirsin; burada örnek olsun diye bıraktım)
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -101,26 +107,41 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
                     </InputAdornment>
                   ),
                 }}
+                sx={{
+                  // dış kutuyu (OutlinedInput) hedefliyoruz
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "12px", // köşeler
+                    bgcolor: "grey.200",
+                    // kenarlığın durumlara göre rengi
+                    "& fieldset": { borderColor: "grey.400" },
+                    "&:hover fieldset": { borderColor: "grey.500" },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "primary.main",
+                      borderWidth: 1,
+                    },
+                  },
+                  // yazı alanının iç pad'i
+                  "& .MuiInputBase-input": {
+                    paddingY: 1.1,
+                  },
+                }}
               />
             </Box>
 
             {/* Sağ aksiyonlar */}
-            <Stack direction="row" spacing={1} alignItems="center">
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              justifyItems="end"
+            >
               <Button
                 startIcon={<StorefrontIcon />}
                 color="inherit"
-                sx={{ display: { xs: "none", sm: "inline-flex" } }}
+                sx={{ display: { sm: "inline-flex" } }}
               >
-                Mağaza Seçiniz
+                Mağazamız
               </Button>
-              <IconButton size="large">
-                <AccountCircleIcon />
-              </IconButton>
-              <IconButton size="large" aria-label="Sepet">
-                <Badge badgeContent={cartCount} color="primary">
-                  <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
             </Stack>
           </Toolbar>
         </Container>
@@ -129,28 +150,29 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
       <Box
         sx={{
           display: { xs: "none", md: "block" },
+          ml: { xs: "auto", md: 0 },
         }}
       >
         <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ minHeight: 56 }}>
-            <Stack direction="row" spacing={2.5} alignItems="center">
+          <Toolbar disableGutters sx={{ justifyItems: "flex-end" }}>
+            <Stack direction="row" spacing={2.5} alignItems="center" mx="start">
               {categories.map((c) => (
                 <Button
                   component={NavLink}
-                  to={c.name}
+                  to={`category/${c.name}`}
                   key={c.id}
                   color="inherit"
-                  sx={{ fontWeight: 300 }}
+                  sx={{ fontWeight: 400 }}
                 >
                   {c.name}
                 </Button>
               ))}
               <Button
                 component={NavLink}
-                to={"2.El Ürünler"}
+                to={"category/2.El Ürünler"}
                 key={0}
                 color="inherit"
-                sx={{ fontWeight: 300 }}
+                sx={{ fontWeight: 400 }}
               >
                 2.El Ürünler
               </Button>
@@ -162,22 +184,39 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
       <Drawer
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
-        PaperProps={{ sx: { width: 320 } }}
+        slotProps={{
+          paper: {
+            sx: {
+              width: 320,
+              top: { xs: 75, md: 128 },
+              height: { xs: "calc(100% - 72px)" },
+            },
+          },
+          backdrop: {
+            sx: {
+              top: { xs: 75, md: 128 },
+              height: { xs: "calc(100% - 72px)" },
+            },
+          },
+        }}
       >
         <Box sx={{ p: 2 }}>
           <Box
             component="form"
-            onSubmit={(e) => {
-              submitSearch(e);
-              setOpenDrawer(false);
+            onSubmit={submitSearch}
+            sx={{
+              flex: 1,
+              mx: { xs: 1, md: 3 },
+              maxWidth: 400,
             }}
           >
             <TextField
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Ara"
+              placeholder="Aranan kelimeyi buraya yazınız…"
               size="small"
               fullWidth
+              // (İstersen adornment'ı kaldırabilirsin; burada örnek olsun diye bıraktım)
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -185,16 +224,49 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
                   </InputAdornment>
                 ),
               }}
+              sx={{
+                // dış kutuyu (OutlinedInput) hedefliyoruz
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "12px", // köşeler
+                  bgcolor: "grey.200",
+                  // kenarlığın durumlara göre rengi
+                  "& fieldset": { borderColor: "grey.400" },
+                  "&:hover fieldset": { borderColor: "grey.500" },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "primary.main",
+                    borderWidth: 1,
+                  },
+                },
+                // yazı alanının iç pad'i
+                "& .MuiInputBase-input": {
+                  paddingY: 1.1,
+                },
+              }}
             />
           </Box>
         </Box>
         <Divider />
         <List>
           {categories.map((c) => (
-            <ListItemButton key={c.id} onClick={() => setOpenDrawer(false)}>
+            <ListItemButton
+              key={c.id}
+              component={NavLink}
+              to={`category/${c.name}`}
+              onClick={() => setOpenDrawer(false)}
+              sx={{ borderBottom: "1px solid rgba(0,0,0,0.12)" }}
+            >
               <ListItemText primary={c.name} />
             </ListItemButton>
           ))}
+          <ListItemButton
+            key={0}
+            component={NavLink}
+            to={`category/2.El Ürünler`}
+            onClick={() => setOpenDrawer(false)}
+            sx={{ borderBottom: "1px solid rgba(0,0,0,0.12)" }}
+          >
+            <ListItemText primary={"2.El Ürünler"} />
+          </ListItemButton>
         </List>
       </Drawer>
     </AppBar>

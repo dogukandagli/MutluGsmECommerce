@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Stack, Typography, Button } from "@mui/material";
 import type { IProduct } from "../types/IProduct";
+import { apiUrl } from "../../../shared/lib/apiClient";
 
 type ProductHeroProps = {
   product: IProduct;
@@ -44,7 +45,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
               >
                 <Box
                   component="img"
-                  src={`https://localhost:7261/images/${product.mainImageUrl}`}
+                  src={`${apiUrl}images/${product.mainImageUrl}`}
                   alt={product.name}
                   sx={{
                     width: "100%",
@@ -100,7 +101,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
                         color: "text.secondary",
                       }}
                     >
-                      {product.price.toLocaleString("tr-TR")} ₺
+                      {product.originalPrice.toLocaleString("tr-TR")} ₺
                     </Typography>
                     <Typography
                       variant="body1"
@@ -109,7 +110,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
                         color: "error.main",
                       }}
                     >
-                      {product.originalPrice.toLocaleString("tr-TR")} ₺
+                      {product.price.toLocaleString("tr-TR")} ₺
                     </Typography>
                   </Box>
                 ) : (
