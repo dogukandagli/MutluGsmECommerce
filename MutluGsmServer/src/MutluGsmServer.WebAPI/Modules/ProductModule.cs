@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MutluGsmServer.Application.Features.Products.Commands.CreateProduct;
 using MutluGsmServer.Application.Features.Products.Commands.ProductDelete;
 using MutluGsmServer.Application.Features.Products.Commands.UpdateProduct;
+using MutluGsmServer.Application.Features.Products.Queries;
 using TS.Result;
 
 namespace MutluGsmServer.WebAPI.Modules;
@@ -46,6 +47,13 @@ public static class ProductModule
             }
             ).Produces<Result<string>>()
             .WithName("ProductDelete");
-
+        group.MapGet("{id}",
+          async (Guid id, ISender sender, CancellationToken cancellationToken) =>
+          {
+              var response = await sender.Send(new ProductGetQuery(id), cancellationToken);
+              return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
+          }
+          ).Produces<Result<ProductDto>>()
+          .WithName("ProductGet");
     }
 }

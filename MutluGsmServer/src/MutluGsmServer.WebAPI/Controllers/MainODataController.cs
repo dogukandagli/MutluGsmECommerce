@@ -6,7 +6,7 @@ using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using MutluGsmServer.Application.Features.Brands.Queries.GetAllBrand;
 using MutluGsmServer.Application.Features.Categories.Queries.GetAllCategory;
-using MutluGsmServer.Application.Features.Products.Queries.GetAllProduct;
+using MutluGsmServer.Application.Features.Products.Queries;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace MutluGsmServer.WebAPI.Controllers;

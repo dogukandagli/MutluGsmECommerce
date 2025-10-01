@@ -3,7 +3,7 @@ using MutluGsmServer.Domain.Brands;
 using MutluGsmServer.Domain.Categories;
 using MutluGsmServer.Domain.Products;
 
-namespace MutluGsmServer.Application.Features.Products.Queries.GetAllProduct;
+namespace MutluGsmServer.Application.Features.Products.Queries;
 
 public sealed class ProductDto : EntityDto
 {
