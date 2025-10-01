@@ -28,6 +28,7 @@ import { Controller, useForm, type FieldValues } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import { LoadingButton } from "@mui/lab";
 import { selectAllCategory } from "../../category/store/categorySlice";
+import SunEditor from "suneditor-react";
 
 export default function ProductEditView() {
   const dispatch = useAppDispatch();
@@ -453,14 +454,50 @@ export default function ProductEditView() {
                     </Grid>
 
                     <Grid size={{ xs: 12 }}>
-                      <TextField
-                        {...register("description")}
-                        fullWidth
-                        label="Açıklama"
-                        type="text"
-                        error={!!errors.description}
-                        helperText={errors.description?.message}
-                      />
+                      <Stack spacing={2}>
+                        <Controller
+                          name="description"
+                          control={control}
+                          defaultValue="" // ilk render için önemli, sonra reset set eder
+                          render={({
+                            field: { value, onChange },
+                            fieldState,
+                          }) => (
+                            <>
+                              <SunEditor
+                                setContents={value || ""} // form değerini editöre koy
+                                onChange={onChange} // editörde değiştikçe formu güncelle
+                                setOptions={{
+                                  height: "300px",
+                                  buttonList: [
+                                    ["bold", "italic", "underline", "strike"],
+                                    ["subscript", "superscript"],
+                                    [
+                                      "paragraphStyle",
+                                      "formatBlock",
+                                      "font",
+                                      "fontSize",
+                                    ],
+                                    ["align", "outdent", "indent", "list"],
+                                    ["blockquote", "link", "image"],
+                                    [
+                                      "undo",
+                                      "redo",
+                                      "removeFormat",
+                                      "fullScreen",
+                                    ],
+                                  ],
+                                }}
+                              />
+                              {fieldState.error && (
+                                <div style={{ color: "#d32f2f" }}>
+                                  {fieldState.error.message}
+                                </div>
+                              )}
+                            </>
+                          )}
+                        />
+                      </Stack>
                     </Grid>
 
                     <Grid size={{ xs: 12, md: 6 }}>

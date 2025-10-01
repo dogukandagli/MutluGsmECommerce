@@ -18,8 +18,10 @@ import { useMemo, useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Keyboard, A11y } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import "swiper/swiper-bundle.css";
+import ProductDescription from "../../../shared/components/ProductDescription";
+import NewestOrFeatured from "./NewestOrFeatured";
 
 export default function ProductDetailMock() {
   const { productId } = useParams();
@@ -42,7 +44,6 @@ export default function ProductDetailMock() {
     return Array.from(new Set(list));
   }, [product, apiUrl]);
 
-  // Lightbox slides formatı
   const slides = images.map((src) => ({ src }));
 
   return (
@@ -57,52 +58,31 @@ export default function ProductDetailMock() {
     >
       <Grid container spacing={4}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Stack
-            spacing={2}
-            sx={{ display: { xs: "inline-block", md: "none" } }}
-          >
+          <Stack spacing={2} sx={{ display: { xs: "block", md: "none" } }}>
             <Swiper
-              modules={[Pagination, Navigation, Keyboard, A11y]}
-              slidesPerView={1}
-              spaceBetween={0}
+              modules={[Pagination]}
               pagination={{ clickable: true }}
-              navigation
-              keyboard={{ enabled: true }}
-              onInit={() => setIndex(0)} // ilk görünen: images[1]
-              onSlideChange={(s) => setIndex(s.activeIndex)} // slice(1) nedeniyle +1
-              style={{ paddingBottom: 24 }} // bullet alanı
+              loop
+              allowTouchMove={true}
+              style={{
+                width: "100%",
+              }}
             >
-              {images.map((src, i) => {
-                const originalIndex = i + 1; // orijinal dizideki index (images[originalIndex])
-                return (
-                  <SwiperSlide key={`mob-${originalIndex}-${src}`}>
-                    <div
+              <Box>
+                {images.map((src, i) => (
+                  <SwiperSlide key={i}>
+                    <img
+                      src={src}
+                      alt={`Slide ${i + 1}`}
                       style={{
                         width: "100%",
-                        aspectRatio: "1/1",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        background: "#fff",
+                        height: "100%",
+                        objectFit: "contain",
                       }}
-                    >
-                      <img
-                        src={src}
-                        alt={`Galeri ${i + 1}`}
-                        style={{
-                          maxWidth: "100%",
-                          maxHeight: "100%",
-                          objectFit: "contain",
-                          display: "block",
-                        }}
-                        onClick={() => {
-                          setOpen(true); // mobilde görsel tıklayınca lightbox aç
-                        }}
-                      />
-                    </div>
+                    />
                   </SwiperSlide>
-                );
-              })}
+                ))}
+              </Box>
             </Swiper>
           </Stack>
 
@@ -191,7 +171,7 @@ export default function ProductDetailMock() {
               </Typography>
 
               <Typography color="success.main" variant="body2">
-                Sadece <b>{product.quantity}</b> kaldı
+                Sadece <b>{product.quantity}</b> adet kaldı
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Marka: {product.brandName}
@@ -237,9 +217,19 @@ export default function ProductDetailMock() {
             <Divider />
 
             <Typography variant="body1" color="text.secondary">
-              {product.description}
+              {product.description && (
+                <ProductDescription html={product.description} />
+              )}
             </Typography>
           </Stack>
+        </Grid>
+        <Grid size={12}>
+          <Typography variant="h5" sx={{ fontSize: { xs: 20, md: 30 }, my: 2 }}>
+            İlginizi Çekebilicek Diğer Ürünler.
+          </Typography>
+          <NewestOrFeatured
+            query={`?count=true&$top=7&$filter=categoryId eq ${product.categoryId} and featured eq true`}
+          />
         </Grid>
       </Grid>
     </Paper>

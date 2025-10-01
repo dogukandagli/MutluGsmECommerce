@@ -21,7 +21,7 @@ export const webRoutes = {
       element: <StoreContactAndMap />,
     },
     {
-      path: "product/:productId",
+      path: ":productId",
       element: <ProductDetailPage />,
     },
   ],

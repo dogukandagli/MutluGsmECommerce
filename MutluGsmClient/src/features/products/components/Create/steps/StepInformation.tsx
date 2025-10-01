@@ -6,6 +6,8 @@ import Category from "../../../../category/api/categoryApi";
 import type { ICategorySelect } from "../../../types/ICategorySelect";
 import Brand from "../../../../brands/api/brandApi";
 import type { IBrandSelect } from "../../../types/IBrandSelect";
+import SunEditor from "suneditor-react";
+import "../../../../../../node_modules/suneditor/dist/css/suneditor.min.css";
 
 export default function StepInformation() {
   const { control } = useFormContext();
@@ -82,18 +84,30 @@ export default function StepInformation() {
               <Controller
                 name="description"
                 control={control}
-                render={({ field, fieldState }) => (
-                  <TextField
-                    {...field}
-                    label="Açıklama"
-                    multiline
-                    rows={4}
-                    margin="normal"
-                    variant="outlined"
-                    fullWidth
-                    error={!!fieldState.error}
-                    helperText={fieldState.error?.message}
-                  />
+                defaultValue=""
+                render={({ field: { value, onChange }, fieldState }) => (
+                  <>
+                    <SunEditor
+                      setContents={value || ""}
+                      onChange={onChange}
+                      setOptions={{
+                        height: "300px",
+                        buttonList: [
+                          ["bold", "italic", "underline", "strike"],
+                          ["subscript", "superscript"],
+                          ["paragraphStyle", "formatBlock", "font", "fontSize"],
+                          ["align", "outdent", "indent", "list"],
+                          ["blockquote", "link", "image"],
+                          ["undo", "redo", "removeFormat", "fullScreen"],
+                        ],
+                      }}
+                    />
+                    {fieldState.error && (
+                      <div style={{ color: "#d32f2f" }}>
+                        {fieldState.error.message}
+                      </div>
+                    )}
+                  </>
                 )}
               />
             </Stack>

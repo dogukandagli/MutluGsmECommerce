@@ -24,7 +24,8 @@ export default function Footer() {
 
   return (
     <Box component="footer" sx={{ bgcolor: "white", py: 6 }}>
-      <Container maxWidth="lg">
+      <Divider />
+      <Container maxWidth="lg" sx={{ mt: 3 }}>
         {/* Üst Kısım */}
         <Grid container spacing={4}>
           {/* Ürün Kategorileri */}

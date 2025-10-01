@@ -1,6 +1,7 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import type { IProduct } from "../../../features/products/types/IProduct";
 import { apiUrl } from "../../../shared/lib/apiClient";
+import { NavLink } from "react-router";
 
 type ProductProps = {
   product: IProduct;
@@ -20,11 +21,14 @@ export default function HomeProductCard({ product }: ProductProps) {
       }}
     >
       <Card
+        component={NavLink}
+        to={product.id}
         sx={{
           borderRadius: 3,
           p: 2,
           width: "100%",
           boxShadow: "0 0 10px rgba(26, 27, 27, 0.15)",
+          textDecoration: "none",
         }}
       >
         <CardMedia

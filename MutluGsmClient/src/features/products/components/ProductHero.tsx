@@ -124,7 +124,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
                 )}
                 <Button
                   component={NavLink}
-                  to={`/product/${product.id}`}
+                  to={`/${product.id}`}
                   variant="outlined"
                   size="large"
                   sx={{

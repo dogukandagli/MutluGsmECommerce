@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import type { IProduct } from "../types/IProduct";
 import { apiUrl } from "../../../shared/lib/apiClient";
+import { NavLink } from "react-router";
 
 type props = {
   product: IProduct;
@@ -77,6 +78,8 @@ export default function ProductSearchCard({ product }: props) {
         }}
       >
         <Button
+          component={NavLink}
+          to={`/${product.id}`}
           variant="contained"
           size="medium"
           sx={{
