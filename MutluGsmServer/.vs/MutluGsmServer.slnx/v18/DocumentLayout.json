@@ -30,8 +30,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -40,7 +44,7 @@
               "RelativeDocumentMoniker": "src\\MutluGsmServer.Infrastructure\\Services\\JwtProvider.cs",
               "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Infrastructure\\Services\\JwtProvider.cs",
               "RelativeToolTip": "src\\MutluGsmServer.Infrastructure\\Services\\JwtProvider.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-30T21:44:45.793Z",
               "EditorCaption": ""
@@ -51,16 +55,11 @@
               "Title": "LoginCommand.cs",
               "DocumentMoniker": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Auth\\LoginCommand.cs",
               "RelativeDocumentMoniker": "src\\MutluGsmServer.Application\\Features\\Auth\\LoginCommand.cs",
-              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Auth\\LoginCommand.cs*",
-              "RelativeToolTip": "src\\MutluGsmServer.Application\\Features\\Auth\\LoginCommand.cs*",
+              "ToolTip": "C:\\Users\\dagli\\source\\repos\\MutluGsmECommerce\\MutluGsmServer\\src\\MutluGsmServer.Application\\Features\\Auth\\LoginCommand.cs",
+              "RelativeToolTip": "src\\MutluGsmServer.Application\\Features\\Auth\\LoginCommand.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAqwB4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T21:42:50.667Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "WhenOpened": "2025-09-30T21:42:50.667Z"
             },
             {
               "$type": "Document",
@@ -72,8 +71,7 @@
               "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\Modules\\AuthModule.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T21:43:19.365Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T21:43:19.365Z"
             },
             {
               "$type": "Document",
@@ -85,8 +83,7 @@
               "RelativeToolTip": "src\\MutluGsmServer.WebAPI\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T21:42:34.744Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T21:42:34.744Z"
             },
             {
               "$type": "Document",
@@ -98,8 +95,7 @@
               "RelativeToolTip": "src\\MutluGsmServer.Application\\Features\\Products\\Commands\\CreateProduct\\ProductCreateCommand.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAiwCwAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T21:38:12.674Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T21:38:12.674Z"
             }
           ]
         }
