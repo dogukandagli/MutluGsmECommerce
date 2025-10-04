@@ -13,7 +13,7 @@ export default function SliderCreatePage() {
         </Link>
         <Link
           component={NavLink}
-          to="/admin/products"
+          to="/admin/sliders"
           underline="hover"
           color="inherit"
         >

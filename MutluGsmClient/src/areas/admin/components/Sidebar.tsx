@@ -123,7 +123,7 @@ export default function Sidebar({
               </ListSubheader>
             }
           >
-            <ListItemButton component={NavLink} to="products">
+            <ListItemButton component={NavLink} to="sliders">
               <ListItemIcon>
                 <Inventory2OutlinedIcon />
               </ListItemIcon>

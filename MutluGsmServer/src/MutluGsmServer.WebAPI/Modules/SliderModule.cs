@@ -28,6 +28,7 @@ public static class SliderModule
         {
             var response = await sender.Send(new SliderDeleteCommand(id), cancellationToken);
             return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
-        });
+        }).Produces<Result<string>>()
+        .WithName("SliderDelete");
     }
 }

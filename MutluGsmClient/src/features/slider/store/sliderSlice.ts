@@ -15,6 +15,12 @@ export const createSlider = createAsyncThunk<void, FormData>(
     return await Slider.crateSlider(formdata);
   }
 );
+export const deleteSlider = createAsyncThunk<void, string>(
+  "sliders/deleteSlider",
+  async (id) => {
+    return await Slider.deleteSlider(id);
+  }
+);
 
 const initialState = {
   status: "idle",
