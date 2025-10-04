@@ -6,6 +6,7 @@ using MutluGsmServer.Domain.Abstractions;
 using MutluGsmServer.Domain.Brands;
 using MutluGsmServer.Domain.Categories;
 using MutluGsmServer.Domain.Products;
+using MutluGsmServer.Domain.Sliders;
 using MutluGsmServer.Domain.User;
 
 namespace MutluGsmServer.Infrastructure.Context;
@@ -20,6 +21,7 @@ internal sealed class ApplicationDbContext : IdentityDbContext<AppUser, Identity
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Brand> Brands { get; set; }
+    public DbSet<Slider> Sliders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -8,5 +8,6 @@ public static class RouteRegistrar
         app.RegisterProductRoutes();
         app.RegisterBrandRoutes();
         app.RegisterAuthRoutes();
+        app.RegisterSliderRoutes();
     }
 }

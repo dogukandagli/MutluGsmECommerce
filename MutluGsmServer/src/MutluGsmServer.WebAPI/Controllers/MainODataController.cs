@@ -7,6 +7,8 @@ using Microsoft.OData.ModelBuilder;
 using MutluGsmServer.Application.Features.Brands.Queries.GetAllBrand;
 using MutluGsmServer.Application.Features.Categories.Queries.GetAllCategory;
 using MutluGsmServer.Application.Features.Products.Queries;
+using MutluGsmServer.Application.Features.Sliders;
+using MutluGsmServer.Domain.Sliders;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace MutluGsmServer.WebAPI.Controllers;
@@ -39,6 +41,12 @@ public class MainODataController(ISender sender) : ODataController
     public async Task<IQueryable<BrandGetAllQueryResponse>> GetAllBrands(CancellationToken cancellationToken)
     {
         var response = await sender.Send(new BrandGetAllQuery(), cancellationToken);
+        return response;
+    }
+    [HttpGet("Sliders")]
+    public async Task<IQueryable<Slider>> GetAllSliders(ISender sender, CancellationToken cancellationToken = default)
+    {
+        var response = (await sender.Send(new SliderGetAllQuery(), cancellationToken));
         return response;
     }
 }

@@ -21,3 +21,7 @@ wwwroot\images\134038660258396812.49314 - Kopya.webp
 wwwroot\images\134038661504144559.134038660258396812.49314 - Kopya.webp
 wwwroot\images\134038676700593672.WhatsApp Görsel 2025-09-29 saat 14.21.34_dfa8d90d.jpg
 wwwroot\images\134038676700608832.49314 - Kopya.webp
+wwwroot\images\134040417385845864.df.png
+wwwroot\images\134040419223130031.df.png
+wwwroot\images\134040419814298631.df.png
+wwwroot\images\134040421635439218.df.png

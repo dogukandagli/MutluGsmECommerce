@@ -39,7 +39,7 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("MutluGsmServer.Domain.Brands.Brand", b =>
@@ -146,6 +146,36 @@ namespace MutluGsmServer.Infrastructure.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
+            modelBuilder.Entity("MutluGsmServer.Domain.Sliders.Slider", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sliders", (string)null);
+                });
+
             modelBuilder.Entity("MutluGsmServer.Domain.User.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -216,7 +246,7 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("MutluGsmServer.Domain.Brands.Brand", b =>
@@ -233,7 +263,7 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                             b1.HasKey("BrandId");
 
-                            b1.ToTable("Brands", (string)null);
+                            b1.ToTable("Brands");
 
                             b1.WithOwner()
                                 .HasForeignKey("BrandId");
@@ -257,7 +287,7 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                             b1.HasKey("CategoryId");
 
-                            b1.ToTable("Categories", (string)null);
+                            b1.ToTable("Categories");
 
                             b1.WithOwner()
                                 .HasForeignKey("CategoryId");
@@ -291,24 +321,7 @@ namespace MutluGsmServer.Infrastructure.Migrations
 
                             b1.HasKey("ProductId");
 
-                            b1.ToTable("Products", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProductId");
-                        });
-
-                    b.OwnsOne("MutluGsmServer.Domain.Products.ValueObjects.Quantity", "Quantity", b1 =>
-                        {
-                            b1.Property<Guid>("ProductId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<int>("Value")
-                                .HasColumnType("int")
-                                .HasColumnName("Quantity");
-
-                            b1.HasKey("ProductId");
-
-                            b1.ToTable("Products", (string)null);
+                            b1.ToTable("Products");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
@@ -338,6 +351,23 @@ namespace MutluGsmServer.Infrastructure.Migrations
                             b1.HasIndex("ProductId");
 
                             b1.ToTable("ProductImages", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.OwnsOne("MutluGsmServer.Domain.Products.ValueObjects.Quantity", "Quantity", b1 =>
+                        {
+                            b1.Property<Guid>("ProductId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Value")
+                                .HasColumnType("int")
+                                .HasColumnName("Quantity");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
