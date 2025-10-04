@@ -2,6 +2,7 @@ import AdminLayout from "../../../app/layouts/AdminLayout";
 import ProductCreatePage from "../pages/ProductCreatePage";
 import ProductEditPage from "../pages/ProductEditPage";
 import ProductsPage from "../pages/ProductsPage";
+import SliderCreatePage from "../pages/SliderCreatePage";
 import { AuthGuard } from "./AuthGuard";
 
 export const adminRoutes = {
@@ -14,6 +15,7 @@ export const adminRoutes = {
         { path: "products", element: <ProductsPage /> },
         { path: "products/new", element: <ProductCreatePage /> },
         { path: "products/edit/:id", element: <ProductEditPage /> },
+        { path: "sliders/new", element: <SliderCreatePage /> },
       ],
     },
   ],

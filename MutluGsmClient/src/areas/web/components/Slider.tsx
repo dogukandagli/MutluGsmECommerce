@@ -2,13 +2,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import { Box } from "@mui/system";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
+import { fetchOdataSliders } from "../../../features/slider/store/sliderSlice";
+import { apiUrl } from "../../../shared/lib/apiClient";
+import { CircularProgress } from "@mui/material";
 
 export default function Slider() {
-  const images = [
-    "https://www.gurgencler.com.tr/media/homepageslider/desktop/iphone17pro-2209.png",
-    "https://www.gurgencler.com.tr/media/homepageslider/desktop/iphone-17-pro-satis-1909_1.png",
-    "https://localhost:7261/images/WhatsApp Görsel 2025-09-29 saat 14.25.49_32d9dcdd.jpg",
-  ];
+  const dispatch = useAppDispatch();
+
+  const { sliders, status } = useAppSelector((state) => state.slider);
+
+  useEffect(() => {
+    dispatch(fetchOdataSliders(""));
+  }, [dispatch]);
+
+  const images = sliders?.map((s) => s.imageUrl) ?? [];
+
+  if (status === "pendingFetchSliders") return <CircularProgress />;
 
   return (
     <Swiper
@@ -27,7 +38,7 @@ export default function Slider() {
         {images.map((src, i) => (
           <SwiperSlide key={i}>
             <img
-              src={src}
+              src={`${apiUrl}images/${src}`}
               alt={`Slide ${i + 1}`}
               style={{
                 width: "100%",
