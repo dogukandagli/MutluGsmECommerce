@@ -25,3 +25,5 @@ wwwroot\images\134040417385845864.df.png
 wwwroot\images\134040419223130031.df.png
 wwwroot\images\134040419814298631.df.png
 wwwroot\images\134040421635439218.df.png
+wwwroot\images\134040470589383302.111.png
+wwwroot\images\134040470590445436.232.png

@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MutluGsmServer.Application.Features.Sliders;
 using TS.Result;
@@ -20,5 +22,12 @@ public static class SliderModule
             .Produces<Result<string>>()
             .WithName("SliderCreate")
             .DisableAntiforgery();
+
+        group.MapDelete("{id}",
+        async (Guid id, ISender sender, CancellationToken cancellationToken) =>
+        {
+            var response = await sender.Send(new SliderDeleteCommand(id), cancellationToken);
+            return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
+        });
     }
 }

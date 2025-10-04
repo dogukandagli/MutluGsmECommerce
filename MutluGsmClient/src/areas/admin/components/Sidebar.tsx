@@ -116,6 +116,28 @@ export default function Sidebar({
           </List>
 
           <Divider sx={{ my: 1 }} />
+          <List
+            subheader={
+              <ListSubheader component="div" disableSticky>
+                Slider
+              </ListSubheader>
+            }
+          >
+            <ListItemButton component={NavLink} to="products">
+              <ListItemIcon>
+                <Inventory2OutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Slider" />
+            </ListItemButton>
+            <ListItemButton component={NavLink} to="sliders/new">
+              <ListItemIcon>
+                <AddBoxOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Slider Oluştur" />
+            </ListItemButton>
+          </List>
+
+          <Divider sx={{ my: 1 }} />
 
           <List
             subheader={

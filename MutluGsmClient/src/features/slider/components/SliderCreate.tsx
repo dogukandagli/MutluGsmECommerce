@@ -7,6 +7,7 @@ import {
   Typography,
   LinearProgress,
   Stack,
+  Paper,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Grid from "@mui/material/Grid";
@@ -26,7 +27,6 @@ export default function SliderCreate() {
   const navigate = useNavigate();
   const { status } = useAppSelector((state) => state.slider);
 
-  // Dropzone
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFiles((prev) => [...prev, ...acceptedFiles]);
   }, []);
@@ -72,7 +72,7 @@ export default function SliderCreate() {
   };
 
   return (
-    <Box>
+    <Paper sx={{ p: 5 }}>
       <Typography variant="h6" gutterBottom>
         Slider Media
       </Typography>
@@ -187,6 +187,6 @@ export default function SliderCreate() {
           <LinearProgress sx={{ flex: 1, maxWidth: 240 }} />
         )}
       </Stack>
-    </Box>
+    </Paper>
   );
 }
