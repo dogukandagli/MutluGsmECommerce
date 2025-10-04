@@ -14,6 +14,13 @@ export const fetchOdataProducts = createAsyncThunk<
 >("products/fetchOdataProducts", async (merged) => {
   return await Product.getProducts(merged);
 });
+export const getProduct = createAsyncThunk<IProduct, string>(
+  "products/getProduct",
+  async (id) => {
+    const rest = await Product.getProducts(id);
+    return rest.data as IProduct;
+  }
+);
 
 export const createProduct = createAsyncThunk<void, FormData>(
   "products/createProduct",
@@ -57,6 +64,13 @@ export const productSlice = createSlice({
       state.products = action.payload.value;
       state.valueCount = Number(action.payload["@odata.count"]);
       state.status = "idle";
+    });
+    builder.addCase(getProduct.pending, (state) => {
+      state.status = "pendingGetProduct";
+    });
+    builder.addCase(getProduct.fulfilled, (state, action) => {
+      state.status = "idle";
+      productsAdapter.addOne(state, action.payload);
     });
     builder.addCase(deleteProduct.pending, (state) => {
       state.status = "pendingDeleteProduct";

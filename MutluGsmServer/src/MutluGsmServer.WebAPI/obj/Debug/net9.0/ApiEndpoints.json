@@ -212,7 +212,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Linq.IQueryable\u00601[[MutluGsmServer.Application.Features.Products.Queries.GetAllProduct.ProductDto, MutluGsmServer.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Linq.IQueryable\u00601[[MutluGsmServer.Application.Features.Products.Queries.ProductDto, MutluGsmServer.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "application/json;odata.metadata=minimal;odata.streaming=true",
           "application/json;odata.metadata=minimal;odata.streaming=false",
@@ -345,5 +345,33 @@
       "Products"
     ],
     "EndpointName": "ProductDelete"
+  },
+  {
+    "ContainingType": "MutluGsmServer.WebAPI.Modules.ProductModule\u002B\u003C\u003Ec",
+    "Method": "\u003CRegisterProductRoutes\u003Eb__0_3",
+    "RelativePath": "products/{id}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "TS.Result.Result\u00601[[MutluGsmServer.Application.Features.Products.Queries.ProductDto, MutluGsmServer.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Tags": [
+      "Products"
+    ],
+    "EndpointName": "ProductGet"
   }
 ]

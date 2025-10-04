@@ -11,10 +11,13 @@ import {
   Grid,
 } from "@mui/material";
 import { useParams } from "react-router";
-import { useAppSelector } from "../../../app/store/hooks";
-import { selectProductById } from "../../../features/products/store/productSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
+import {
+  getProduct,
+  selectProductById,
+} from "../../../features/products/store/productSlice";
 import { apiUrl } from "../../../shared/lib/apiClient";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -24,6 +27,7 @@ import ProductDescription from "../../../shared/components/ProductDescription";
 import NewestOrFeatured from "./NewestOrFeatured";
 
 export default function ProductDetailMock() {
+  const dispatch = useAppDispatch();
   const { productId } = useParams();
 
   const product = useAppSelector((state) =>
@@ -32,7 +36,12 @@ export default function ProductDetailMock() {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
-  // Görsel kaynakları: main + gallery'den tek diziye
+  useEffect(() => {
+    if (!product && productId) {
+      dispatch(getProduct(productId));
+    }
+  }, [productId]);
+
   const images: string[] = useMemo(() => {
     const list = [
       product?.mainImageUrl
@@ -40,7 +49,6 @@ export default function ProductDetailMock() {
         : undefined,
       ...(product?.imageUrl ?? []).map((p) => `${apiUrl}images/${p}`),
     ].filter(Boolean) as string[];
-    // tekrar varsa temizle
     return Array.from(new Set(list));
   }, [product, apiUrl]);
 
