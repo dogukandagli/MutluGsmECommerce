@@ -75,7 +75,7 @@ export const ActionsCellRenderer = (params: CustomCellRendererProps) => {
       <Tooltip title="Ürünü düzenle">
         <IconButton
           size="small"
-          color="error"
+          color="warning"
           component={NavLink}
           to={`/admin/products/edit/${id}`}
           aria-label="edit"

@@ -21,13 +21,10 @@ import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
 import { useNavigate, useParams } from "react-router";
 import { selectProductById, updateProduct } from "../store/productSlice";
-import type { IBrandSelect } from "../types/IBrandSelect";
 import { useEffect, useState } from "react";
-import Brand from "../../brands/api/brandApi";
 import { Controller, useForm, type FieldValues } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import { LoadingButton } from "@mui/lab";
-import { selectAllCategory } from "../../category/store/categorySlice";
 import SunEditor from "suneditor-react";
 
 export default function ProductEditView() {
@@ -38,17 +35,14 @@ export default function ProductEditView() {
   const product = useAppSelector((state) => selectProductById(state, id!));
   const { status } = useAppSelector((state) => state.product);
 
-  const [brands, setBrands] = useState<IBrandSelect[]>([]);
   const [files, setFiles] = useState<(File | null)[]>([]);
   const [mainfoto, setmainfoto] = useState(true);
   const [fileloaded, setfileloaded] = useState(false);
 
-  const categories = useAppSelector((state) => selectAllCategory(state));
+  const { categories } = useAppSelector((state) => state.category);
+  const { brands } = useAppSelector((state) => state.brand);
 
   useEffect(() => {
-    Brand.get("id,name").then((data) => {
-      setBrands(data.value as IBrandSelect[]);
-    });
     (async () => {
       const urls = [product.mainImageUrl, ...(product.imageUrl ?? [])];
       const files = await Promise.all(urls.map(filenameToFile));
@@ -516,11 +510,12 @@ export default function ProductEditView() {
                               error={!!errors.category}
                               helperText={errors.category?.message}
                             >
-                              {categories.map((c) => (
-                                <MenuItem key={c.id} value={String(c.id)}>
-                                  {c.name}
-                                </MenuItem>
-                              ))}
+                              {categories &&
+                                categories.map((c) => (
+                                  <MenuItem key={c.id} value={String(c.id)}>
+                                    {c.name}
+                                  </MenuItem>
+                                ))}
                             </TextField>
                           )}
                         />
@@ -540,11 +535,12 @@ export default function ProductEditView() {
                               select
                             >
                               <MenuItem value="">{/* boş */}</MenuItem>
-                              {brands.map((b) => (
-                                <MenuItem key={b.id} value={String(b.id)}>
-                                  {b.name}
-                                </MenuItem>
-                              ))}
+                              {brands &&
+                                brands.map((b) => (
+                                  <MenuItem key={b.id} value={String(b.id)}>
+                                    {b.name}
+                                  </MenuItem>
+                                ))}
                             </TextField>
                           )}
                         />

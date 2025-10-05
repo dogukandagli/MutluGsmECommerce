@@ -3,6 +3,7 @@ import { productSlice } from "../../features/products/store/productSlice";
 import { authtSlice } from "../../features/account/store/authSlice";
 import { categorySlice } from "../../features/category/store/categorySlice";
 import { sliderSlice } from "../../features/slider/store/sliderSlice";
+import { brandSlice } from "../../features/brands/store/brandSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authtSlice.reducer,
     category: categorySlice.reducer,
     slider: sliderSlice.reducer,
+    brand: brandSlice.reducer,
   },
 });
 

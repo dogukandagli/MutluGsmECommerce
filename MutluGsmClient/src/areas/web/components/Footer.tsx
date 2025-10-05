@@ -16,11 +16,10 @@ import {
   Email as EmailIcon,
 } from "@mui/icons-material";
 import { useAppSelector } from "../../../app/store/hooks";
-import { selectAllCategory } from "../../../features/category/store/categorySlice";
 import { NavLink } from "react-router";
 
 export default function Footer() {
-  const categories = useAppSelector((state) => selectAllCategory(state));
+  const { categories } = useAppSelector((state) => state.category);
 
   return (
     <Box component="footer" sx={{ bgcolor: "white", py: 6 }}>

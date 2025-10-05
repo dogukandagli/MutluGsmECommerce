@@ -15,17 +15,27 @@ import {
   useRef,
   useState,
 } from "react";
-
+import AddIcon from "@mui/icons-material/Add";
 import OdataProvider from "ag-grid-odata";
 import SearchIcon from "@mui/icons-material/Search";
 import { ActionsCellRenderer } from "../../../shared/cell-renderers/ActionsCellRenderer";
 import { ProductCellRenderer } from "../../../shared/cell-renderers/ProductCellRenderer";
 import { Box } from "@mui/system";
-import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useAppDispatch } from "../../../app/store/hooks";
 import { fetchOdataProducts } from "../store/productSlice";
+import { StockCellRenderer } from "../../../shared/cell-renderers/StockCellRenderer";
+import { StatusCellRenderer } from "../../../shared/cell-renderers/StatusCellRenderer";
+import { FeaturedCellRenderer } from "../../../shared/cell-renderers/FeaturedCellRenderer";
+import BrandDrawer from "../../brands/components/BrandDrawer";
 
 // sadece community modülleri
 ModuleRegistry.registerModules([AllCommunityModule, ClientSideRowModelModule]);
@@ -69,6 +79,8 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
   const quickFilterTextRef = useRef<string>("");
   const [searchValue, setSearchValue] = useState("");
 
+  const [openBrand, setOpenBrand] = useState(false);
+
   const onFilterTextBoxChanged = useCallback(
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
       setSearchValue(value);
@@ -87,10 +99,11 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
       width: 180,
     },
     { field: "categoryName", headerName: "Kategori", width: 90 },
-    { field: "brandName", headerName: "Marka" },
+    { field: "brandName", width: 100, headerName: "Marka" },
     {
       field: "quantity",
       headerName: "Adet",
+      cellRenderer: StockCellRenderer,
       filter: "agNumberColumnFilter",
       width: 100,
     },
@@ -112,18 +125,18 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
       field: "condition",
       headerName: "Durum",
       width: 120,
-      valueFormatter: (p) => (p.value === 0 ? "Yeni" : "İkinci El"),
+      cellRenderer: StatusCellRenderer,
     },
     {
       field: "featured",
       headerName: "Vitrin",
-      width: 100,
-      valueFormatter: (p) => (p.value === true ? "Vitrinde" : "Değil"),
+      cellRenderer: FeaturedCellRenderer,
+      width: 130,
     },
     {
       field: "isActive",
       headerName: "Aktif",
-      width: 50,
+      width: 100,
       valueFormatter: (p) => (p.value === true ? "Aktif" : "Aktif Değil"),
     },
     {
@@ -192,33 +205,52 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "start",
-          alignSelf: "start",
           gap: 2,
           flexWrap: "wrap",
           m: 2,
         }}
       >
-        <TextField
-          placeholder="Ürün Ara..."
-          size="small"
-          value={searchValue}
-          onChange={onFilterTextBoxChanged}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon fontSize="small" />
-              </InputAdornment>
-            ),
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            flex: 1,
+            minWidth: 280,
           }}
-        />
-        <Tooltip title={isDarkMode ? "Aydınlık" : "Karanlık"}>
-          <IconButton onClick={() => setIsDarkMode((prev) => !prev)}>
-            {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
-        </Tooltip>
-      </Box>
+        >
+          <TextField
+            placeholder="Ürün Ara..."
+            size="small"
+            value={searchValue}
+            onChange={onFilterTextBoxChanged}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon fontSize="small" />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <Tooltip title={isDarkMode ? "Aydınlık" : "Karanlık"}>
+            <IconButton onClick={() => setIsDarkMode((prev) => !prev)}>
+              {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
+          </Tooltip>
+        </Box>
 
+        <Box sx={{ ml: { xs: 0, sm: "auto" } }}>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            size="medium"
+            onClick={() => setOpenBrand(true)} // drawer/modal açan handler
+            sx={{ textTransform: "none", fontWeight: 600 }}
+          >
+            Marka Ekle
+          </Button>
+        </Box>
+      </Box>
       {/* grid */}
       <Box
         className={themeClass}
@@ -244,6 +276,7 @@ export const ProductsDataGrid: FunctionComponent<Props> = () => {
           getRowId={getRowId}
         />
       </Box>
+      <BrandDrawer open={openBrand} onClose={() => setOpenBrand(false)} />
     </Box>
   );
 };

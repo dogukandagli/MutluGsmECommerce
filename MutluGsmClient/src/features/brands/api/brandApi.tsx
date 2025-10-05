@@ -1,7 +1,7 @@
 import queries from "../../../shared/lib/apiClient";
 
 const Brand = {
-  get: (select: string) => queries.get(`odata/Brands?$select=${select}`),
-  post: (formData: any) => queries.post("products", formData),
+  getBrands: (url: string) => queries.get(`odata/Brands?${url}`),
+  createBrand: (data: any) => queries.post("brands", data),
 };
 export default Brand;

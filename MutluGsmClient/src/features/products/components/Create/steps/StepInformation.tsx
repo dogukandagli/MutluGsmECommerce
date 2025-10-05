@@ -1,27 +1,15 @@
 import { MenuItem, TextField, Typography } from "@mui/material";
 import { Box, Grid, Stack } from "@mui/system";
-import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import Category from "../../../../category/api/categoryApi";
-import type { ICategorySelect } from "../../../types/ICategorySelect";
-import Brand from "../../../../brands/api/brandApi";
-import type { IBrandSelect } from "../../../types/IBrandSelect";
 import SunEditor from "suneditor-react";
 import "../../../../../../node_modules/suneditor/dist/css/suneditor.min.css";
+import { useAppSelector } from "../../../../../app/store/hooks";
 
 export default function StepInformation() {
   const { control } = useFormContext();
-  const [categories, setCategories] = useState<ICategorySelect[]>([]);
-  const [brands, setBrands] = useState<IBrandSelect[]>([]);
 
-  useEffect(() => {
-    Category.get("id,name").then((data) => {
-      setCategories(data.value as ICategorySelect[]);
-    });
-    Brand.get("id,name").then((data) => {
-      setBrands(data.value as IBrandSelect[]);
-    });
-  }, []);
+  const { categories } = useAppSelector((state) => state.category);
+  const { brands } = useAppSelector((state) => state.brand);
 
   return (
     <>
@@ -69,11 +57,12 @@ export default function StepInformation() {
                     error={!!fieldState.error}
                     helperText={fieldState.error?.message}
                   >
-                    {categories.map((option) => (
-                      <MenuItem key={option.id} value={option.id}>
-                        {option.name}
-                      </MenuItem>
-                    ))}
+                    {categories &&
+                      categories.map((option) => (
+                        <MenuItem key={option.id} value={option.id}>
+                          {option.name}
+                        </MenuItem>
+                      ))}
                   </TextField>
                 )}
               />
@@ -127,11 +116,12 @@ export default function StepInformation() {
                     error={!!fieldState.error}
                     helperText={fieldState.error?.message}
                   >
-                    {brands.map((option) => (
-                      <MenuItem key={option.id} value={option.id}>
-                        {option.name}
-                      </MenuItem>
-                    ))}
+                    {brands &&
+                      brands.map((option) => (
+                        <MenuItem key={option.id} value={option.id}>
+                          {option.name}
+                        </MenuItem>
+                      ))}
                   </TextField>
                 )}
               />

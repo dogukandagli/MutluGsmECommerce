@@ -20,7 +20,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import { useAppSelector } from "../../../app/store/hooks";
-import { selectAllCategory } from "../../../features/category/store/categorySlice";
 import { NavLink, useNavigate } from "react-router";
 
 export default function Header() {
@@ -34,7 +33,7 @@ export default function Header() {
     setQ("");
   };
 
-  const categories = useAppSelector((state) => selectAllCategory(state));
+  const { categories } = useAppSelector((state) => state.category);
 
   return (
     <AppBar
@@ -159,17 +158,18 @@ export default function Header() {
         <Container maxWidth="lg">
           <Toolbar disableGutters sx={{ justifyItems: "flex-end" }}>
             <Stack direction="row" spacing={2.5} alignItems="center" mx="start">
-              {categories.map((c) => (
-                <Button
-                  component={NavLink}
-                  to={`category/${c.name}`}
-                  key={c.id}
-                  color="inherit"
-                  sx={{ fontWeight: 400 }}
-                >
-                  {c.name}
-                </Button>
-              ))}
+              {categories &&
+                categories.map((c) => (
+                  <Button
+                    component={NavLink}
+                    to={`category/${c.name}`}
+                    key={c.id}
+                    color="inherit"
+                    sx={{ fontWeight: 400 }}
+                  >
+                    {c.name}
+                  </Button>
+                ))}
               <Button
                 component={NavLink}
                 to={"category/2.El Ürünler"}
@@ -246,17 +246,18 @@ export default function Header() {
         </Box>
         <Divider />
         <List>
-          {categories.map((c) => (
-            <ListItemButton
-              key={c.id}
-              component={NavLink}
-              to={`category/${c.name}`}
-              onClick={() => setOpenDrawer(false)}
-              sx={{ borderBottom: "1px solid rgba(0,0,0,0.12)" }}
-            >
-              <ListItemText primary={c.name} />
-            </ListItemButton>
-          ))}
+          {categories &&
+            categories.map((c) => (
+              <ListItemButton
+                key={c.id}
+                component={NavLink}
+                to={`category/${c.name}`}
+                onClick={() => setOpenDrawer(false)}
+                sx={{ borderBottom: "1px solid rgba(0,0,0,0.12)" }}
+              >
+                <ListItemText primary={c.name} />
+              </ListItemButton>
+            ))}
           <ListItemButton
             key={0}
             component={NavLink}

@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import { fetchOdataCategories } from "./features/category/store/categorySlice";
 import { useAppDispatch } from "./app/store/hooks";
 import { CircularProgress } from "@mui/material";
+import { fetchOdataBrands } from "./features/brands/store/brandSlice";
 function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
   const initApp = async () => {
-    dispatch(fetchOdataCategories("id,name"));
+    dispatch(fetchOdataCategories(""));
+    dispatch(fetchOdataBrands(""));
   };
 
   useEffect(() => {

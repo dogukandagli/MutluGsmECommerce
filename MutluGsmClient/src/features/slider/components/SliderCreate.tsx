@@ -5,7 +5,6 @@ import {
   IconButton,
   Tooltip,
   Typography,
-  LinearProgress,
   Stack,
   Paper,
 } from "@mui/material";
@@ -20,6 +19,7 @@ import "swiper/swiper-bundle.css";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
 import { createSlider } from "../store/sliderSlice";
 import { useNavigate } from "react-router";
+import { LoadingButton } from "@mui/lab";
 
 export default function SliderCreate() {
   const [files, setFiles] = useState<File[]>([]);
@@ -70,7 +70,6 @@ export default function SliderCreate() {
       console.error(e);
     }
   };
-
   return (
     <Paper sx={{ p: 5 }}>
       <Typography variant="h6" gutterBottom>
@@ -108,7 +107,6 @@ export default function SliderCreate() {
               pauseOnMouseEnter: true,
             }}
             pagination={{ clickable: true }}
-            navigation
             loop
             style={{ maxHeight: 420, width: "100%", aspectRatio: "16 / 9" }}
           >
@@ -175,16 +173,26 @@ export default function SliderCreate() {
         </Grid>
       )}
 
-      <Stack direction="row" spacing={2} mt={3} alignItems="center">
-        <Button
-          variant="contained"
-          disabled={status === "pendingCreateSlider"}
-          onClick={handleCreate}
-        >
-          Create
-        </Button>
-        {status === "pendingCreateSlider" && (
-          <LinearProgress sx={{ flex: 1, maxWidth: 240 }} />
+      <Stack
+        direction="row"
+        spacing={2}
+        mt={3}
+        alignItems="center"
+        justifyContent={"end"}
+      >
+        {status === "pendingCreateSlider" ? (
+          <LoadingButton sx={{ flex: 1, maxWidth: 240 }} />
+        ) : (
+          <Button
+            variant="contained"
+            disabled={status === "pendingCreateSlider"}
+            onClick={handleCreate}
+            sx={{
+              backgroundColor: "#002984",
+            }}
+          >
+            Create
+          </Button>
         )}
       </Stack>
     </Paper>

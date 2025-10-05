@@ -57,7 +57,8 @@ export default function Sliders() {
     }
   };
 
-  const loading = status === "pendingFetchSliders" || status === "deleting";
+  const loading =
+    status === "pendingFetchSliders" || status === "pendingDeleteSlider";
 
   return (
     <Box p={2}>

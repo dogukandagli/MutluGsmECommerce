@@ -7,7 +7,7 @@ namespace MutluGsmServer.Application.Features.Sliders;
 
 public sealed record SliderDeleteCommand(Guid Id) : IRequest<Result<string>>;
 
-public sealed class SliderDeleteCommandHandler(
+internal sealed class SliderDeleteCommandHandler(
     ISliderRepository sliderRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<SliderDeleteCommand, Result<string>>
 {

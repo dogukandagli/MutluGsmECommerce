@@ -1,13 +1,20 @@
 import type { CustomCellRendererProps } from "ag-grid-react";
 import { type FunctionComponent } from "react";
 
-import styles from "./StockCellRenderer.module.css";
-
+import { Box } from "@mui/system";
+import { Chip } from "@mui/material";
 export const StockCellRenderer: FunctionComponent<CustomCellRendererProps> = ({
-  data: { available, variants },
+  value,
 }) => (
-  <div className={styles.stock}>
-    <span>{available}</span> <span className={styles.stockText}>Stock /</span>{" "}
-    <span className={styles.variantsText}>{`${variants} Variants`}</span>
-  </div>
+  <Box>
+    <Chip
+      label={`${value}`}
+      color={"success"}
+      sx={{
+        fontWeight: 500,
+        fontSize: "0.875rem",
+        borderRadius: "6px",
+      }}
+    />
+  </Box>
 );

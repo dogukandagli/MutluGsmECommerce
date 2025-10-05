@@ -47,5 +47,11 @@ export const sliderSlice = createSlice({
     builder.addCase(createSlider.rejected, (state) => {
       state.status = "idle";
     });
+    builder.addCase(deleteSlider.pending, (state) => {
+      state.status = "pendingDeleteSlider";
+    });
+    builder.addCase(deleteSlider.fulfilled, (state) => {
+      state.status = "idle";
+    });
   },
 });
