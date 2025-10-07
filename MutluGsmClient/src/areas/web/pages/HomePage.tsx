@@ -1,7 +1,8 @@
 import { Box, Container } from "@mui/system";
 import Slider from "../components/Slider";
-import { Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import NewestOrFeatured from "../components/NewestOrFeatured";
+import FeatureGrid from "../components/FeatureGrid";
 
 export default function HomePage() {
   return (
@@ -36,6 +37,8 @@ export default function HomePage() {
           />
         </Container>
       </Box>
+      <FeatureGrid />
+      <Divider />
     </>
   );
 }

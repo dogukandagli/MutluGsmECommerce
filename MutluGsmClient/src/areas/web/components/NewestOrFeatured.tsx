@@ -6,11 +6,13 @@ import { Box } from "@mui/system";
 import { CircularProgress } from "@mui/material";
 import type { IProduct } from "../../../features/products/types/IProduct";
 import HomeProductCard from "./HomeProductCard";
+import ProductSearchCard from "../../../features/products/components/ProductSearchCard";
 type props = {
   query: string;
+  bool?: boolean;
 };
 
-export default function NewestOrFeatured({ query }: props) {
+export default function NewestOrFeatured({ query, bool = true }: props) {
   const dispatch = useAppDispatch();
   const { status } = useAppSelector((state) => state.product);
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -39,7 +41,11 @@ export default function NewestOrFeatured({ query }: props) {
               justifyContent: "center",
             }}
           >
-            <HomeProductCard product={p} />
+            {bool ? (
+              <HomeProductCard product={p} />
+            ) : (
+              <ProductSearchCard product={p} />
+            )}
           </SwiperSlide>
         ))
       ) : (

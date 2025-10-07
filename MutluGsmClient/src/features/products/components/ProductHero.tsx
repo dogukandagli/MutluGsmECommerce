@@ -42,6 +42,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  py: { xs: 0, md: 0.5 },
                 }}
               >
                 <Box
@@ -60,7 +61,7 @@ export default function ProductHero({ product }: ProductHeroProps) {
 
             <Grid
               size={{ xs: 12, md: 7 }}
-              sx={{ order: { xs: 2, md: 1 }, p: { xs: 4, md: 0 } }}
+              sx={{ order: { xs: 2, md: 1 }, p: { xs: 2, md: 0 } }}
             >
               <Stack
                 spacing={1}

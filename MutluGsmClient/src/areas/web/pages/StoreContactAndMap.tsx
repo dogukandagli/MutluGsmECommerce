@@ -26,8 +26,8 @@ export default function StoreContactAndMap() {
   const address = "Maslak Mahallesi, Büyükdere Cd. No:123, Sarıyer/İstanbul";
   const phone = "0850 555 33 22";
   const email = "destek@magazam.com";
-  const lat = 38.39699293548789;
-  const lng = 27.11342679086468;
+  const lat = 38.396569708499314;
+  const lng = 27.11413455704533;
 
   const mapSrc = `https://www.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
 

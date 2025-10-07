@@ -24,15 +24,15 @@ export default function ProductSearchCard({ product }: props) {
         display: "flex",
         flexDirection: "column",
         borderRadius: 2,
-
         p: 2,
+        width: "288px",
       }}
     >
       <Box
         sx={{
           border: (theme) => `1px solid ${theme.palette.divider}`,
           borderRadius: 2,
-          height: 192,
+          height: 233,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -85,6 +85,7 @@ export default function ProductSearchCard({ product }: props) {
           sx={{
             borderRadius: 999,
             width: "60%",
+            fontSize: 13,
           }}
         >
           Ürünü Görüntüle

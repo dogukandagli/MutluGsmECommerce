@@ -9,6 +9,7 @@ import {
   Card,
   CardMedia,
   Grid,
+  CircularProgress,
 } from "@mui/material";
 import { useParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
@@ -25,6 +26,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import ProductDescription from "../../../shared/components/ProductDescription";
 import NewestOrFeatured from "./NewestOrFeatured";
+import WhatsAppButton from "./WhatsAppButton";
 
 export default function ProductDetailMock() {
   const dispatch = useAppDispatch();
@@ -40,7 +42,7 @@ export default function ProductDetailMock() {
     if (!product && productId) {
       dispatch(getProduct(productId));
     }
-  }, [productId]);
+  }, [dispatch, productId]);
 
   const images: string[] = useMemo(() => {
     const list = [
@@ -53,6 +55,15 @@ export default function ProductDetailMock() {
   }, [product, apiUrl]);
 
   const slides = images.map((src) => ({ src }));
+
+  const message =
+    `Merhabalar, Sipariş vermek istiyorum\n\n` +
+    `${product?.name}\n` +
+    `Adet Fiyatı: ${product?.price} ₺\n` +
+    `Bağlantı: localhost:3000/${productId} \n` +
+    `Teşekkürler ( Verilen Fiyatlar adet fiyatıdır )`;
+
+  if (!product) return <CircularProgress />;
 
   return (
     <Paper
@@ -223,6 +234,9 @@ export default function ProductDetailMock() {
             </Stack>
 
             <Divider />
+            <Stack direction="row">
+              <WhatsAppButton phone={"905388726981"} message={message} />
+            </Stack>
 
             <Typography variant="body1" color="text.secondary">
               {product.description && (
@@ -237,6 +251,7 @@ export default function ProductDetailMock() {
           </Typography>
           <NewestOrFeatured
             query={`?count=true&$top=7&$filter=categoryId eq ${product.categoryId} and featured eq true`}
+            bool={false}
           />
         </Grid>
       </Grid>

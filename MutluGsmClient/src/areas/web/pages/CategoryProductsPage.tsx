@@ -41,7 +41,6 @@ export default function CategoryProductsPage() {
     { label: "En Yeni", value: "createdDate desc" },
     { label: "En Eski", value: "createdDate asc" },
   ];
-  console.log(type, value);
   const skip = (page - 1) * pageSize;
 
   const query = useMemo(() => {

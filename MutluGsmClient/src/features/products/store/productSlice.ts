@@ -17,7 +17,7 @@ export const fetchOdataProducts = createAsyncThunk<
 export const getProduct = createAsyncThunk<IProduct, string>(
   "products/getProduct",
   async (id) => {
-    const rest = await Product.getProducts(id);
+    const rest = await Product.getProduct(id);
     return rest.data as IProduct;
   }
 );
@@ -70,7 +70,7 @@ export const productSlice = createSlice({
     });
     builder.addCase(getProduct.fulfilled, (state, action) => {
       state.status = "idle";
-      productsAdapter.addOne(state, action.payload);
+      productsAdapter.upsertOne(state, action.payload);
     });
     builder.addCase(deleteProduct.pending, (state) => {
       state.status = "pendingDeleteProduct";
