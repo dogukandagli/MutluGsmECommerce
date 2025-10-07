@@ -25,8 +25,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import ProductDescription from "../../../shared/components/ProductDescription";
-import NewestOrFeatured from "./NewestOrFeatured";
-import WhatsAppButton from "./WhatsAppButton";
+import NewestOrFeatured from "../components/NewestOrFeatured";
+import WhatsAppButton from "../components/WhatsAppButton";
 
 export default function ProductDetailMock() {
   const dispatch = useAppDispatch();

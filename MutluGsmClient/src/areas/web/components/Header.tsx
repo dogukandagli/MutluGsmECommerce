@@ -4,7 +4,6 @@ import {
   Toolbar,
   Container,
   IconButton,
-  Typography,
   Box,
   Stack,
   Button,
@@ -29,7 +28,8 @@ export default function Header() {
 
   const submitSearch = (e?: React.FormEvent) => {
     e?.preventDefault();
-    navigate(`/search/${q}`);
+    if (q != "") navigate(`/search/${q}`);
+
     setQ("");
   };
 
@@ -65,20 +65,26 @@ export default function Header() {
               </Box>
 
               {/* Logo */}
-              <Box sx={{ display: "inline=block" }}>
-                <Typography
-                  component={NavLink}
-                  to="/"
+              <Box
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 1,
+                  textDecoration: "none",
+                }}
+                component={NavLink}
+                to="/"
+              >
+                <Box
+                  component="img"
+                  src="/mutlugsm.png"
+                  alt="Mutlu GSM Logo"
                   sx={{
-                    fontWeight: 800,
-                    letterSpacing: "-0.02em",
-                    fontSize: { xs: 22, md: 26 },
-                    color: "text.error",
-                    textDecoration: "none", // çizgi yok
+                    width: { xs: 125, md: 175 },
+                    height: "auto",
+                    display: "block",
                   }}
-                >
-                  Mutlu Gsm
-                </Typography>
+                />
               </Box>
             </Box>
 

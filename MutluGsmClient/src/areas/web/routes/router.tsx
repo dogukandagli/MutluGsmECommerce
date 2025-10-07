@@ -1,5 +1,5 @@
 import WebLayout from "../../../app/layouts/WebLayout";
-import ProductDetailPage from "../components/ProductDetailPage";
+import ProductDetailPage from "../pages/ProductDetailPage";
 import CategoryProductsPage from "../pages/CategoryProductsPage";
 import HomePage from "../pages/HomePage";
 import StoreContactAndMap from "../pages/StoreContactAndMap";

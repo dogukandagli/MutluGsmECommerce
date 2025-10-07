@@ -80,6 +80,9 @@ export default function ProductSearchCard({ product }: props) {
         <Button
           component={NavLink}
           to={`/${product.id}`}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
           variant="contained"
           size="medium"
           sx={{
