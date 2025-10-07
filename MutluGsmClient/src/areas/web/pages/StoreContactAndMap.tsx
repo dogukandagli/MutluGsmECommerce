@@ -19,12 +19,11 @@ import {
   Email as EmailIcon,
   Facebook as FacebookIcon,
   Instagram as InstagramIcon,
-  YouTube as YouTubeIcon,
 } from "@mui/icons-material";
 
 export default function StoreContactAndMap() {
-  const address = "Maslak Mahallesi, Büyükdere Cd. No:123, Sarıyer/İstanbul";
-  const phone = "0850 555 33 22";
+  const address = "Reis, Ordu Cd. No:145 Mutlugsm, 35000 Karabağlar/İzmir";
+  const phone = "0507 977 57 74";
   const email = "destek@magazam.com";
   const lat = 38.396569708499314;
   const lng = 27.11413455704533;
@@ -99,14 +98,17 @@ export default function StoreContactAndMap() {
               <Divider sx={{ my: 1 }} />
 
               <Stack direction="row" spacing={1} sx={{}}>
-                <IconButton aria-label="Facebook">
+                <IconButton
+                  aria-label="Facebook"
+                  href="https://www.facebook.com/people/Mutlu-Gsm/61574552334433/"
+                >
                   <FacebookIcon />
                 </IconButton>
-                <IconButton aria-label="Instagram">
+                <IconButton
+                  aria-label="Instagram"
+                  href="https://www.instagram.com/mutlu_gsm/"
+                >
                   <InstagramIcon />
-                </IconButton>
-                <IconButton aria-label="YouTube">
-                  <YouTubeIcon />
                 </IconButton>
               </Stack>
             </Paper>

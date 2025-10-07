@@ -87,8 +87,8 @@ export default function Sidebar({
           <Box
             component="img"
             alt="Logo"
-            src="https://localhost:7261/images/x5_12717039194c6.jpg"
-            sx={{ height: 100, width: 200, objectFit: "cover" }}
+            src="/mutlugsm.png"
+            sx={{ height: "auto", width: 190, objectFit: "cover" }}
           />
         </Box>
 

@@ -10,7 +10,6 @@ import {
 import {
   Facebook as FacebookIcon,
   Instagram as InstagramIcon,
-  Twitter as TwitterIcon,
   LocationOn as LocationOnIcon,
   Phone as PhoneIcon,
   Email as EmailIcon,
@@ -118,13 +117,13 @@ export default function Footer() {
             <Box display="flex" alignItems="flex-start" gap={1}>
               <LocationOnIcon fontSize="small" color="action" />
               <Typography variant="body2" color="text.secondary">
-                Maslak Mahallesi, Büyükdere Caddesi No:123, Sarıyer, İstanbul
+                Reis, Ordu Cd. No:145 Mutlugsm, 35000 Karabağlar/İzmir
               </Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={1} mt={1}>
               <PhoneIcon fontSize="small" color="action" />
               <Typography variant="body2" color="text.secondary">
-                0850 123 45 67
+                0507 977 57 74
               </Typography>
             </Box>
             <Box display="flex" alignItems="center" gap={1} mt={1}>
@@ -135,7 +134,6 @@ export default function Footer() {
             </Box>
           </Grid>
         </Grid>
-
         {/* Sosyal Medya */}
         <Divider sx={{ my: 4 }} />
         <Box
@@ -150,14 +148,17 @@ export default function Footer() {
               Bizi Takip Edin
             </Typography>
             <Box>
-              <IconButton color="primary">
+              <IconButton
+                href="https://www.facebook.com/people/Mutlu-Gsm/61574552334433/"
+                color="primary"
+              >
                 <FacebookIcon />
               </IconButton>
-              <IconButton color="error">
+              <IconButton
+                href="https://www.instagram.com/mutlu_gsm/"
+                color="error"
+              >
                 <InstagramIcon />
-              </IconButton>
-              <IconButton color="secondary">
-                <TwitterIcon />
               </IconButton>
             </Box>
           </Box>
