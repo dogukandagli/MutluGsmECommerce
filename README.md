@@ -1,7 +1,7 @@
 # Project Name
 
 ## 🚀 Tech Stack
-**Backend:** .NET 8, Clean Architecture, DDD, CQRS, MediatR, FluentValidation, Repository Pattern  
+**Backend:** .NET 9, Clean Architecture, DDD, CQRS, MediatR, FluentValidation, Repository Pattern  
 **Frontend:** React, Redux Toolkit, Material UI, React Router
 
 ---
