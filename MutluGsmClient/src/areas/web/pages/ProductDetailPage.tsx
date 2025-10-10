@@ -42,7 +42,7 @@ export default function ProductDetailMock() {
     if (!product && productId) {
       dispatch(getProduct(productId));
     }
-  }, [dispatch, productId]);
+  }, [dispatch, product, productId]);
 
   const images: string[] = useMemo(() => {
     const list = [
@@ -56,6 +56,7 @@ export default function ProductDetailMock() {
 
   const slides = images.map((src) => ({ src }));
 
+  if (!product) return <CircularProgress />;
   const message =
     `Merhabalar, Sipariş vermek istiyorum\n\n` +
     `${product?.name}\n` +
@@ -85,6 +86,7 @@ export default function ProductDetailMock() {
               allowTouchMove={true}
               style={{
                 width: "100%",
+                height: "325px",
               }}
             >
               <Box>
@@ -172,14 +174,13 @@ export default function ProductDetailMock() {
             )}
           </Stack>
 
-          {/* Lightbox */}
           <Lightbox
             open={open}
             close={() => setOpen(false)}
             index={index}
             slides={slides}
-            carousel={{ finite: false }} // sonsuz döngü
-            controller={{ closeOnBackdropClick: true }} // dışarı tıklayınca kapanır
+            carousel={{ finite: false }}
+            controller={{ closeOnBackdropClick: true }}
           />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>

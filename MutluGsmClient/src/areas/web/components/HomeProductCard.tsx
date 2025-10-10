@@ -39,7 +39,7 @@ export default function HomeProductCard({ product }: ProductProps) {
           sx={{ borderRadius: 2, objectFit: "contain" }}
         />
 
-        <CardContent>
+        <CardContent sx={{ textAlign: "center" }}>
           <Typography color="primary" fontSize="17px">
             {product.featured == true ? "Öne Çıkan" : "Yeni"}
           </Typography>
@@ -51,7 +51,12 @@ export default function HomeProductCard({ product }: ProductProps) {
             {product.name}
           </Typography>
           {product.originalPrice ? (
-            <Box display="flex" alignItems="center" gap={1}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              gap={1}
+            >
               <Typography
                 variant="body2"
                 sx={{

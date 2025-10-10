@@ -24,7 +24,8 @@ public static class ProductModule
             .Accepts<ProductCreateCommand>("multipart/form-data")
             .Produces<Result<string>>()
             .WithName("ProductCreate")
-            .DisableAntiforgery();
+            .DisableAntiforgery()
+            ;
 
         group.MapPut(string.Empty,
             async ([FromForm] ProductUpdateCommand request, ISender sender, CancellationToken cancellationToken) =>
@@ -54,6 +55,7 @@ public static class ProductModule
               return response.IsSuccessful ? Results.Ok(response) : Results.InternalServerError(response);
           }
           ).Produces<Result<ProductDto>>()
-          .WithName("ProductGet");
+          .WithName("ProductGet")
+          .AllowAnonymous();
     }
 }

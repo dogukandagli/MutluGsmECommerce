@@ -1,4 +1,3 @@
-// ProductEditView.tsx
 import {
   Box,
   Container,
@@ -19,20 +18,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Save from "@mui/icons-material/Save";
 import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
-import { useNavigate, useParams } from "react-router";
-import { selectProductById, updateProduct } from "../store/productSlice";
+import { useNavigate } from "react-router";
+import { updateProduct } from "../store/productSlice";
 import { useEffect, useState } from "react";
 import { Controller, useForm, type FieldValues } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import { LoadingButton } from "@mui/lab";
 import SunEditor from "suneditor-react";
+import { apiUrl } from "../../../shared/lib/apiClient";
+import type { IProduct } from "../types/IProduct";
 
-export default function ProductEditView() {
+type EditProps = {
+  product: IProduct;
+};
+
+export default function ProductEditView({ product }: EditProps) {
   const dispatch = useAppDispatch();
-  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const product = useAppSelector((state) => selectProductById(state, id!));
   const { status } = useAppSelector((state) => state.product);
 
   const [files, setFiles] = useState<(File | null)[]>([]);
@@ -49,7 +52,8 @@ export default function ProductEditView() {
       setFiles(files);
       setfileloaded(true);
     })();
-  }, [id]);
+  }, [product]);
+
   const isNew = !product?.id;
 
   const {
@@ -96,7 +100,7 @@ export default function ProductEditView() {
   });
 
   async function filenameToFile(filename: string): Promise<File> {
-    const url = "https://localhost:7261/images/" + filename;
+    const url = `${apiUrl}images/` + filename;
     const res = await fetch(url, { cache: "no-store" });
     const blob = await res.blob();
     return new File([blob], filename, { type: blob.type });

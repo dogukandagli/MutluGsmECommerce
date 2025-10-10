@@ -1,13 +1,25 @@
 import { Container } from "@mui/system";
 import ProductEditView from "../../../features/products/components/ProductEditView";
-import { Breadcrumbs, Link, Typography } from "@mui/material";
+import { Breadcrumbs, CircularProgress, Link, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router";
-import { useAppSelector } from "../../../app/store/hooks";
-import { selectProductById } from "../../../features/products/store/productSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/store/hooks";
+import {
+  getProduct,
+  selectProductById,
+} from "../../../features/products/store/productSlice";
+import { useEffect } from "react";
 
 export default function ProductEditPage() {
   const { id } = useParams<{ id: string }>();
   const product = useAppSelector((state) => selectProductById(state, id!));
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!product && id) {
+      dispatch(getProduct(id));
+    }
+  }, [dispatch, product, id]);
+
+  if (!product) return <CircularProgress />;
 
   return (
     <>
@@ -31,7 +43,7 @@ export default function ProductEditPage() {
           </Link>
           <Typography color="text.primary">{product.name}</Typography>
         </Breadcrumbs>
-        <ProductEditView />
+        <ProductEditView product={product} />
       </Container>
     </>
   );

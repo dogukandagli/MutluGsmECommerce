@@ -60,7 +60,7 @@ export const productSlice = createSlice({
       state.status = "pendingFetchProducts";
     });
     builder.addCase(fetchOdataProducts.fulfilled, (state, action) => {
-      productsAdapter.upsertMany(state, action.payload.value);
+      productsAdapter.setAll(state, action.payload.value);
       state.products = action.payload.value;
       state.valueCount = Number(action.payload["@odata.count"]);
       state.status = "idle";

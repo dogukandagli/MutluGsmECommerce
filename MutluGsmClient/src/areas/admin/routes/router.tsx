@@ -13,6 +13,7 @@ export const adminRoutes = {
     {
       element: <AdminLayout />,
       children: [
+        { path: "", element: <ProductsPage /> },
         { path: "products", element: <ProductsPage /> },
         { path: "products/new", element: <ProductCreatePage /> },
         { path: "products/edit/:id", element: <ProductEditPage /> },

@@ -99,7 +99,10 @@ export default function CategoryProductsPage() {
                 {value}
               </Link>
             </Breadcrumbs>
-            <Typography variant="h5" sx={{ fontSize: { xs: 20, md: 50 } }}>
+            <Typography
+              variant="h5"
+              sx={{ fontSize: 50, display: { xs: "none", md: "inline-block" } }}
+            >
               {value}
             </Typography>
           </Box>

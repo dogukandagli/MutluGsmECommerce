@@ -1,8 +1,6 @@
 import {
   Box,
   Container,
-  Divider,
-  IconButton,
   Link,
   Paper,
   Stack,
@@ -12,8 +10,6 @@ import {
 } from "@mui/material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import { useForm, type FieldValues } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
 import { useAppDispatch } from "../../../app/store/hooks";

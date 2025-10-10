@@ -5,23 +5,26 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
-  Typography,
+  // Typography,
   Box,
-  Avatar,
-  IconButton,
-  MenuItem,
-  Menu,
+  // Avatar,
+  // IconButton,
+  // MenuItem,
+  // Menu,
   ListSubheader,
 } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 
-import { useState } from "react";
-import { NavLink } from "react-router";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { NavLink, useNavigate } from "react-router";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined"; // Products
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined"; // Create Product
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { useAppDispatch } from "../../../app/store/hooks";
+import { signOut } from "../../../features/account/store/authSlice";
+// import { useState } from "react";
+// import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+// import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+// import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+// import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 const drawerWidth = 240;
 
@@ -36,12 +39,15 @@ export default function Sidebar({
   handleSideBar,
   mobile,
 }: HeaderProps) {
-  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
-  const menuOpen = Boolean(menuAnchor);
+  // const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  // const menuOpen = Boolean(menuAnchor);
 
-  const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
-    setMenuAnchor(e.currentTarget);
-  const handleMenuClose = () => setMenuAnchor(null);
+  // const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
+  //   setMenuAnchor(e.currentTarget);
+  // const handleMenuClose = () => setMenuAnchor(null);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const mobileProps = mobile
     ? {
@@ -142,27 +148,26 @@ export default function Sidebar({
           <List
             subheader={
               <ListSubheader component="div" disableSticky>
-                Account
+                Hesap
               </ListSubheader>
             }
           >
-            <ListItemButton>
+            <ListItemButton
+              onClick={() => {
+                dispatch(signOut());
+                navigate("/admin/login");
+              }}
+            >
               <ListItemIcon>
-                <PersonOutlineIcon />
+                <LogoutIcon />
               </ListItemIcon>
-              <ListItemText primary="User" />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemIcon>
-                <SettingsOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Profile" />
+              <ListItemText primary="Çıkış Yap" />
             </ListItemButton>
           </List>
         </Box>
 
         {/* Footer (user + menu) */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+        {/* <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           <Avatar
             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
             sx={{ width: 36, height: 36 }}
@@ -206,7 +211,7 @@ export default function Sidebar({
               Log out
             </MenuItem>
           </Menu>
-        </Box>
+        </Box> */}
       </Box>
     </Drawer>
   );
