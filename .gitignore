@@ -1,2 +1,2 @@
-Server/appsettings.json
-Server/appsettings.*.json
+MutluGsmServer/src/MutluGsmServer.WebAPI/appsettings.json
+MutluGsmServer/src/MutluGsmServer.WebAPI/appsettings.Development.json
