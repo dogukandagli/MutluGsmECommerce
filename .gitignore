@@ -1,2 +1,4 @@
 MutluGsmServer/src/MutluGsmServer.WebAPI/appsettings.json
 MutluGsmServer/src/MutluGsmServer.WebAPI/appsettings.Development.json
+MutluGsmServer/src/MutluGsmServer.WebAPI/bin/
+MutluGsmServer/src/MutluGsmServer.WebAPI/obj/
