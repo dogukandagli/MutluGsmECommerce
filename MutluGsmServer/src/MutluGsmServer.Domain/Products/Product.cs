@@ -32,16 +32,16 @@ public sealed class Product : Entity
         SetProductImages(Images);
     }
 
-    public Name Name { get; private set; }
-    public Quantity Quantity { get; private set; }
+    public Name Name { get; private set; } = default!;
+    public Quantity Quantity { get; private set; } = default!;
     public decimal Price { get; private set; }
     public decimal? OriginalPrice { get; private set; }
     public ConditionEnum Condition { get; private set; }
     public string? Description { get; private set; }
     public Guid CategoryId { get; private set; }
-    public Category Category { get; private set; }
+    public Category Category { get; private set; } = default!;
     public Guid? BrandId { get; private set; }
-    public Brand Brand { get; private set; }
+    public Brand? Brand { get; private set; }
     public List<ProductImage> _images = new List<ProductImage>();
     public bool Featured { get; private set; }
 

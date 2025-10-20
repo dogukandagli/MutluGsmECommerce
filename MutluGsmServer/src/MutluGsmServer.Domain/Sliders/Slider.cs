@@ -11,7 +11,7 @@ public sealed class Slider : Entity
         setImageUrl(imageUrl);
     }
 
-    public string ImageUrl { get; set; }
+    public string ImageUrl { get; set; } = default!;
 
     public void setImageUrl(string imageUrl)
     {

@@ -377,3 +377,4 @@ C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.
 C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\bin\Debug\net9.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\dagli\source\repos\MutluGsmECommerce\MutluGsmServer\src\MutluGsmServer.WebAPI\obj\Debug\net9.0\MutluGsmServer.WebAPI.MvcApplicationPartsAssemblyInfo.cs
